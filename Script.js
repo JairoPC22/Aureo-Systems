@@ -1279,6 +1279,11 @@
         const fuentes = aboutVideo.querySelectorAll('source[data-src]');
         let cargado = false;
 
+        aboutVideo.addEventListener('error', function () {
+            const contenedor = aboutVideo.closest('.about__video-wrap');
+            if (contenedor) contenedor.style.display = 'none';
+        }, true);
+
         const observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
