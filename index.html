@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aureo Systems Consulting - Soluciones tecnológicas empresariales, consultoría y suministros tecnológicos.">
+    <title>Aureo Systems Consulting | Tecnología Empresarial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+</head>
+<body>
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="header" id="header" role="banner">
+        <div class="header__inner">
+            <a href="#inicio" class="header__logo" aria-label="Aureo Systems - Ir al inicio">
+                <svg class="header__logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M 20.00 11.36 L 20.31 11.41 L 20.61 11.46 L 20.91 11.53 L 21.20 11.60 L 21.49 11.69 L 21.78 11.78 L 22.06 11.88 L 22.34 12.00 L 22.61 12.12 L 22.88 12.26 L 23.14 12.40 L 23.39 12.55 L 23.64 12.70 L 23.88 12.87 L 24.11 13.04 L 24.33 13.23 L 24.55 13.41 L 24.76 13.61 L 24.96 13.81 L 25.16 14.02 L 25.34 14.23 L 25.52 14.45 L 25.69 14.68 L 25.85 14.90 L 26.00 15.14 L 26.14 15.38 L 26.27 15.62 L 26.39 15.86 L 26.50 16.11 L 26.61 16.36 L 26.70 16.61 L 26.79 16.87 L 26.86 17.13 L 26.93 17.38 L 26.98 17.64 L 27.03 17.90 L 27.06 18.16 L 27.09 18.42 L 27.11 18.68 L 27.12 18.94 L 27.12 19.20 L 27.11 19.45 L 27.09 19.71 L 27.06 19.96 L 27.02 20.21 L 26.98 20.46 L 26.93 20.70 L 26.86 20.95 L 26.79 21.18 L 26.71 21.42 L 26.63 21.65 L 26.53 21.87 L 26.43 22.09 L 26.32 22.31 L 26.20 22.52 L 26.08 22.73 L 25.95 22.93 L 25.81 23.12 L 25.67 23.31 L 25.52 23.49 L 25.37 23.67 L 25.21 23.84 L 25.04 24.00 L 24.87 24.16 L 24.70 24.31 L 24.52 24.45 L 24.34 24.58 L 24.15 24.71 L 23.96 24.83 L 23.77 24.95 L 23.57 25.05 L 23.37 25.15 L 23.17 25.24 L 22.97 25.32 L 22.76 25.40 L 22.56 25.46 L 22.35 25.52 L 22.14 25.57 L 21.93 25.62 L 21.72 25.65 L 21.51 25.68 L 21.30 25.70 L 21.09 25.72 L 20.88 25.72 L 20.68 25.72 L 20.47 25.71 L 20.26 25.69 L 20.06 25.67 L 19.86 25.64 L 19.66 25.60 L 19.46 25.56 L 19.27 25.50 L 19.08 25.45 L 18.89 25.38 L 18.71 25.31 L 18.53 25.23 L 18.35 25.15 L 18.18 25.06 L 18.01 24.97 L 17.85 24.87 L 17.69 24.76 L 17.53 24.65 L 17.38 24.54 L 17.24 24.42 L 17.10 24.29 L 16.97 24.16 L 16.84 24.03 L 16.71 23.90 L 16.59 23.76 L 16.48 23.61 L 16.38 23.47 L 16.28 23.32 L 16.18 23.17 L 16.09 23.01 L 16.01 22.85 L 15.93 22.70 L 15.86 22.54 L 15.80 22.37 L 15.74 22.21 L 15.69 22.05 L 15.64 21.88 L 15.60 21.71 L 15.57 21.55 L 15.54 21.38 L 15.52 21.22 L 15.51 21.05 L 15.50 20.88 L 15.50 20.72 L 15.50 20.56 L 15.51 20.39 L 15.52 20.23 L 15.54 20.07 L 15.57 19.91 L 15.60 19.76 L 15.64 19.60 L 15.68 19.45 L 15.72 19.30 L 15.78 19.16 L 15.83 19.01 L 15.90 18.87 L 15.96 18.73 L 16.03 18.60 L 16.11 18.47 L 16.19 18.34 L 16.27 18.22 L 16.36 18.09 L 16.45 17.98 L 16.54 17.87 L 16.64 17.76 L 16.74 17.65 L 16.85 17.55 L 16.95 17.46 L 17.06 17.37 L 17.18 17.28 L 17.29 17.20 L 17.41 17.12 L 17.53 17.05 L 17.65 16.98 L 17.77 16.92 L 17.90 16.86 L 18.02 16.81 L 18.15 16.76 L 18.27 16.72 L 18.40 16.68 L 18.53 16.64 L 18.66 16.61 L 18.79 16.59 L 18.92 16.57 L 19.04 16.55 L 19.17 16.54 L 19.30 16.54 L 19.43 16.54 L 19.55 16.54 L 19.68 16.55 L 19.80 16.56 L 19.93 16.58 L 20.05 16.60 L 20.17 16.62 L 20.29 16.65 L 20.40 16.69 L 20.52 16.73 L 20.63 16.77 L 20.74 16.81 L 20.85 16.86 L 20.95 16.91 L 21.05 16.97 L 21.15 17.03 L 21.25 17.09 L 21.34 17.15 L 21.44 17.22 L 21.52 17.29 L 21.61 17.36 L 21.69 17.44 L 21.77 17.52 L 21.84 17.60 L 21.91 17.68 L 21.98 17.76 L 22.05 17.85 L 22.11 17.94 L 22.17 18.03 L 22.22 18.12 L 22.27 18.21 L 22.32 18.30 L 22.36 18.40 L 22.40 18.49 L 22.43 18.59 L 22.47 18.69 L 22.49 18.78 L 22.52 18.88 L 22.54 18.98 L 22.56 19.07 L 22.57 19.17 L 22.58 19.27 L 22.59 19.37 L 22.59 19.46 L 22.59 19.56 L 22.59 19.65 L 22.58 19.75 L 22.57 19.84 L 22.56 19.93 L 22.54 20.02 L 22.52 20.11 L 22.50 20.20 L 22.47 20.29 L 22.44 20.37 L 22.41 20.45 L 22.37 20.54 L 22.34 20.62 L 22.30 20.69 L 22.25 20.77 L 22.21 20.84 L 22.16 20.91 L 22.11 20.98 L 22.06 21.05 L 22.01 21.12 L 21.95 21.18 L 21.90 21.24 L 21.84 21.30 L 21.78 21.35 L 21.72 21.40 L 21.65 21.45 L 21.59 21.50 L 21.52 21.54 L 21.46 21.58 L 21.39 21.62 L 21.32 21.66 L 21.25 21.69 L 21.18 21.72 L 21.11 21.75 L 21.04 21.78 L 20.97 21.80 L 20.90 21.82 L 20.83 21.84 L 20.76 21.85 L 20.69 21.86 L 20.61 21.87 L 20.54 21.88 L 20.47 21.88 L 20.40 21.88 L 20.33 21.88 L 20.16 20.90 L 20.19 20.91 L 20.23 20.91 L 20.27 20.92 L 20.30 20.92 L 20.34 20.93 L 20.38 20.93 L 20.42 20.93 L 20.46 20.93 L 20.50 20.92 L 20.54 20.92 L 20.58 20.91 L 20.62 20.90 L 20.66 20.89 L 20.70 20.88 L 20.74 20.87 L 20.78 20.85 L 20.83 20.84 L 20.87 20.82 L 20.91 20.80 L 20.95 20.77 L 20.99 20.75 L 21.03 20.72 L 21.07 20.70 L 21.11 20.67 L 21.14 20.63 L 21.18 20.60 L 21.22 20.57 L 21.25 20.53 L 21.29 20.49 L 21.32 20.45 L 21.35 20.41 L 21.38 20.36 L 21.41 20.32 L 21.44 20.27 L 21.46 20.22 L 21.49 20.17 L 21.51 20.12 L 21.53 20.07 L 21.55 20.01 L 21.57 19.96 L 21.59 19.90 L 21.60 19.84 L 21.61 19.78 L 21.62 19.72 L 21.63 19.66 L 21.63 19.60 L 21.63 19.54 L 21.64 19.47 L 21.63 19.41 L 21.63 19.34 L 21.62 19.28 L 21.61 19.21 L 21.60 19.15 L 21.59 19.08 L 21.57 19.02 L 21.55 18.95 L 21.53 18.88 L 21.50 18.82 L 21.47 18.75 L 21.44 18.69 L 21.41 18.62 L 21.37 18.56 L 21.33 18.50 L 21.29 18.43 L 21.25 18.37 L 21.20 18.31 L 21.15 18.25 L 21.10 18.20 L 21.04 18.14 L 20.99 18.09 L 20.93 18.03 L 20.87 17.98 L 20.80 17.93 L 20.73 17.89 L 20.66 17.84 L 20.59 17.80 L 20.52 17.76 L 20.44 17.72 L 20.36 17.69 L 20.29 17.65 L 20.20 17.62 L 20.12 17.60 L 20.03 17.57 L 19.95 17.55 L 19.86 17.53 L 19.77 17.52 L 19.68 17.50 L 19.59 17.49 L 19.49 17.49 L 19.40 17.49 L 19.30 17.49 L 19.21 17.49 L 19.11 17.50 L 19.01 17.51 L 18.92 17.53 L 18.82 17.55 L 18.72 17.57 L 18.63 17.60 L 18.53 17.63 L 18.43 17.66 L 18.34 17.70 L 18.24 17.74 L 18.15 17.79 L 18.05 17.84 L 17.96 17.89 L 17.87 17.95 L 17.78 18.01 L 17.69 18.08 L 17.61 18.14 L 17.52 18.22 L 17.44 18.29 L 17.36 18.37 L 17.28 18.45 L 17.21 18.54 L 17.14 18.63 L 17.07 18.72 L 17.00 18.82 L 16.94 18.92 L 16.88 19.02 L 16.82 19.12 L 16.77 19.23 L 16.72 19.34 L 16.67 19.46 L 16.63 19.57 L 16.59 19.69 L 16.55 19.81 L 16.52 19.93 L 16.50 20.06 L 16.48 20.18 L 16.46 20.31 L 16.45 20.44 L 16.44 20.57 L 16.43 20.70 L 16.44 20.83 L 16.44 20.97 L 16.45 21.10 L 16.47 21.23 L 16.49 21.37 L 16.52 21.50 L 16.55 21.64 L 16.58 21.77 L 16.63 21.91 L 16.67 22.04 L 16.72 22.17 L 16.78 22.30 L 16.84 22.43 L 16.91 22.56 L 16.98 22.69 L 17.06 22.81 L 17.14 22.93 L 17.23 23.05 L 17.32 23.17 L 17.42 23.29 L 17.52 23.40 L 17.63 23.51 L 17.74 23.62 L 17.86 23.72 L 17.98 23.82 L 18.10 23.91 L 18.23 24.00 L 18.36 24.09 L 18.50 24.17 L 18.64 24.25 L 18.78 24.33 L 18.93 24.40 L 19.08 24.46 L 19.24 24.52 L 19.39 24.57 L 19.56 24.62 L 19.72 24.66 L 19.88 24.70 L 20.05 24.73 L 20.22 24.76 L 20.39 24.77 L 20.57 24.79 L 20.74 24.79 L 20.92 24.79 L 21.09 24.79 L 21.27 24.78 L 21.45 24.76 L 21.63 24.73 L 21.80 24.70 L 21.98 24.66 L 22.16 24.62 L 22.34 24.56 L 22.51 24.50 L 22.69 24.44 L 22.86 24.37 L 23.03 24.29 L 23.20 24.20 L 23.37 24.11 L 23.54 24.01 L 23.70 23.91 L 23.86 23.80 L 24.01 23.68 L 24.17 23.55 L 24.31 23.42 L 24.46 23.29 L 24.60 23.14 L 24.74 23.00 L 24.87 22.84 L 25.00 22.68 L 25.12 22.52 L 25.23 22.35 L 25.34 22.17 L 25.45 21.99 L 25.55 21.81 L 25.64 21.62 L 25.73 21.42 L 25.81 21.23 L 25.88 21.02 L 25.95 20.82 L 26.00 20.61 L 26.06 20.40 L 26.10 20.18 L 26.14 19.97 L 26.17 19.75 L 26.19 19.53 L 26.20 19.30 L 26.21 19.08 L 26.20 18.85 L 26.19 18.62 L 26.17 18.39 L 26.14 18.17 L 26.11 17.94 L 26.06 17.71 L 26.01 17.48 L 25.95 17.25 L 25.88 17.03 L 25.80 16.80 L 25.71 16.58 L 25.62 16.36 L 25.52 16.14 L 25.40 15.93 L 25.28 15.72 L 25.15 15.51 L 25.02 15.30 L 24.87 15.10 L 24.72 14.90 L 24.56 14.71 L 24.39 14.53 L 24.22 14.34 L 24.03 14.17 L 23.84 14.00 L 23.64 13.83 L 23.44 13.67 L 23.23 13.52 L 23.01 13.38 L 22.79 13.24 L 22.56 13.11 L 22.33 12.99 L 22.08 12.87 L 21.84 12.77 L 21.59 12.67 L 21.33 12.58 L 21.07 12.50 L 20.81 12.43 L 20.54 12.37 L 20.27 12.32 L 20.00 12.27 Z" fill="url(#logoGradHeader)"/>
+                    <defs>
+                        <linearGradient id="logoGradHeader" x1="5" y1="5" x2="35" y2="35" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#FFDE73"/>
+                            <stop offset="100%" stop-color="#B5850E"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="header__logo-word">
+                    <strong>aureo</strong>
+                    <em>systems</em>
+                </span>
+            </a>
+            <nav class="header__nav" aria-label="Navegación principal">
+                <ul class="header__menu" id="main-menu" role="menubar">
+                    <li role="none"><a href="#inicio" class="header__link header__link--active" role="menuitem" data-section="inicio">Inicio</a></li>
+                    <li role="none"><a href="#productos" class="header__link" role="menuitem" data-section="productos">Productos</a></li>
+                    <li class="header__dropdown" role="none">
+                        <button class="header__link header__dropdown-toggle" aria-haspopup="true" aria-expanded="false" role="menuitem" id="dropdown-toggle">
+                            Soluciones
+                            <svg class="header__chevron" width="12" height="7" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <ul class="header__dropdown-menu" id="dropdown-menu" role="menu" aria-labelledby="dropdown-toggle">
+                            <li role="none"><a href="#soluciones" class="header__dropdown-link" role="menuitem" data-solution="desarrollo">Desarrollo de sistemas</a></li>
+                            <li role="none"><a href="#soluciones" class="header__dropdown-link" role="menuitem" data-solution="datos-ia">Análisis de datos e IA</a></li>
+                            <li role="none"><a href="#soluciones" class="header__dropdown-link" role="menuitem" data-solution="automatizacion">Automatización de procesos</a></li>
+                            <li role="none"><a href="#soluciones" class="header__dropdown-link" role="menuitem" data-solution="marketing">Marketing digital</a></li>
+                            <li role="none"><a href="#soluciones" class="header__dropdown-link" role="menuitem" data-solution="consultoria">Consultoría tecnológica</a></li>
+                            <li role="none"><a href="#soluciones" class="header__dropdown-link" role="menuitem" data-solution="ecommerce">Ecommerce</a></li>
+                        </ul>
+                    </li>
+                    <li role="none"><a href="#nosotros" class="header__link" role="menuitem" data-section="nosotros">Nosotros</a></li>
+                    <li role="none"><a href="#contacto" class="header__link" role="menuitem" data-section="contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="header__actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar a modo claro" title="Cambiar tema">
+                    <svg class="theme-toggle__sun" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M9 1v2M9 15v2M17 9h-2M3 9H1M14.5 3.5l-1.4 1.4M4.9 13.1l-1.4 1.4M14.5 14.5l-1.4-1.4M4.9 4.9L3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <svg class="theme-toggle__moon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style="display:none;"><path d="M15.5 10.5A6.5 6.5 0 017.5 2.5a6.5 6.5 0 108 8z" fill="currentColor"/></svg>
+                </button>
+                <a href="#contacto" class="header__cta btn btn--gold">Solicitar cotización</a>
+            </div>
+            <button class="header__hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+                <span class="header__hamburger-line"></span>
+                <span class="header__hamburger-line"></span>
+                <span class="header__hamburger-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu__backdrop"></div>
+        <div class="mobile-menu__panel">
+            <div class="mobile-menu__header">
+                <span class="mobile-menu__title">Menú</span>
+                <button class="mobile-menu__close" id="mobile-close" aria-label="Cerrar menú">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+            </div>
+            <nav aria-label="Navegación móvil">
+                <ul class="mobile-menu__list">
+                    <li><a href="#inicio" class="mobile-menu__link" data-section="inicio">Inicio</a></li>
+                    <li><a href="#productos" class="mobile-menu__link" data-section="productos">Productos</a></li>
+                    <li>
+                        <button class="mobile-menu__link mobile-menu__sub-toggle" id="mobile-soluciones-toggle" aria-expanded="false">
+                            Soluciones
+                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <ul class="mobile-menu__sub" id="mobile-soluciones-sub" aria-hidden="true">
+                            <li><a href="#soluciones" class="mobile-menu__sublink" data-solution="desarrollo">Desarrollo de sistemas</a></li>
+                            <li><a href="#soluciones" class="mobile-menu__sublink" data-solution="datos-ia">Análisis de datos e IA</a></li>
+                            <li><a href="#soluciones" class="mobile-menu__sublink" data-solution="automatizacion">Automatización de procesos</a></li>
+                            <li><a href="#soluciones" class="mobile-menu__sublink" data-solution="marketing">Marketing digital</a></li>
+                            <li><a href="#soluciones" class="mobile-menu__sublink" data-solution="consultoria">Consultoría tecnológica</a></li>
+                            <li><a href="#soluciones" class="mobile-menu__sublink" data-solution="ecommerce">Ecommerce</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#nosotros" class="mobile-menu__link" data-section="nosotros">Nosotros</a></li>
+                    <li><a href="#contacto" class="mobile-menu__link" data-section="contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu__theme">
+                <span>Modo claro</span>
+                <button class="theme-toggle theme-toggle--mobile" id="theme-toggle-mobile" aria-label="Cambiar tema">
+                    <span class="theme-toggle__track"><span class="theme-toggle__thumb"></span></span>
+                </button>
+            </div>
+            <a href="#contacto" class="mobile-menu__cta btn btn--gold btn--block">Solicitar cotización</a>
+        </div>
+    </div>
+
+    <main id="contenido-principal">
+        <section class="hero" id="inicio" aria-labelledby="hero-heading">
+            <div class="hero__bg" id="hero-bg"></div>
+            <canvas class="hero__particles" id="hero-particles" aria-hidden="true"></canvas>
+            <div class="hero__container">
+                <div class="hero__info">
+                    <span class="hero__tag">TECNOLOGÍA PARA EMPRESAS</span>
+                    <h1 class="hero__title" id="hero-heading">Equipamos el futuro<br>de tu negocio</h1>
+                    <p class="hero__desc">Soluciones tecnológicas, equipos y suministros seleccionados para mejorar el rendimiento, la seguridad y la productividad de tu empresa.</p>
+                    <div class="hero__actions">
+                        <a href="#productos" class="btn btn--gold">Explorar productos</a>
+                        <a href="#contacto" class="btn btn--outline">Hablar con un asesor</a>
+                    </div>
+                </div>
+                <div class="hero__product" id="hero-product">
+                    <div class="hero__product-visual" id="hero-product-visual">
+                        <div class="hero__product-svg-container" id="product-svg-container"></div>
+                        <div class="hero__product-glow" id="product-glow"></div>
+                        <div class="hero__product-shadow"></div>
+                    </div>
+                    <div class="hero__product-details" id="hero-product-details">
+                        <span class="hero__product-badge" id="product-badge">Recomendado</span>
+                        <h2 class="hero__product-name" id="product-name">NovaBook X14</h2>
+                        <p class="hero__product-desc" id="product-desc">Laptop empresarial ultraligera con rendimiento excepcional para profesionales en movimiento.</p>
+                        <ul class="hero__product-features" id="product-features">
+                            <li>Procesador de última generación</li>
+                            <li>Pantalla de alta resolución</li>
+                            <li>Batería de larga duración</li>
+                        </ul>
+                        <span class="hero__product-price" id="product-price">Cotizar</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__controls">
+                <button class="hero__arrow hero__arrow--prev" id="hero-prev" aria-label="Producto anterior">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="hero__indicators" id="hero-indicators" role="tablist" aria-label="Indicadores de producto"></div>
+                <button class="hero__arrow hero__arrow--next" id="hero-next" aria-label="Producto siguiente">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M8 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+            <div class="hero__counter" id="hero-counter">01 / 08</div>
+            <div class="hero__next-preview" id="hero-next-preview" aria-hidden="true">
+                <span class="hero__next-label">Siguiente</span>
+                <span class="hero__next-name" id="next-product-name">Axis ProStation</span>
+            </div>
+            <button class="hero__autoplay-toggle" id="autoplay-toggle" aria-label="Pausar reproducción automática" title="Pausar reproducción automática">
+                <svg class="hero__play-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="2" width="4" height="12" rx="1" fill="currentColor"/><rect x="9" y="2" width="4" height="12" rx="1" fill="currentColor"/></svg>
+                <svg class="hero__pause-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="display:none;"><path d="M4 2l10 6-10 6V2z" fill="currentColor"/></svg>
+            </button>
+        </section>
+
+        <section class="categories" id="productos" aria-labelledby="categories-heading">
+            <div class="categories__container">
+                <div class="section-header">
+                    <span class="section-header__tag">CATÁLOGO</span>
+                    <h2 class="section-header__title" id="categories-heading">Categorías de producto</h2>
+                    <p class="section-header__desc">Soluciones tecnológicas organizadas para encontrar rápidamente lo que tu empresa necesita.</p>
+                </div>
+                <div class="categories__grid">
+                    <article class="category-card" tabindex="0" data-categoria="Cómputo empresarial">
+                        <div class="category-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="6" y="8" width="28" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="28" width="12" height="3" rx="1.5" fill="currentColor" opacity="0.5"/><line x1="20" y1="10" x2="20" y2="26" stroke="currentColor" stroke-width="1" opacity="0.4"/></svg>
+                        </div>
+                        <h3 class="category-card__title">Cómputo empresarial</h3>
+                        <p class="category-card__desc">Laptops, estaciones de trabajo y equipos de alto rendimiento.</p>
+                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <div class="category-card__glow"></div>
+                    </article>
+                    <article class="category-card" tabindex="0" data-categoria="Redes y conectividad">
+                        <div class="category-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="20" r="5" fill="currentColor" opacity="0.5"/><circle cx="20" cy="8" r="2" fill="currentColor" opacity="0.6"/><circle cx="32" cy="20" r="2" fill="currentColor" opacity="0.6"/><circle cx="8" cy="20" r="2" fill="currentColor" opacity="0.6"/></svg>
+                        </div>
+                        <h3 class="category-card__title">Redes y conectividad</h3>
+                        <p class="category-card__desc">Infraestructura de red, switches y soluciones de conectividad.</p>
+                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <div class="category-card__glow"></div>
+                    </article>
+                    <article class="category-card" tabindex="0" data-categoria="Servidores y almacenamiento">
+                        <div class="category-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="8" y="10" width="24" height="22" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="14" width="16" height="3" rx="1" fill="currentColor" opacity="0.5"/><rect x="12" y="19" width="16" height="3" rx="1" fill="currentColor" opacity="0.35"/><rect x="12" y="24" width="10" height="3" rx="1" fill="currentColor" opacity="0.35"/></svg>
+                        </div>
+                        <h3 class="category-card__title">Servidores y almacenamiento</h3>
+                        <p class="category-card__desc">Servidores, NAS y sistemas de respaldo para datos críticos.</p>
+                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <div class="category-card__glow"></div>
+                    </article>
+                    <article class="category-card" tabindex="0" data-categoria="Impresión y oficina">
+                        <div class="category-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="6" y="10" width="28" height="22" rx="3" stroke="currentColor" stroke-width="1.5"/><rect x="10" y="14" width="20" height="5" rx="1" fill="currentColor" opacity="0.4"/><circle cx="14" cy="25" r="3" stroke="currentColor" stroke-width="1.2"/><path d="M20 25h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3 class="category-card__title">Impresión y oficina</h3>
+                        <p class="category-card__desc">Impresoras multifuncionales y equipos para oficina productiva.</p>
+                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <div class="category-card__glow"></div>
+                    </article>
+                    <article class="category-card" tabindex="0" data-categoria="Periféricos">
+                        <div class="category-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="10" y="6" width="20" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><ellipse cx="20" cy="24" rx="10" ry="5" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="12" r="3" fill="currentColor" opacity="0.5"/></svg>
+                        </div>
+                        <h3 class="category-card__title">Periféricos</h3>
+                        <p class="category-card__desc">Monitores, teclados y accesorios para entornos profesionales.</p>
+                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <div class="category-card__glow"></div>
+                    </article>
+                    <article class="category-card" tabindex="0" data-categoria="Suministros tecnológicos">
+                        <div class="category-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="6" y="14" width="28" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M6 20h28" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.2"/><circle cx="28" cy="10" r="3" stroke="currentColor" stroke-width="1.2"/></svg>
+                        </div>
+                        <h3 class="category-card__title">Suministros tecnológicos</h3>
+                        <p class="category-card__desc">Consumibles, cables y accesorios esenciales para tu infraestructura.</p>
+                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <div class="category-card__glow"></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="solutions" id="soluciones" aria-labelledby="solutions-heading">
+            <div class="solutions__container">
+                <div class="section-header">
+                    <span class="section-header__tag">SOLUCIONES INTEGRALES</span>
+                    <h2 class="section-header__title" id="solutions-heading">Tecnología, estrategia y ejecución<br>en un mismo lugar</h2>
+                    <p class="section-header__desc">Acompañamos a cada empresa desde la selección de tecnología hasta la implementación de soluciones digitales que optimizan sus procesos y aceleran su crecimiento.</p>
+                </div>
+                <div class="solutions__layout">
+                    <article class="solution-card solution-card--large" tabindex="0" data-solution="desarrollo">
+                        <div class="solution-card__icon solution-card__icon--large">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="6" y="6" width="36" height="36" rx="6" stroke="currentColor" stroke-width="1.5"/><path d="M16 24h16M24 16v16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="24" r="10" stroke="currentColor" stroke-width="1" opacity="0.4"/></svg>
+                        </div>
+                        <h3 class="solution-card__title">Desarrollo de sistemas a medida</h3>
+                        <p class="solution-card__desc">Creamos software personalizado que se adapta exactamente a los procesos y necesidades de tu empresa, integrando tecnologías modernas y escalables.</p>
+                        <ul class="solution-card__list">
+                            <li>Aplicaciones web y móviles</li>
+                            <li>Sistemas de gestión empresarial</li>
+                            <li>Integración de plataformas</li>
+                        </ul>
+                        <div class="solution-card__glow"></div>
+                    </article>
+                    <article class="solution-card" tabindex="0" data-solution="datos-ia">
+                        <div class="solution-card__icon">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M18 10v16M10 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3 class="solution-card__title">Análisis de datos e IA</h3>
+                        <p class="solution-card__desc">Transformamos datos en decisiones estratégicas con inteligencia artificial y análisis avanzado.</p>
+                        <div class="solution-card__glow"></div>
+                    </article>
+                    <article class="solution-card" tabindex="0" data-solution="automatizacion">
+                        <div class="solution-card__icon">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M6 28L12 18l6 8 6-10 6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="10" r="3" stroke="currentColor" stroke-width="1.2"/></svg>
+                        </div>
+                        <h3 class="solution-card__title">Automatización de procesos</h3>
+                        <p class="solution-card__desc">Optimizamos flujos de trabajo con automatización inteligente para reducir costos y errores.</p>
+                        <div class="solution-card__glow"></div>
+                    </article>
+                    <article class="solution-card" tabindex="0" data-solution="consultoria">
+                        <div class="solution-card__icon">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M8 30c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3 class="solution-card__title">Consultoría tecnológica</h3>
+                        <p class="solution-card__desc">Asesoría experta para alinear tecnología con objetivos de negocio y maximizar inversiones.</p>
+                        <div class="solution-card__glow"></div>
+                    </article>
+                    <article class="solution-card" tabindex="0" data-solution="marketing">
+                        <div class="solution-card__icon">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="4" y="8" width="28" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="18" r="5" fill="currentColor" opacity="0.3"/></svg>
+                        </div>
+                        <h3 class="solution-card__title">Marketing digital</h3>
+                        <p class="solution-card__desc">Estrategias digitales que aumentan la visibilidad y generan resultados medibles.</p>
+                        <div class="solution-card__glow"></div>
+                    </article>
+                    <article class="solution-card" tabindex="0" data-solution="ecommerce">
+                        <div class="solution-card__icon">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M6 24l8-8 4 4 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="28" cy="10" r="3" stroke="currentColor" stroke-width="1.2"/></svg>
+                        </div>
+                        <h3 class="solution-card__title">Ecommerce</h3>
+                        <p class="solution-card__desc">Plataformas de comercio electrónico optimizadas para vender más y mejor.</p>
+                        <div class="solution-card__glow"></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="process" id="proceso" aria-labelledby="process-heading">
+            <div class="process__container">
+                <div class="section-header">
+                    <span class="section-header__tag">CÓMO TRABAJAMOS</span>
+                    <h2 class="section-header__title" id="process-heading">De la idea a la implementación</h2>
+                    <p class="section-header__desc">Un proceso claro y transparente, diseñado para que sepas exactamente qué esperar en cada etapa.</p>
+                </div>
+                <div class="process__grid">
+                    <article class="process-step">
+                        <span class="process-step__number">01</span>
+                        <h3 class="process-step__title">Diagnóstico</h3>
+                        <p class="process-step__desc">Analizamos tus procesos actuales, infraestructura y objetivos de negocio.</p>
+                    </article>
+                    <article class="process-step">
+                        <span class="process-step__number">02</span>
+                        <h3 class="process-step__title">Propuesta</h3>
+                        <p class="process-step__desc">Diseñamos una solución a medida con alcance, tiempos y costos claros.</p>
+                    </article>
+                    <article class="process-step">
+                        <span class="process-step__number">03</span>
+                        <h3 class="process-step__title">Implementación</h3>
+                        <p class="process-step__desc">Desarrollamos e integramos la solución con acompañamiento constante.</p>
+                    </article>
+                    <article class="process-step">
+                        <span class="process-step__number">04</span>
+                        <h3 class="process-step__title">Soporte</h3>
+                        <p class="process-step__desc">Damos seguimiento, optimizamos y ofrecemos soporte continuo.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+<section class="about" id="nosotros" aria-labelledby="about-heading">
+            <div class="about__container">
+                <div class="about__top">
+                    <div class="about__content">
+                        <span class="section-header__tag">SOBRE NOSOTROS</span>
+                        <h2 class="section-header__title" id="about-heading">Tu socio estratégico para el crecimiento y la optimización empresarial</h2>
+                        <p class="about__text">Somos una empresa líder en ofrecer soluciones integrales para impulsar el crecimiento y el éxito de las empresas. Nos hemos posicionado como un socio confiable y experto en cuatro ramos distintos: gestión de procesos empresariales, agencia de marketing digital, consultoría y adquisición de equipo de tecnología, y desarrollo de aplicaciones y programación de sistemas a medida.</p>
+                        <p class="about__text">Aureo Systems Consulting entiende que el éxito empresarial requiere una combinación efectiva de procesos eficientes, una presencia digital sólida, tecnología adecuada y soluciones personalizadas.</p>
+                        <div class="about__benefits">
+                            <div class="about__benefit">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="var(--gold-elegant)" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="var(--gold-elegant)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                <span>Soluciones personalizadas</span>
+                            </div>
+                            <div class="about__benefit">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="var(--gold-elegant)" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="var(--gold-elegant)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                <span>Resultados demostrados</span>
+                            </div>
+                            <div class="about__benefit">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="var(--gold-elegant)" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="var(--gold-elegant)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                <span>Atención al cliente excepcional</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about__video-wrap">
+                        <video id="about-video" class="about__video" muted loop playsinline preload="none">
+                            <source data-src="/nosotros.webm" type="video/webm">
+                        </video>
+                        <div class="about__video-frame" aria-hidden="true"></div>
+                    </div>
+                </div>
+                <div class="about__stats">
+                    <div class="about__stat" data-count="200">
+                        <span class="about__stat-number" id="stat-1">0</span>
+                        <span class="about__stat-label">Clientes satisfechos</span>
+                    </div>
+                    <div class="about__stat" data-count="100">
+                        <span class="about__stat-number" id="stat-2">0</span>
+                        <span class="about__stat-suffix">%</span>
+                        <span class="about__stat-label">De satisfacción</span>
+                    </div>
+                    <div class="about__stat" data-count="300">
+                        <span class="about__stat-number" id="stat-3">0</span>
+                        <span class="about__stat-label">Proyectos realizados</span>
+                    </div>
+                    <div class="about__stat" data-count="15">
+                        <span class="about__stat-number" id="stat-4">0</span>
+                        <span class="about__stat-label">Años de experiencia</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="simulator" id="simulador" aria-labelledby="simulator-heading">
+            <div class="simulator__container">
+                <div class="section-header">
+                    <span class="section-header__tag">CALCULA TU AHORRO</span>
+                    <h2 class="section-header__title" id="simulator-heading">¿Cuánto podrías ahorrar automatizando tus procesos?</h2>
+                    <p class="section-header__desc">Ajusta los valores según tu empresa y descubre una estimación de tiempo y dinero que podrías recuperar al automatizar tareas repetitivas.</p>
+                </div>
+                <div class="simulator__panel">
+                    <div class="simulator__controls">
+                        <div class="simulator__field">
+                            <label for="sim-empleados">Empleados involucrados en tareas manuales</label>
+                            <div class="simulator__field-row">
+                                <input type="range" id="sim-empleados" min="1" max="50" value="8" step="1">
+                                <span class="simulator__value" id="sim-empleados-val">8</span>
+                            </div>
+                        </div>
+                        <div class="simulator__field">
+                            <label for="sim-horas">Horas semanales por empleado en tareas repetitivas</label>
+                            <div class="simulator__field-row">
+                                <input type="range" id="sim-horas" min="1" max="25" value="8" step="1">
+                                <span class="simulator__value" id="sim-horas-val">8 h</span>
+                            </div>
+                        </div>
+                        <div class="simulator__field">
+                            <label for="sim-costo">Costo promedio por hora, por empleado (MXN)</label>
+                            <div class="simulator__field-row">
+                                <input type="range" id="sim-costo" min="80" max="500" value="180" step="10">
+                                <span class="simulator__value" id="sim-costo-val">$180</span>
+                            </div>
+                        </div>
+                        <p class="simulator__note">Estimación basada en una reducción promedio del 35% del tiempo dedicado a tareas repetitivas al automatizarlas. Es un cálculo referencial, no una cotización.</p>
+                    </div>
+                    <div class="simulator__results">
+                        <div class="simulator__result">
+                            <span class="simulator__result-number" id="sim-horas-mes">0</span>
+                            <span class="simulator__result-label">Horas recuperadas al mes</span>
+                        </div>
+                        <div class="simulator__result">
+                            <span class="simulator__result-number" id="sim-dias-mes">0</span>
+                            <span class="simulator__result-label">Días laborales recuperados al mes</span>
+                        </div>
+                        <div class="simulator__result simulator__result--highlight">
+                            <span class="simulator__result-number" id="sim-dinero-anio">$0</span>
+                            <span class="simulator__result-label">Ahorro estimado al año</span>
+                        </div>
+                        <a href="#contacto" class="btn btn--gold simulator__cta">Quiero automatizar esto</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="brands" aria-labelledby="brands-heading">
+            <div class="brands__container">
+                <h2 class="section-header__title section-header__title--center" id="brands-heading">Las mejores marcas en un solo lugar</h2>
+                <div class="brands__track-wrapper">
+                    <div class="brands__track" id="brands-track" aria-hidden="true">
+                        <span class="brands__item">Cómputo</span>
+                        <span class="brands__item">Redes</span>
+                        <span class="brands__item">Impresión</span>
+                        <span class="brands__item">Seguridad</span>
+                        <span class="brands__item">Almacenamiento</span>
+                        <span class="brands__item">Accesorios</span>
+                        <span class="brands__item">Cómputo</span>
+                        <span class="brands__item">Redes</span>
+                        <span class="brands__item">Impresión</span>
+                        <span class="brands__item">Seguridad</span>
+                        <span class="brands__item">Almacenamiento</span>
+                        <span class="brands__item">Accesorios</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials" id="testimonios" aria-labelledby="testimonials-heading">
+            <div class="testimonials__container">
+                <div class="section-header">
+                    <span class="section-header__tag">TESTIMONIOS</span>
+                    <h2 class="section-header__title" id="testimonials-heading">Lo que dicen nuestros clientes</h2>
+                    <p class="section-header__desc">Empresas que ya confiaron en nosotros para resolver sus retos tecnológicos.</p>
+                </div>
+                <div class="testimonials__grid">
+                    <article class="testimonial-card">
+                        <div class="testimonial-card__stars" aria-hidden="true">★★★★★</div>
+                        <p class="testimonial-card__quote">"Automatizaron un proceso que nos tomaba días y ahora lo resolvemos en horas. El acompañamiento del equipo fue excelente de principio a fin."</p>
+                        <div class="testimonial-card__author">
+                            <span class="testimonial-card__avatar">RM</span>
+                            <div>
+                                <strong>Roberto Martínez</strong>
+                                <span>Director de Operaciones, Grupo Industrial del Centro</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-card__stars" aria-hidden="true">★★★★★</div>
+                        <p class="testimonial-card__quote">"Buscábamos renovar todo nuestro equipo de cómputo sin parar operaciones. Aureo lo planeó por etapas y cumplió cada fecha comprometida."</p>
+                        <div class="testimonial-card__author">
+                            <span class="testimonial-card__avatar">LC</span>
+                            <div>
+                                <strong>Lucía Contreras</strong>
+                                <span>Gerente de TI, Corporativo Altamira</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-card__stars" aria-hidden="true">★★★★★</div>
+                        <p class="testimonial-card__quote">"El sistema a medida que desarrollaron se adapta exactamente a cómo trabajamos, sin forzar nuestros procesos a un software genérico."</p>
+                        <div class="testimonial-card__author">
+                            <span class="testimonial-card__avatar">JF</span>
+                            <div>
+                                <strong>Jorge Fuentes</strong>
+                                <span>Director General, Distribuidora del Valle</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta" aria-labelledby="cta-heading">
+            <div class="cta__container">
+                <div class="cta__glow" aria-hidden="true"></div>
+                <h2 class="cta__title" id="cta-heading">Transformemos la tecnología<br>de tu empresa</h2>
+                <p class="cta__desc">Cuéntanos qué necesita tu negocio y nuestro equipo te ayudará a encontrar una solución adecuada.</p>
+                <div class="cta__actions">
+                    <a href="#contacto" class="btn btn--gold btn--lg">Solicitar asesoría</a>
+                    <a href="#productos" class="btn btn--outline-light btn--lg">Explorar catálogo</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq" aria-labelledby="faq-heading">
+            <div class="faq__container">
+                <div class="section-header">
+                    <span class="section-header__tag">DUDAS FRECUENTES</span>
+                    <h2 class="section-header__title" id="faq-heading">Preguntas frecuentes</h2>
+                    <p class="section-header__desc">Si no encuentras la respuesta que buscas, escríbenos y con gusto te ayudamos.</p>
+                </div>
+                <div class="faq__list">
+                    <details class="faq__item">
+                        <summary class="faq__question">¿Cómo funciona el proceso de cotización?</summary>
+                        <p class="faq__answer">Completas el formulario de contacto o nos llamas directamente, agendamos una llamada breve para entender tu necesidad y te enviamos una propuesta con alcance, tiempos y costo sin compromiso.</p>
+                    </details>
+                    <details class="faq__item">
+                        <summary class="faq__question">¿Cuánto tiempo toma implementar una solución?</summary>
+                        <p class="faq__answer">Depende del alcance: un suministro de equipo puede resolverse en días, mientras que un desarrollo a medida o una automatización de procesos suele tomar entre 3 y 10 semanas. Esto se define en la propuesta inicial.</p>
+                    </details>
+                    <details class="faq__item">
+                        <summary class="faq__question">¿Ofrecen soporte después de la entrega?</summary>
+                        <p class="faq__answer">Sí, todos nuestros proyectos incluyen un periodo de soporte post-implementación, y ofrecemos planes de mantenimiento continuo para quienes lo necesitan.</p>
+                    </details>
+                    <details class="faq__item">
+                        <summary class="faq__question">¿Trabajan con empresas fuera de Puebla?</summary>
+                        <p class="faq__answer">Sí, damos atención remota a empresas en toda la región y coordinamos visitas presenciales cuando el proyecto lo requiere.</p>
+                    </details>
+                    <details class="faq__item">
+                        <summary class="faq__question">¿Qué formas de pago manejan?</summary>
+                        <p class="faq__answer">Transferencia bancaria y, para proyectos de mayor alcance, pagos por etapas conforme a los entregables acordados en la propuesta.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contacto" aria-labelledby="contact-heading">
+            <div class="contact__container">
+                <div class="section-header">
+                    <span class="section-header__tag">CONTACTO</span>
+                    <h2 class="section-header__title" id="contact-heading">Hablemos sobre tu proyecto</h2>
+                    <p class="section-header__desc">Completa el formulario y nuestro equipo se pondrá en contacto contigo para entender tus necesidades.</p>
+                </div>
+                <div class="contact__layout">
+                    <form class="contact__form" id="contact-form" novalidate>
+                        <div class="contact__row">
+                            <div class="contact__field">
+                                <label for="nombre" class="contact__label">Nombre completo *</label>
+                                <input type="text" id="nombre" name="nombre" class="contact__input" required placeholder="Tu nombre completo" autocomplete="name">
+                                <span class="contact__error" id="error-nombre" aria-live="polite"></span>
+                            </div>
+                            <div class="contact__field">
+                                <label for="empresa" class="contact__label">Empresa</label>
+                                <input type="text" id="empresa" name="empresa" class="contact__input" placeholder="Nombre de tu empresa" autocomplete="organization">
+                            </div>
+                        </div>
+                        <div class="contact__row">
+                            <div class="contact__field">
+                                <label for="telefono" class="contact__label">Teléfono *</label>
+                                <input type="tel" id="telefono" name="telefono" class="contact__input" required placeholder="Tu número de teléfono" autocomplete="tel">
+                                <span class="contact__error" id="error-telefono" aria-live="polite"></span>
+                            </div>
+                            <div class="contact__field">
+                                <label for="email" class="contact__label">Correo electrónico *</label>
+                                <input type="email" id="email" name="email" class="contact__input" required placeholder="tu@correo.com" autocomplete="email">
+                                <span class="contact__error" id="error-email" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        <div class="contact__field">
+                            <label for="tipo-solucion" class="contact__label">Tipo de solución</label>
+                            <select id="tipo-solucion" name="tipo-solucion" class="contact__input contact__select">
+                                <option value="">Selecciona una opción</option>
+                                <option value="desarrollo">Desarrollo de sistemas</option>
+                                <option value="datos-ia">Análisis de datos e IA</option>
+                                <option value="automatizacion">Automatización de procesos</option>
+                                <option value="marketing">Marketing digital</option>
+                                <option value="consultoria">Consultoría tecnológica</option>
+                                <option value="ecommerce">Ecommerce</option>
+                                <option value="equipos">Equipos y suministros</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="contact__field">
+                            <label for="mensaje" class="contact__label">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" class="contact__input contact__textarea" required placeholder="Cuéntanos sobre tu proyecto o necesidad..." rows="5"></textarea>
+                            <span class="contact__error" id="error-mensaje" aria-live="polite"></span>
+                        </div>
+                        <button type="submit" class="btn btn--gold btn--lg contact__submit">
+                            Enviar solicitud
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="contact__success" id="contact-success" aria-live="polite" style="display:none;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="var(--gold-elegant)" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="var(--gold-elegant)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>¡Solicitud registrada! Esta es una demostración. Nuestro equipo se pondría en contacto contigo.</span>
+                        </div>
+                    </form>
+                    <aside class="contact__info-stack" aria-label="Información de contacto">
+                        <div class="contact__info-card">
+                            <h3 class="contact__info-title">¿Por qué escribirnos?</h3>
+                            <ul class="contact__info-list">
+                                <li class="contact__info-item">
+                                    <span class="contact__info-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.4"/><path d="M9 5v4l3 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+                                    <div>
+                                        <strong>Respuesta rápida</strong>
+                                        <span>Te contactamos en menos de 24 horas hábiles.</span>
+                                    </div>
+                                </li>
+                                <li class="contact__info-item">
+                                    <span class="contact__info-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 6l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/></svg></span>
+                                    <div>
+                                        <strong>Asesoría sin costo</strong>
+                                        <span>Tu primera consulta con nuestro equipo es gratuita.</span>
+                                    </div>
+                                </li>
+                                <li class="contact__info-item">
+                                    <span class="contact__info-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M3 16c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+                                    <div>
+                                        <strong>Trato directo</strong>
+                                        <span>Hablas con un especialista, no con un formulario perdido.</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="contact__info-card">
+                            <h3 class="contact__info-title">Contáctanos directo</h3>
+                            <ul class="contact__info-direct">
+                                <li>
+                                    <span class="contact__info-direct-icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M2 5l6 4 6-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                                    </span>
+                                    <div class="contact__info-direct-text">
+                                        <a href="mailto:help@aureo-systems.com">help@aureo-systems.com</a>
+                                        <a href="mailto:ventas@aureo-systems.com">ventas@aureo-systems.com</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="contact__info-direct-icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.3 2.7L6.6 5a1 1 0 01-.3 1.2l-1 .8a8 8 0 003.7 3.7l.8-1a1 1 0 011.2-.3l2.3 1.3a1 1 0 01.5 1.1l-.4 1.6a1 1 0 01-1 .8C7.8 14 2 8.2 1.9 3.6a1 1 0 01.8-1l1.6-.4a1 1 0 011 .5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+                                    </span>
+                                    <div class="contact__info-direct-text">
+                                        <a href="tel:+522221529152">222 152 9152</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="contact__info-direct-icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M4 14c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                                    </span>
+                                    <div class="contact__info-direct-text">
+                                        <a href="https://www.google.com/maps/search/?api=1&query=Morelos+36+Col.+Francisco+I.+Madero+Puebla+Pue+72130" target="_blank" rel="noopener noreferrer">
+                                            Morelos 36, Col. Francisco I. Madero<br>Puebla, Pue., C.P. 72130
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="contact__hours">
+                                <h4 class="contact__hours-title">Horario de atención</h4>
+                                <ul class="contact__hours-list">
+                                    <li><span>Lunes a viernes</span><span>9:00 am – 6:00 pm</span></li>
+                                    <li><span>Sábado</span><span>9:00 am – 1:00 pm</span></li>
+                                    <li><span>Domingo</span><span>Cerrado</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="contact__info-card contact__info-card--map">
+                            <div class="contact__map">
+                                <h4 class="contact__map-title">Nuestra ubicación</h4>
+                                <div class="contact__map-wrap">
+                                    <iframe
+                                        class="contact__map-frame"
+                                        src="https://maps.google.com/maps?q=%22Morelos%2036%2C%20Puebla%2C%20Pue.%2072130%2C%20M%C3%A9xico%22&z=16&output=embed"
+                                        title="Ubicación de Aureo Systems Consulting"
+                                        loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                                <a class="contact__map-link" href="https://www.google.com/maps/search/?api=1&query=Morelos+36+Col.+Francisco+I.+Madero+Puebla+Pue+72130" target="_blank" rel="noopener noreferrer">
+                                    Ver cómo llegar <span aria-hidden="true">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="#inicio" class="footer__logo" aria-label="Aureo Systems">
+                        <svg class="footer__logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M 20.00 11.36 L 20.31 11.41 L 20.61 11.46 L 20.91 11.53 L 21.20 11.60 L 21.49 11.69 L 21.78 11.78 L 22.06 11.88 L 22.34 12.00 L 22.61 12.12 L 22.88 12.26 L 23.14 12.40 L 23.39 12.55 L 23.64 12.70 L 23.88 12.87 L 24.11 13.04 L 24.33 13.23 L 24.55 13.41 L 24.76 13.61 L 24.96 13.81 L 25.16 14.02 L 25.34 14.23 L 25.52 14.45 L 25.69 14.68 L 25.85 14.90 L 26.00 15.14 L 26.14 15.38 L 26.27 15.62 L 26.39 15.86 L 26.50 16.11 L 26.61 16.36 L 26.70 16.61 L 26.79 16.87 L 26.86 17.13 L 26.93 17.38 L 26.98 17.64 L 27.03 17.90 L 27.06 18.16 L 27.09 18.42 L 27.11 18.68 L 27.12 18.94 L 27.12 19.20 L 27.11 19.45 L 27.09 19.71 L 27.06 19.96 L 27.02 20.21 L 26.98 20.46 L 26.93 20.70 L 26.86 20.95 L 26.79 21.18 L 26.71 21.42 L 26.63 21.65 L 26.53 21.87 L 26.43 22.09 L 26.32 22.31 L 26.20 22.52 L 26.08 22.73 L 25.95 22.93 L 25.81 23.12 L 25.67 23.31 L 25.52 23.49 L 25.37 23.67 L 25.21 23.84 L 25.04 24.00 L 24.87 24.16 L 24.70 24.31 L 24.52 24.45 L 24.34 24.58 L 24.15 24.71 L 23.96 24.83 L 23.77 24.95 L 23.57 25.05 L 23.37 25.15 L 23.17 25.24 L 22.97 25.32 L 22.76 25.40 L 22.56 25.46 L 22.35 25.52 L 22.14 25.57 L 21.93 25.62 L 21.72 25.65 L 21.51 25.68 L 21.30 25.70 L 21.09 25.72 L 20.88 25.72 L 20.68 25.72 L 20.47 25.71 L 20.26 25.69 L 20.06 25.67 L 19.86 25.64 L 19.66 25.60 L 19.46 25.56 L 19.27 25.50 L 19.08 25.45 L 18.89 25.38 L 18.71 25.31 L 18.53 25.23 L 18.35 25.15 L 18.18 25.06 L 18.01 24.97 L 17.85 24.87 L 17.69 24.76 L 17.53 24.65 L 17.38 24.54 L 17.24 24.42 L 17.10 24.29 L 16.97 24.16 L 16.84 24.03 L 16.71 23.90 L 16.59 23.76 L 16.48 23.61 L 16.38 23.47 L 16.28 23.32 L 16.18 23.17 L 16.09 23.01 L 16.01 22.85 L 15.93 22.70 L 15.86 22.54 L 15.80 22.37 L 15.74 22.21 L 15.69 22.05 L 15.64 21.88 L 15.60 21.71 L 15.57 21.55 L 15.54 21.38 L 15.52 21.22 L 15.51 21.05 L 15.50 20.88 L 15.50 20.72 L 15.50 20.56 L 15.51 20.39 L 15.52 20.23 L 15.54 20.07 L 15.57 19.91 L 15.60 19.76 L 15.64 19.60 L 15.68 19.45 L 15.72 19.30 L 15.78 19.16 L 15.83 19.01 L 15.90 18.87 L 15.96 18.73 L 16.03 18.60 L 16.11 18.47 L 16.19 18.34 L 16.27 18.22 L 16.36 18.09 L 16.45 17.98 L 16.54 17.87 L 16.64 17.76 L 16.74 17.65 L 16.85 17.55 L 16.95 17.46 L 17.06 17.37 L 17.18 17.28 L 17.29 17.20 L 17.41 17.12 L 17.53 17.05 L 17.65 16.98 L 17.77 16.92 L 17.90 16.86 L 18.02 16.81 L 18.15 16.76 L 18.27 16.72 L 18.40 16.68 L 18.53 16.64 L 18.66 16.61 L 18.79 16.59 L 18.92 16.57 L 19.04 16.55 L 19.17 16.54 L 19.30 16.54 L 19.43 16.54 L 19.55 16.54 L 19.68 16.55 L 19.80 16.56 L 19.93 16.58 L 20.05 16.60 L 20.17 16.62 L 20.29 16.65 L 20.40 16.69 L 20.52 16.73 L 20.63 16.77 L 20.74 16.81 L 20.85 16.86 L 20.95 16.91 L 21.05 16.97 L 21.15 17.03 L 21.25 17.09 L 21.34 17.15 L 21.44 17.22 L 21.52 17.29 L 21.61 17.36 L 21.69 17.44 L 21.77 17.52 L 21.84 17.60 L 21.91 17.68 L 21.98 17.76 L 22.05 17.85 L 22.11 17.94 L 22.17 18.03 L 22.22 18.12 L 22.27 18.21 L 22.32 18.30 L 22.36 18.40 L 22.40 18.49 L 22.43 18.59 L 22.47 18.69 L 22.49 18.78 L 22.52 18.88 L 22.54 18.98 L 22.56 19.07 L 22.57 19.17 L 22.58 19.27 L 22.59 19.37 L 22.59 19.46 L 22.59 19.56 L 22.59 19.65 L 22.58 19.75 L 22.57 19.84 L 22.56 19.93 L 22.54 20.02 L 22.52 20.11 L 22.50 20.20 L 22.47 20.29 L 22.44 20.37 L 22.41 20.45 L 22.37 20.54 L 22.34 20.62 L 22.30 20.69 L 22.25 20.77 L 22.21 20.84 L 22.16 20.91 L 22.11 20.98 L 22.06 21.05 L 22.01 21.12 L 21.95 21.18 L 21.90 21.24 L 21.84 21.30 L 21.78 21.35 L 21.72 21.40 L 21.65 21.45 L 21.59 21.50 L 21.52 21.54 L 21.46 21.58 L 21.39 21.62 L 21.32 21.66 L 21.25 21.69 L 21.18 21.72 L 21.11 21.75 L 21.04 21.78 L 20.97 21.80 L 20.90 21.82 L 20.83 21.84 L 20.76 21.85 L 20.69 21.86 L 20.61 21.87 L 20.54 21.88 L 20.47 21.88 L 20.40 21.88 L 20.33 21.88 L 20.16 20.90 L 20.19 20.91 L 20.23 20.91 L 20.27 20.92 L 20.30 20.92 L 20.34 20.93 L 20.38 20.93 L 20.42 20.93 L 20.46 20.93 L 20.50 20.92 L 20.54 20.92 L 20.58 20.91 L 20.62 20.90 L 20.66 20.89 L 20.70 20.88 L 20.74 20.87 L 20.78 20.85 L 20.83 20.84 L 20.87 20.82 L 20.91 20.80 L 20.95 20.77 L 20.99 20.75 L 21.03 20.72 L 21.07 20.70 L 21.11 20.67 L 21.14 20.63 L 21.18 20.60 L 21.22 20.57 L 21.25 20.53 L 21.29 20.49 L 21.32 20.45 L 21.35 20.41 L 21.38 20.36 L 21.41 20.32 L 21.44 20.27 L 21.46 20.22 L 21.49 20.17 L 21.51 20.12 L 21.53 20.07 L 21.55 20.01 L 21.57 19.96 L 21.59 19.90 L 21.60 19.84 L 21.61 19.78 L 21.62 19.72 L 21.63 19.66 L 21.63 19.60 L 21.63 19.54 L 21.64 19.47 L 21.63 19.41 L 21.63 19.34 L 21.62 19.28 L 21.61 19.21 L 21.60 19.15 L 21.59 19.08 L 21.57 19.02 L 21.55 18.95 L 21.53 18.88 L 21.50 18.82 L 21.47 18.75 L 21.44 18.69 L 21.41 18.62 L 21.37 18.56 L 21.33 18.50 L 21.29 18.43 L 21.25 18.37 L 21.20 18.31 L 21.15 18.25 L 21.10 18.20 L 21.04 18.14 L 20.99 18.09 L 20.93 18.03 L 20.87 17.98 L 20.80 17.93 L 20.73 17.89 L 20.66 17.84 L 20.59 17.80 L 20.52 17.76 L 20.44 17.72 L 20.36 17.69 L 20.29 17.65 L 20.20 17.62 L 20.12 17.60 L 20.03 17.57 L 19.95 17.55 L 19.86 17.53 L 19.77 17.52 L 19.68 17.50 L 19.59 17.49 L 19.49 17.49 L 19.40 17.49 L 19.30 17.49 L 19.21 17.49 L 19.11 17.50 L 19.01 17.51 L 18.92 17.53 L 18.82 17.55 L 18.72 17.57 L 18.63 17.60 L 18.53 17.63 L 18.43 17.66 L 18.34 17.70 L 18.24 17.74 L 18.15 17.79 L 18.05 17.84 L 17.96 17.89 L 17.87 17.95 L 17.78 18.01 L 17.69 18.08 L 17.61 18.14 L 17.52 18.22 L 17.44 18.29 L 17.36 18.37 L 17.28 18.45 L 17.21 18.54 L 17.14 18.63 L 17.07 18.72 L 17.00 18.82 L 16.94 18.92 L 16.88 19.02 L 16.82 19.12 L 16.77 19.23 L 16.72 19.34 L 16.67 19.46 L 16.63 19.57 L 16.59 19.69 L 16.55 19.81 L 16.52 19.93 L 16.50 20.06 L 16.48 20.18 L 16.46 20.31 L 16.45 20.44 L 16.44 20.57 L 16.43 20.70 L 16.44 20.83 L 16.44 20.97 L 16.45 21.10 L 16.47 21.23 L 16.49 21.37 L 16.52 21.50 L 16.55 21.64 L 16.58 21.77 L 16.63 21.91 L 16.67 22.04 L 16.72 22.17 L 16.78 22.30 L 16.84 22.43 L 16.91 22.56 L 16.98 22.69 L 17.06 22.81 L 17.14 22.93 L 17.23 23.05 L 17.32 23.17 L 17.42 23.29 L 17.52 23.40 L 17.63 23.51 L 17.74 23.62 L 17.86 23.72 L 17.98 23.82 L 18.10 23.91 L 18.23 24.00 L 18.36 24.09 L 18.50 24.17 L 18.64 24.25 L 18.78 24.33 L 18.93 24.40 L 19.08 24.46 L 19.24 24.52 L 19.39 24.57 L 19.56 24.62 L 19.72 24.66 L 19.88 24.70 L 20.05 24.73 L 20.22 24.76 L 20.39 24.77 L 20.57 24.79 L 20.74 24.79 L 20.92 24.79 L 21.09 24.79 L 21.27 24.78 L 21.45 24.76 L 21.63 24.73 L 21.80 24.70 L 21.98 24.66 L 22.16 24.62 L 22.34 24.56 L 22.51 24.50 L 22.69 24.44 L 22.86 24.37 L 23.03 24.29 L 23.20 24.20 L 23.37 24.11 L 23.54 24.01 L 23.70 23.91 L 23.86 23.80 L 24.01 23.68 L 24.17 23.55 L 24.31 23.42 L 24.46 23.29 L 24.60 23.14 L 24.74 23.00 L 24.87 22.84 L 25.00 22.68 L 25.12 22.52 L 25.23 22.35 L 25.34 22.17 L 25.45 21.99 L 25.55 21.81 L 25.64 21.62 L 25.73 21.42 L 25.81 21.23 L 25.88 21.02 L 25.95 20.82 L 26.00 20.61 L 26.06 20.40 L 26.10 20.18 L 26.14 19.97 L 26.17 19.75 L 26.19 19.53 L 26.20 19.30 L 26.21 19.08 L 26.20 18.85 L 26.19 18.62 L 26.17 18.39 L 26.14 18.17 L 26.11 17.94 L 26.06 17.71 L 26.01 17.48 L 25.95 17.25 L 25.88 17.03 L 25.80 16.80 L 25.71 16.58 L 25.62 16.36 L 25.52 16.14 L 25.40 15.93 L 25.28 15.72 L 25.15 15.51 L 25.02 15.30 L 24.87 15.10 L 24.72 14.90 L 24.56 14.71 L 24.39 14.53 L 24.22 14.34 L 24.03 14.17 L 23.84 14.00 L 23.64 13.83 L 23.44 13.67 L 23.23 13.52 L 23.01 13.38 L 22.79 13.24 L 22.56 13.11 L 22.33 12.99 L 22.08 12.87 L 21.84 12.77 L 21.59 12.67 L 21.33 12.58 L 21.07 12.50 L 20.81 12.43 L 20.54 12.37 L 20.27 12.32 L 20.00 12.27 Z" fill="url(#logoGradFooter)"/>
+                            <defs>
+                                <linearGradient id="logoGradFooter" x1="5" y1="5" x2="35" y2="35" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FFDE73"/>
+                                    <stop offset="100%" stop-color="#B5850E"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="footer__logo-word">
+                            <strong>aureo</strong>
+                            <em>systems</em>
+                        </span>
+                    </a>
+                    <p class="footer__desc">Soluciones tecnológicas empresariales, consultoría y suministros para impulsar el crecimiento de tu negocio.</p>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M6 8v6M6 6v.01M10 14v-4.5M10 9.5A2.5 2.5 0 0115 9.5V14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="Twitter / X">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 4l5 6-5 6h2l4-5 3.5 5H17l-5.5-7L16 4h-2l-3.5 4.5L7 4H4z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.3"/><circle cx="15" cy="5" r="1" fill="currentColor"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer__nav">
+                    <h3 class="footer__nav-title">Navegación</h3>
+                    <ul class="footer__nav-list">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#soluciones">Soluciones</a></li>
+                        <li><a href="#proceso">Proceso</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#simulador">Calculadora</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#faq">Preguntas frecuentes</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer__nav">
+                    <h3 class="footer__nav-title">Soluciones</h3>
+                    <ul class="footer__nav-list">
+                        <li><a href="#soluciones" data-solution="desarrollo">Desarrollo de sistemas</a></li>
+                        <li><a href="#soluciones" data-solution="datos-ia">Análisis de datos e IA</a></li>
+                        <li><a href="#soluciones" data-solution="automatizacion">Automatización</a></li>
+                        <li><a href="#soluciones" data-solution="marketing">Marketing digital</a></li>
+                        <li><a href="#soluciones" data-solution="consultoria">Consultoría</a></li>
+                    </ul>
+                </div>
+                <div class="footer__contact-info">
+                    <h3 class="footer__nav-title">Contacto</h3>
+                    <ul class="footer__contact-list">
+                        <li>
+                            <span class="footer__contact-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M2 5l6 4 6-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                            </span>
+                            <div class="footer__contact-text">
+                                <a href="mailto:help@aureo-systems.com">help@aureo-systems.com</a>
+                                <a href="mailto:ventas@aureo-systems.com">ventas@aureo-systems.com</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="footer__contact-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.3 2.7L6.6 5a1 1 0 01-.3 1.2l-1 .8a8 8 0 003.7 3.7l.8-1a1 1 0 011.2-.3l2.3 1.3a1 1 0 01.5 1.1l-.4 1.6a1 1 0 01-1 .8C7.8 14 2 8.2 1.9 3.6a1 1 0 01.8-1l1.6-.4a1 1 0 011 .5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+                            </span>
+                            <div class="footer__contact-text">
+                                <a href="tel:+522221529152">222 152 9152</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="footer__contact-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M4 14c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                            </span>
+                            <div class="footer__contact-text">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Morelos+36+Col.+Francisco+I.+Madero+Puebla+Pue+72130" target="_blank" rel="noopener noreferrer">Morelos 36 Col. Francisco I. Madero<br>Puebla, Pue., C.P. 72130</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; <span id="current-year">2024</span> Aureo Systems Consulting. Todos los derechos reservados.</p>
+                <div class="footer__legal">
+                    <a href="#">Política de privacidad</a>
+                    <a href="#">Términos y condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+<a href="https://wa.me/522221529152?text=Hola%2C%20quiero%20más%20información%20sobre%20sus%20soluciones"
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5-1.3c1.5.8 3.2 1.3 5 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3C4.4 15 4 13.5 4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.2-.3.4-.4.1-.1.2-.3.2-.4.1-.2 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.2 1.6 2.5 4 3.4.6.2 1 .4 1.3.5.6.2 1.1.1 1.5-.1.5-.2 1.4-.6 1.6-1.1.2-.5.2-.9.1-1z"/></svg>
+    </a>
+    <button class="scroll-top" id="scroll-top" aria-label="Volver arriba">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 12l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <script src="Script.js"></script>
+</body>
+</html>
