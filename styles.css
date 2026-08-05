@@ -348,12 +348,13 @@ textarea:focus-visible {
     height: 68px;
     flex-shrink: 0;
     display: block;
+    object-fit: contain;
 }
 .header__logo-word {
     display: flex;
     flex-direction: column;
     line-height: 1;
-    margin-left: -12px;
+    margin-left: 8px;
 }
 .header__logo-word strong {
     font-family: var(--font-heading);
@@ -1805,6 +1806,14 @@ textarea:focus-visible {
     background-position: right 14px center;
     padding-right: 36px;
     cursor: pointer;
+    color-scheme: dark;
+}
+[data-theme="light"] .contact__select {
+    color-scheme: light;
+}
+.contact__select option {
+    background-color: var(--bg-dark-alt);
+    color: var(--white-warm);
 }
 .contact__textarea {
     resize: vertical;
@@ -1864,12 +1873,13 @@ textarea:focus-visible {
     height: 57px;
     flex-shrink: 0;
     display: block;
+    object-fit: contain;
 }
 .footer__logo-word {
     display: flex;
     flex-direction: column;
     line-height: 1;
-    margin-left: -10px;
+    margin-left: 8px;
 }
 .footer__logo-word strong {
     font-family: var(--font-heading);
@@ -2499,5 +2509,44 @@ textarea:focus-visible {
     .faq__question {
         font-size: 0.9rem;
         padding-right: 24px;
+    }
+}
+/* --- Foto destacada dentro de una sección --- */
+.section-photo {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto 48px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--border-gold);
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 16 / 9;
+}
+.section-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--transition-slow);
+}
+.section-photo:hover img {
+    transform: scale(1.03);
+}
+.section-photo__caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px 24px;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.65));
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+@media (max-width: 768px) {
+    .section-photo {
+        aspect-ratio: 4 / 3;
+        margin-bottom: 32px;
     }
 }

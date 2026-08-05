@@ -1,14 +1,12 @@
 /* ============================================
    AUREO SYSTEMS CONSULTING - LANDING PAGE
    Script.js
+   7.2
    ============================================ */
 
 (function () {
     'use strict';
 
-    // --- Datos de productos ---
-    // Para usar tu propia foto en un producto, pon la ruta del PNG en "imagen".
-    // Si "imagen" es null (o el archivo no existe), se usa el dibujo SVG como respaldo automático.
     const productos = [
         {
             id: 'HONOR MagicBook X 14',
@@ -891,6 +889,7 @@
     // --- Animaciones al entrar en pantalla (con cascada por grupo) ---
     function observarFadeIn() {
         const grupos = [
+            '.section-photo',
             '.category-card',
             '.solution-card',
             '.about__stat',
