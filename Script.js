@@ -978,6 +978,121 @@
         });
     }
 
+    // --- Modelo 3D de la laptop en el hero de marca: se queda siempre abierta
+    //     y gira sola combinando una rotación automática lenta y constante con
+    //     un impulso extra ligado a cuánto se ha avanzado por la sección. Se
+    //     puede arrastrar con el mouse/dedo para girarla manualmente (solo
+    //     rotación: zoom y pan están deshabilitados en el HTML); al soltar,
+    //     retoma el giro automático desde donde haya quedado, sin saltos. ---
+    function inicializarLaptop3D() {
+        const laptop = document.getElementById('intro-laptop');
+        const introSection = document.querySelector('.intro');
+        if (!laptop || !introSection) return;
+
+        laptop.addEventListener('error', function () {
+            console.warn('El modelo 3D de la laptop no pudo cargarse.');
+        });
+
+        const prefiereMenosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefiereMenosMovimiento) return; // se queda fija en su ángulo inicial, sin animación
+
+        const ORBIT_INICIAL = 180;
+        const ORBIT_PHI = 65;
+        const GRADOS_POR_SEGUNDO = 6; // rotación continua y lenta
+        const GIRO_EXTRA_POR_SCROLL = 110; // grados adicionales al recorrer la sección completa
+
+        let ultimoTimestamp = null;
+        let anguloAcumulado = 0;
+        let activo = true;
+        let idAnimacion = null;
+        let interactuando = false;
+
+        function progresoScroll() {
+            const rect = introSection.getBoundingClientRect();
+            const alto = rect.height || window.innerHeight;
+            return Math.min(Math.max(-rect.top / alto, 0), 1);
+        }
+
+        function cuadro(timestamp) {
+            if (!activo) return;
+            if (ultimoTimestamp === null) ultimoTimestamp = timestamp;
+            const deltaSegundos = (timestamp - ultimoTimestamp) / 1000;
+            ultimoTimestamp = timestamp;
+            anguloAcumulado += GRADOS_POR_SEGUNDO * deltaSegundos;
+
+            const theta = ORBIT_INICIAL + anguloAcumulado + progresoScroll() * GIRO_EXTRA_POR_SCROLL;
+            laptop.cameraOrbit = `${theta}deg ${ORBIT_PHI}deg 105%`;
+            idAnimacion = requestAnimationFrame(cuadro);
+        }
+
+        // Solo animamos mientras la sección de inicio es visible, la pestaña
+        // está activa y el usuario no la está arrastrando en ese momento, para
+        // no gastar CPU/batería de fondo ni pelear con su gesto.
+        function iniciar() {
+            if (idAnimacion || interactuando) return;
+            activo = true;
+            ultimoTimestamp = null;
+            idAnimacion = requestAnimationFrame(cuadro);
+        }
+        function detener() {
+            activo = false;
+            if (idAnimacion) {
+                cancelAnimationFrame(idAnimacion);
+                idAnimacion = null;
+            }
+        }
+
+        // Pausamos ANTES de que la cámara llegue a moverse (en pointerdown, no
+        // esperamos al evento camera-change) para que nuestro giro automático
+        // nunca alcance a pisar el primer instante del arrastre del usuario.
+        function pausarPorInteraccion() {
+            if (interactuando) return;
+            interactuando = true;
+            detener();
+        }
+        ['pointerdown', 'mousedown', 'touchstart'].forEach(function (evento) {
+            laptop.addEventListener(evento, pausarPorInteraccion, { passive: true });
+        });
+        ['pointerup', 'mouseup', 'touchend', 'pointercancel'].forEach(function (evento) {
+            laptop.addEventListener(evento, function () {
+                if (!interactuando) return;
+                setTimeout(function () {
+                    interactuando = false;
+                    // Retoma el giro automático desde el ángulo donde el usuario
+                    // la dejó, en vez de saltar de vuelta al ángulo anterior.
+                    try {
+                        const actual = laptop.getCameraOrbit();
+                        anguloAcumulado = (actual.theta * 180 / Math.PI) - ORBIT_INICIAL - progresoScroll() * GIRO_EXTRA_POR_SCROLL;
+                    } catch (err) { /* si no está disponible, se sigue desde el último ángulo automático */ }
+                    iniciar();
+                }, 400);
+            });
+        });
+
+        if (typeof IntersectionObserver === 'function') {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting && !document.hidden) {
+                        iniciar();
+                    } else {
+                        detener();
+                    }
+                });
+            }, { threshold: 0 });
+            observer.observe(laptop);
+        } else {
+            iniciar();
+        }
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                detener();
+            } else if (laptop.getBoundingClientRect().bottom > 0) {
+                iniciar();
+            }
+        });
+    }
+
     // --- Modo claro / oscuro ---
     const THEME_KEY = 'aureo-theme';
 
@@ -1430,6 +1545,7 @@
         pasoSeguro('tilt-categorias', function () { activarTilt3D('.category-card', 6); });
         pasoSeguro('tilt-soluciones', function () { activarTilt3D('.solution-card', 5); });
         pasoSeguro('tilt-hero', activarTiltHeroProducto);
+        pasoSeguro('laptop-3d', inicializarLaptop3D);
         pasoSeguro('video-nosotros', inicializarVideoNosotros);
         pasoSeguro('particulas-hero', inicializarParticulasHero);
     }

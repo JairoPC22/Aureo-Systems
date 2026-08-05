@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
     <link rel="icon" href="Ico/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="Ico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="Ico/favicon-16x16.png">
@@ -107,16 +108,68 @@
     </div>
 
     <main id="contenido-principal">
-        <section class="hero" id="inicio" aria-labelledby="hero-heading">
+        <section class="intro" id="inicio" aria-labelledby="intro-heading">
+            <div class="intro__bg" aria-hidden="true"></div>
+            <div class="intro__container">
+                <div class="intro__info">
+                    <span class="intro__tag">TECNOLOGÍA · CONSULTORÍA · CONFIANZA</span>
+                    <h1 class="intro__title" id="intro-heading">Tecnología que impulsa el <span class="intro__title-accent">crecimiento</span> de tu empresa</h1>
+                    <p class="intro__desc">Somos el socio integral que combina consultoría estratégica, desarrollo a medida y equipamiento tecnológico para llevar tu operación al siguiente nivel.</p>
+                    <div class="intro__actions">
+                        <a href="#soluciones" class="btn btn--gold">Ver soluciones</a>
+                        <a href="#contacto" class="btn btn--outline">Hablar con un asesor</a>
+                    </div>
+                    <dl class="intro__trust" aria-label="Cifras de Aureo Systems">
+                        <div class="intro__trust-item">
+                            <dt><strong>+300</strong></dt>
+                            <dd>Proyectos realizados</dd>
+                        </div>
+                        <div class="intro__trust-item">
+                            <dt><strong>+200</strong></dt>
+                            <dd>Clientes satisfechos</dd>
+                        </div>
+                        <div class="intro__trust-item">
+                            <dt><strong>15 años</strong></dt>
+                            <dd>De experiencia</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="intro__visual">
+                    <div class="intro__glow" aria-hidden="true"></div>
+                    <model-viewer
+                        id="intro-laptop"
+                        class="intro__laptop-model"
+                        src="assets/laptop.glb"
+                        alt="Laptop 3D de Aureo Systems: arrástrala para girarla"
+                        camera-controls
+                        disable-zoom
+                        disable-pan
+                        interaction-prompt-style="basic"
+                        interaction-prompt-threshold="1500"
+                        camera-orbit="180deg 65deg 105%"
+                        field-of-view="30deg"
+                        exposure="1.05"
+                        shadow-intensity="1"
+                        shadow-softness="0.85"
+                        loading="eager">
+                    </model-viewer>
+                </div>
+            </div>
+            <a href="#destacados" class="intro__scroll-cue" aria-label="Bajar a la siguiente sección">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 8l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+        </section>
+
+        <section class="hero" id="destacados" aria-labelledby="hero-heading">
             <div class="hero__bg" id="hero-bg"></div>
             <canvas class="hero__particles" id="hero-particles" aria-hidden="true"></canvas>
             <div class="hero__container">
                 <div class="hero__info">
-                    <span class="hero__tag">TECNOLOGÍA PARA EMPRESAS</span>
-                    <h1 class="hero__title" id="hero-heading">Equipamos el futuro<br>de tu negocio</h1>
-                    <p class="hero__desc">Soluciones tecnológicas, equipos y suministros seleccionados para mejorar el rendimiento, la seguridad y la productividad de tu empresa.</p>
+                    <span class="hero__tag">CATÁLOGO EN VIVO</span>
+                    <h2 class="hero__title" id="hero-heading">Explora nuestros productos destacados</h2>
+                    <p class="hero__desc">Una selección rotativa de los equipos y soluciones que más piden nuestros clientes, con cotización directa.</p>
                     <div class="hero__actions">
-                        <a href="#productos" class="btn btn--gold">Explorar productos</a>
+                        <a href="#productos" class="btn btn--gold">Ver catálogo completo</a>
                         <a href="#contacto" class="btn btn--outline">Hablar con un asesor</a>
                     </div>
                 </div>
@@ -128,7 +181,7 @@
                     </div>
                     <div class="hero__product-details" id="hero-product-details">
                         <span class="hero__product-badge" id="product-badge">Recomendado</span>
-                        <h2 class="hero__product-name" id="product-name">NovaBook X14</h2>
+                        <h3 class="hero__product-name" id="product-name">NovaBook X14</h3>
                         <p class="hero__product-desc" id="product-desc">Laptop empresarial ultraligera con rendimiento excepcional para profesionales en movimiento.</p>
                         <ul class="hero__product-features" id="product-features">
                             <li>Procesador de última generación</li>
@@ -177,7 +230,7 @@
                         </div>
                         <h3 class="category-card__title">Cómputo empresarial</h3>
                         <p class="category-card__desc">Laptops, estaciones de trabajo y equipos de alto rendimiento.</p>
-                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <a href="#destacados" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
                         <div class="category-card__glow"></div>
                     </article>
                     <article class="category-card" tabindex="0" data-categoria="Redes y conectividad">
@@ -186,7 +239,7 @@
                         </div>
                         <h3 class="category-card__title">Redes y conectividad</h3>
                         <p class="category-card__desc">Infraestructura de red, switches y soluciones de conectividad.</p>
-                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <a href="#destacados" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
                         <div class="category-card__glow"></div>
                     </article>
                     <article class="category-card" tabindex="0" data-categoria="Servidores y almacenamiento">
@@ -195,7 +248,7 @@
                         </div>
                         <h3 class="category-card__title">Servidores y almacenamiento</h3>
                         <p class="category-card__desc">Servidores, NAS y sistemas de respaldo para datos críticos.</p>
-                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <a href="#destacados" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
                         <div class="category-card__glow"></div>
                     </article>
                     <article class="category-card" tabindex="0" data-categoria="Impresión y oficina">
@@ -204,7 +257,7 @@
                         </div>
                         <h3 class="category-card__title">Impresión y oficina</h3>
                         <p class="category-card__desc">Impresoras multifuncionales y equipos para oficina productiva.</p>
-                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <a href="#destacados" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
                         <div class="category-card__glow"></div>
                     </article>
                     <article class="category-card" tabindex="0" data-categoria="Periféricos">
@@ -213,7 +266,7 @@
                         </div>
                         <h3 class="category-card__title">Periféricos</h3>
                         <p class="category-card__desc">Monitores, teclados y accesorios para entornos profesionales.</p>
-                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <a href="#destacados" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
                         <div class="category-card__glow"></div>
                     </article>
                     <article class="category-card" tabindex="0" data-categoria="Suministros tecnológicos">
@@ -222,7 +275,7 @@
                         </div>
                         <h3 class="category-card__title">Suministros tecnológicos</h3>
                         <p class="category-card__desc">Consumibles, cables y accesorios esenciales para tu infraestructura.</p>
-                        <a href="#inicio" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
+                        <a href="#destacados" class="category-card__link">Ver productos <span aria-hidden="true">→</span></a>
                         <div class="category-card__glow"></div>
                     </article>
                 </div>
