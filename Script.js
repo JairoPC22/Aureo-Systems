@@ -7,6 +7,17 @@
 (function () {
     'use strict';
 
+    // --- Este sitio no usa ni necesita Service Worker. Si el navegador tiene uno
+    //     activo para este origen (de una prueba anterior, otro proyecto en el
+    //     mismo puerto, etc.) lo desregistramos: un Service Worker viejo puede
+    //     interceptar peticiones (fuentes, video) y responderlas mal, rompiendo
+    //     cosas que en el código de esta página funcionan bien. ---
+    if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+        navigator.serviceWorker.getRegistrations().then(function (registros) {
+            registros.forEach(function (registro) { registro.unregister(); });
+        }).catch(function () { /* nada que hacer si el navegador lo bloquea */ });
+    }
+
     const productos = [
         {
             id: 'HONOR MagicBook X 14',
@@ -888,6 +899,10 @@
 
     // --- Animaciones al entrar en pantalla (con cascada por grupo) ---
     function observarFadeIn() {
+        // Sin soporte de IntersectionObserver no ocultamos nada: mejor mostrar
+        // el contenido siempre que arriesgarnos a dejarlo invisible sin forma de revelarlo.
+        if (typeof IntersectionObserver !== 'function') return;
+
         const grupos = [
             '.section-photo',
             '.category-card',
@@ -1079,28 +1094,35 @@
         return valido;
     }
 
+    let envioEnCurso = false;
     contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
+        if (envioEnCurso) return; // evita doble envío si el usuario hace click/Enter repetido
         if (!validarFormulario()) return;
 
-        // Simular envío
+        // Simular envío (solo cambia el texto de la etiqueta, conserva el ícono intacto)
         const submitBtn = contactForm.querySelector('.contact__submit');
-        const textoOriginal = submitBtn.textContent;
-        submitBtn.textContent = 'Enviando...';
-        submitBtn.disabled = true;
+        const labelEl = submitBtn ? submitBtn.querySelector('.contact__submit-label') : null;
+        const textoOriginal = labelEl ? labelEl.textContent : '';
+        envioEnCurso = true;
+        if (labelEl) labelEl.textContent = 'Enviando...';
+        if (submitBtn) submitBtn.disabled = true;
 
         setTimeout(() => {
-            submitBtn.textContent = textoOriginal;
-            submitBtn.disabled = false;
+            if (labelEl) labelEl.textContent = textoOriginal;
+            if (submitBtn) submitBtn.disabled = false;
+            envioEnCurso = false;
             contactForm.reset();
             const successEl = document.getElementById('contact-success');
-            successEl.style.display = 'flex';
+            if (successEl) {
+                successEl.style.display = 'flex';
+                // Ocultar mensaje de éxito después de 8 segundos
+                setTimeout(() => {
+                    successEl.style.display = 'none';
+                }, 8000);
+            }
             // Limpiar errores
             ['nombre', 'telefono', 'email', 'mensaje'].forEach(limpiarError);
-            // Ocultar mensaje de éxito después de 8 segundos
-            setTimeout(() => {
-                successEl.style.display = 'none';
-            }, 8000);
         }, 1200);
     });
 
@@ -1250,50 +1272,132 @@
                 ctx.fill();
             }
 
-            animFrame = requestAnimationFrame(dibujar);
+            if (animando) animFrame = requestAnimationFrame(dibujar);
+        }
+
+        let animando = false;
+        function iniciarAnimacion() {
+            if (animando || prefiereMenosMovimiento) return;
+            animando = true;
+            dibujar();
+        }
+        function detenerAnimacion() {
+            animando = false;
+            if (animFrame) {
+                cancelAnimationFrame(animFrame);
+                animFrame = null;
+            }
         }
 
         redimensionar();
-        window.addEventListener('resize', redimensionar, { passive: true });
+
+        // El resize se re-calcula con un pequeño debounce: evita reconstruir
+        // todas las partículas en cada pixel mientras el usuario arrastra el borde de la ventana.
+        let resizeTimeout = null;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(redimensionar, 150);
+        }, { passive: true });
 
         if (prefiereMenosMovimiento) {
+            // Se respeta la preferencia de movimiento reducido: se pinta un solo
+            // cuadro estático de la red de partículas y no se anima.
             dibujar();
-            cancelAnimationFrame(animFrame);
-        } else {
-            dibujar();
+            return;
         }
+
+        // La animación solo corre mientras el hero es visible en pantalla y la
+        // pestaña está activa; en cualquier otro momento se detiene para no
+        // consumir CPU/batería de fondo en el resto de la página.
+        if (typeof IntersectionObserver === 'function') {
+            const heroObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting && !document.hidden) {
+                        iniciarAnimacion();
+                    } else {
+                        detenerAnimacion();
+                    }
+                });
+            }, { threshold: 0 });
+            heroObserver.observe(canvas);
+        } else {
+            iniciarAnimacion();
+        }
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                detenerAnimacion();
+            } else {
+                const rect = canvas.getBoundingClientRect();
+                const visible = rect.bottom > 0 && rect.top < window.innerHeight;
+                if (visible) iniciarAnimacion();
+            }
+        });
     }
-    // --- Video decorativo en "Nosotros": carga diferida, solo se reproduce cuando es visible ---
+    // --- Video decorativo en "Nosotros": carga diferida, solo se reproduce cuando es visible.
+    //     El poster (imagen estática) siempre queda visible aunque el video no cargue,
+    //     no se reproduzca o el navegador no soporte los formatos ofrecidos. ---
     function inicializarVideoNosotros() {
         const aboutVideo = document.getElementById('about-video');
         if (!aboutVideo) return;
 
+        // Lista de formatos candidatos, tomada del HTML (data-src de cada <source>).
+        // No dejamos que el navegador maneje el fallback entre <source> solo: varios
+        // navegadores (Opera/Chromium entre ellos) NO reintentan automáticamente con
+        // el siguiente <source> cuando la fuente elegida falla al DECODIFICAR (solo
+        // lo hacen si falla la carga de red), así que el reintento lo controlamos
+        // manualmente reasignando aboutVideo.src.
+        const candidatos = Array.prototype.map.call(
+            aboutVideo.querySelectorAll('source[data-src]'),
+            function (fuente) { return fuente.getAttribute('data-src'); }
+        );
+        let indiceFuente = -1;
+        let seVioAlMenosUnFrame = false;
+
+        aboutVideo.addEventListener('playing', function () {
+            seVioAlMenosUnFrame = true;
+        });
+
+        function intentarSiguienteFuente() {
+            indiceFuente++;
+            if (indiceFuente >= candidatos.length) {
+                if (!seVioAlMenosUnFrame) {
+                    console.warn('El video de "Nosotros" no pudo reproducirse en ningún formato disponible; se muestra la imagen de portada.');
+                }
+                return;
+            }
+            aboutVideo.src = candidatos[indiceFuente];
+            aboutVideo.load();
+            aboutVideo.play().catch(function () { /* autoplay bloqueado: el poster/cuadro actual queda visible */ });
+        }
+
+        // Si la fuente activa falla (red o decodificación) el poster definido en el
+        // HTML permanece visible mientras probamos con el siguiente formato.
+        aboutVideo.addEventListener('error', intentarSiguienteFuente, true);
+
         const prefiereMenosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefiereMenosMovimiento) {
-            const contenedor = aboutVideo.closest('.about__media');
-            if (contenedor) contenedor.style.display = 'none';
+            // Respetamos la preferencia de movimiento reducido sin ocultar el contenido:
+            // el poster estático se queda mostrado y nunca se reproduce ni se carga el video.
             return;
         }
 
-        const fuentes = aboutVideo.querySelectorAll('source[data-src]');
+        if (typeof IntersectionObserver !== 'function') {
+            // Navegadores muy antiguos sin IntersectionObserver: cargamos directo.
+            intentarSiguienteFuente();
+            return;
+        }
+
         let cargado = false;
-
-        aboutVideo.addEventListener('error', function () {
-            const contenedor = aboutVideo.closest('.about__video-wrap');
-            if (contenedor) contenedor.style.display = 'none';
-        }, true);
-
         const observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
                     if (!cargado) {
-                        fuentes.forEach(function (fuente) {
-                            fuente.src = fuente.getAttribute('data-src');
-                        });
-                        aboutVideo.load();
                         cargado = true;
+                        intentarSiguienteFuente();
+                    } else {
+                        aboutVideo.play().catch(function () { /* el navegador bloqueó el autoplay, no pasa nada */ });
                     }
-                    aboutVideo.play().catch(function () { /* el navegador bloqueó el autoplay, no pasa nada */ });
                 } else {
                     aboutVideo.pause();
                 }
@@ -1304,19 +1408,30 @@
     }
 
     // --- Inicialización ---
+    // Cada paso corre de forma aislada: si alguno falla en algún navegador
+    // poco común, el resto de las funciones de la página se siguen iniciando
+    // en lugar de detenerse por completo.
+    function pasoSeguro(nombre, fn) {
+        try {
+            fn();
+        } catch (err) {
+            console.error('Error al inicializar "' + nombre + '":', err);
+        }
+    }
+
     function inicializar() {
-        inicializarTema();
-        crearIndicadores();
-        actualizarUIProducto(productos[productoActual]);
-        iniciarAutoplay();
-        observarContadores();
-        observarFadeIn();
-        actualizarIconoAutoplay();
-        activarTilt3D('.category-card', 6);
-        activarTilt3D('.solution-card', 5);
-        activarTiltHeroProducto();
-        inicializarVideoNosotros();
-        inicializarParticulasHero();
+        pasoSeguro('tema', inicializarTema);
+        pasoSeguro('indicadores', crearIndicadores);
+        pasoSeguro('producto-inicial', function () { actualizarUIProducto(productos[productoActual]); });
+        pasoSeguro('autoplay', iniciarAutoplay);
+        pasoSeguro('contadores', observarContadores);
+        pasoSeguro('fade-in', observarFadeIn);
+        pasoSeguro('icono-autoplay', actualizarIconoAutoplay);
+        pasoSeguro('tilt-categorias', function () { activarTilt3D('.category-card', 6); });
+        pasoSeguro('tilt-soluciones', function () { activarTilt3D('.solution-card', 5); });
+        pasoSeguro('tilt-hero', activarTiltHeroProducto);
+        pasoSeguro('video-nosotros', inicializarVideoNosotros);
+        pasoSeguro('particulas-hero', inicializarParticulasHero);
     }
 
     // --- Respetar prefers-reduced-motion ---
