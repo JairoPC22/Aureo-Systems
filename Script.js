@@ -713,6 +713,175 @@
         });
     });
 
+    // --- Aviso de privacidad (modal) ---
+    const privacyModal = document.getElementById('privacy-modal');
+    let ultimoElementoEnfocadoPrivacidad = null;
+    const privacyModalTocToggle = document.getElementById('privacy-modal-toc-toggle');
+    const privacyModalTocPanel = document.getElementById('privacy-modal-toc-panel');
+
+    function cerrarPrivacyModal() {
+        if (!privacyModal) return;
+        cerrarPrivacyTocPanel(false);
+        privacyModal.classList.remove('privacy-modal--open');
+        privacyModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('privacy-modal-open');
+        if (ultimoElementoEnfocadoPrivacidad && typeof ultimoElementoEnfocadoPrivacidad.focus === 'function') {
+            ultimoElementoEnfocadoPrivacidad.focus();
+        }
+    }
+
+    // Índice desplegable: abre/cierra el panel con todas las secciones sin ocupar una columna fija
+    function abrirPrivacyTocPanel() {
+        if (!privacyModalTocPanel || !privacyModalTocToggle) return;
+        privacyModalTocPanel.hidden = false;
+        privacyModalTocToggle.setAttribute('aria-expanded', 'true');
+        // Limita la altura al espacio real hasta el footer para que el panel nunca lo tape
+        const footer = privacyModal && privacyModal.querySelector('.privacy-modal__footer');
+        if (footer) {
+            const espacioDisponible = footer.getBoundingClientRect().top - privacyModalTocPanel.getBoundingClientRect().top - 16;
+            privacyModalTocPanel.style.maxHeight = Math.max(160, espacioDisponible) + 'px';
+        }
+    }
+    function cerrarPrivacyTocPanel(restaurarFoco) {
+        if (!privacyModalTocPanel || !privacyModalTocToggle) return;
+        if (privacyModalTocPanel.hidden) return;
+        privacyModalTocPanel.hidden = true;
+        privacyModalTocToggle.setAttribute('aria-expanded', 'false');
+        if (restaurarFoco !== false) {
+            privacyModalTocToggle.focus();
+        }
+    }
+    if (privacyModalTocToggle && privacyModalTocPanel) {
+        privacyModalTocToggle.addEventListener('click', function () {
+            if (privacyModalTocPanel.hidden) {
+                abrirPrivacyTocPanel();
+            } else {
+                cerrarPrivacyTocPanel(false);
+            }
+        });
+        // Cierra el panel al hacer clic fuera de él y del botón que lo abre
+        document.addEventListener('click', function (e) {
+            if (privacyModalTocPanel.hidden) return;
+            if (privacyModalTocPanel.contains(e.target) || privacyModalTocToggle.contains(e.target)) return;
+            cerrarPrivacyTocPanel(false);
+        });
+    }
+
+    if (privacyModal) {
+        const privacyModalPanel = privacyModal.querySelector('.privacy-modal__panel');
+        const privacyModalBackdrop = document.getElementById('privacy-modal-backdrop');
+        const privacyModalBody = document.getElementById('privacy-modal-body');
+        const privacyModalClose = document.getElementById('privacy-modal-close');
+        const privacyModalAccept = document.getElementById('privacy-modal-accept');
+        const privacyModalProgressBar = document.getElementById('privacy-modal-progress-bar');
+        const openPrivacyTriggers = document.querySelectorAll('#open-privacy-modal');
+        const privacyTocButtons = privacyModal.querySelectorAll('.privacy-modal__toc-grid button[data-target]');
+        const privacySections = privacyModal.querySelectorAll('.privacy-modal__section[id]');
+        const privacyQuicknavNum = document.getElementById('privacy-quicknav-num');
+        const privacyQuicknavLabel = document.getElementById('privacy-quicknav-label');
+        const privacyQuicknavCount = document.getElementById('privacy-quicknav-count');
+
+        function abrirPrivacyModal(disparador) {
+            ultimoElementoEnfocadoPrivacidad = disparador || document.activeElement;
+            privacyModal.classList.add('privacy-modal--open');
+            privacyModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('privacy-modal-open');
+            if (privacyModalBody) privacyModalBody.scrollTop = 0;
+            if (privacyModalClose) privacyModalClose.focus();
+        }
+
+        openPrivacyTriggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                abrirPrivacyModal(trigger);
+            });
+        });
+
+        if (privacyModalClose) privacyModalClose.addEventListener('click', cerrarPrivacyModal);
+        if (privacyModalAccept) privacyModalAccept.addEventListener('click', cerrarPrivacyModal);
+        if (privacyModalBackdrop) privacyModalBackdrop.addEventListener('click', cerrarPrivacyModal);
+
+        // Refleja la sección activa en la barra compacta (número, nombre y "x / total")
+        function actualizarQuicknav(boton) {
+            if (!boton) return;
+            const num = boton.querySelector('.privacy-modal__toc-num');
+            const nombre = boton.querySelector('.privacy-modal__toc-name');
+            if (privacyQuicknavNum && num) privacyQuicknavNum.textContent = num.textContent.replace('.', '');
+            if (privacyQuicknavLabel && nombre) privacyQuicknavLabel.textContent = nombre.textContent;
+            if (privacyQuicknavCount) {
+                const indice = Array.prototype.indexOf.call(privacyTocButtons, boton) + 1;
+                privacyQuicknavCount.textContent = indice + ' / ' + privacyTocButtons.length;
+            }
+        }
+
+        function marcarBotonActivo(boton) {
+            if (!boton) return;
+            privacyTocButtons.forEach(function (b) { b.classList.remove('is-active'); });
+            boton.classList.add('is-active');
+            actualizarQuicknav(boton);
+        }
+
+        // Navegación del índice: salta a la sección dentro del propio modal
+        const prefiereMovimientoReducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        privacyTocButtons.forEach(function (boton) {
+            boton.addEventListener('click', function () {
+                const destino = document.getElementById(this.getAttribute('data-target'));
+                if (!destino) return;
+                marcarBotonActivo(this);
+                cerrarPrivacyTocPanel(false);
+                destino.scrollIntoView({ behavior: prefiereMovimientoReducido ? 'auto' : 'smooth', block: 'start' });
+            });
+        });
+
+        // Barra de progreso de lectura, según el scroll del contenido.
+        // Al llegar al final, fuerza la última sección como activa: el observer de scroll
+        // (rootMargin -70%) puede no disparar ahí si el resto del documento es corto.
+        if (privacyModalBody && privacyModalProgressBar) {
+            const actualizarProgresoPrivacidad = function () {
+                const recorrido = privacyModalBody.scrollHeight - privacyModalBody.clientHeight;
+                const porcentaje = recorrido > 0 ? (privacyModalBody.scrollTop / recorrido) * 100 : 0;
+                privacyModalProgressBar.style.width = Math.min(100, Math.max(0, porcentaje)) + '%';
+                if (recorrido > 0 && porcentaje >= 99 && privacyTocButtons.length) {
+                    marcarBotonActivo(privacyTocButtons[privacyTocButtons.length - 1]);
+                }
+            };
+            privacyModalBody.addEventListener('scroll', actualizarProgresoPrivacidad, { passive: true });
+            actualizarProgresoPrivacidad();
+        }
+
+        // Resalta la sección visible mientras se hace scroll (scrollspy) y sincroniza la barra compacta
+        if (privacySections.length && typeof IntersectionObserver === 'function') {
+            const observadorSecciones = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    const boton = privacyModal.querySelector('.privacy-modal__toc-grid button[data-target="' + entry.target.id + '"]');
+                    marcarBotonActivo(boton);
+                });
+            }, { root: privacyModalBody, rootMargin: '0px 0px -70% 0px', threshold: 0 });
+            privacySections.forEach(function (seccion) { observadorSecciones.observe(seccion); });
+        }
+
+        // Atrapar el foco dentro del modal mientras está abierto (accesibilidad con teclado)
+        if (privacyModalPanel) {
+            privacyModalPanel.addEventListener('keydown', function (e) {
+                if (e.key !== 'Tab' || !privacyModal.classList.contains('privacy-modal--open')) return;
+                const enfocables = privacyModalPanel.querySelectorAll(
+                    'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                if (!enfocables.length) return;
+                const primero = enfocables[0];
+                const ultimo = enfocables[enfocables.length - 1];
+                if (e.shiftKey && document.activeElement === primero) {
+                    e.preventDefault();
+                    ultimo.focus();
+                } else if (!e.shiftKey && document.activeElement === ultimo) {
+                    e.preventDefault();
+                    primero.focus();
+                }
+            });
+        }
+    }
+
     // Escape para cerrar menú
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
@@ -721,6 +890,13 @@
             }
             if (dropdownMenu.classList.contains('header__dropdown-menu--visible')) {
                 cerrarDropdown();
+            }
+            if (privacyModalTocPanel && !privacyModalTocPanel.hidden) {
+                cerrarPrivacyTocPanel();
+                return;
+            }
+            if (privacyModal && privacyModal.classList.contains('privacy-modal--open')) {
+                cerrarPrivacyModal();
             }
         }
     });

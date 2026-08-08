@@ -836,7 +836,7 @@
             <div class="footer__bottom">
                 <p>&copy; <span id="current-year">2024</span> Aureo Systems Consulting. Todos los derechos reservados.</p>
                 <div class="footer__legal">
-                    <a href="#">Política de privacidad</a>
+                    <button type="button" class="footer__legal-trigger" id="open-privacy-modal" aria-haspopup="dialog" aria-controls="privacy-modal">Aviso de privacidad</button>
                     <a href="#">Términos y condiciones</a>
                 </div>
             </div>
@@ -849,6 +849,312 @@
     <button class="scroll-top" id="scroll-top" aria-label="Volver arriba">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 12l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
+
+    <div class="privacy-modal" id="privacy-modal" aria-hidden="true">
+        <div class="privacy-modal__backdrop" id="privacy-modal-backdrop"></div>
+        <div class="privacy-modal__panel" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
+            <header class="privacy-modal__header">
+                <button type="button" class="privacy-modal__close" id="privacy-modal-close" aria-label="Cerrar aviso de privacidad">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </button>
+                <div class="privacy-modal__header-inner">
+                    <span class="privacy-modal__brand">
+                        <img class="privacy-modal__brand-mark" src="assets/logo-aureo-icon.png" alt="" width="24" height="24">
+                        Aureo Systems
+                    </span>
+                    <span class="privacy-modal__eyebrow">Documento legal</span>
+                    <h2 class="privacy-modal__title" id="privacy-modal-title">Aviso de Privacidad Integral</h2>
+                    <p class="privacy-modal__subtitle">En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).</p>
+                </div>
+                <div class="privacy-modal__progress" aria-hidden="true"><span id="privacy-modal-progress-bar"></span></div>
+            </header>
+
+            <div class="privacy-modal__quicknav">
+                <div class="privacy-modal__quicknav-inner">
+                    <div class="privacy-modal__quicknav-bar">
+                        <div class="privacy-modal__quicknav-current">
+                            <span class="privacy-modal__quicknav-num" id="privacy-quicknav-num">I</span>
+                            <span class="privacy-modal__quicknav-text">
+                                <span class="privacy-modal__quicknav-label" id="privacy-quicknav-label">Identidad del responsable</span>
+                                <span class="privacy-modal__quicknav-count" id="privacy-quicknav-count">1 / 13</span>
+                            </span>
+                        </div>
+                        <button type="button" class="privacy-modal__quicknav-toggle" id="privacy-modal-toc-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="privacy-modal-toc-panel">
+                            <span>Ver secciones</span>
+                            <svg class="privacy-modal__quicknav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </div>
+                    <div class="privacy-modal__toc-panel" id="privacy-modal-toc-panel" role="region" aria-label="Índice de secciones del aviso de privacidad" hidden>
+                        <ol class="privacy-modal__toc-grid">
+                            <li><button type="button" class="is-active" data-target="privacidad-1"><span class="privacy-modal__toc-num">I.</span><span class="privacy-modal__toc-name">Identidad del responsable</span></button></li>
+                            <li><button type="button" data-target="privacidad-2"><span class="privacy-modal__toc-num">II.</span><span class="privacy-modal__toc-name">Datos que recabamos</span></button></li>
+                            <li><button type="button" data-target="privacidad-3"><span class="privacy-modal__toc-num">III.</span><span class="privacy-modal__toc-name">Finalidades del tratamiento</span></button></li>
+                            <li><button type="button" data-target="privacidad-4"><span class="privacy-modal__toc-num">IV.</span><span class="privacy-modal__toc-name">Redes sociales</span></button></li>
+                            <li><button type="button" data-target="privacidad-5"><span class="privacy-modal__toc-num">V.</span><span class="privacy-modal__toc-name">Transferencias de datos</span></button></li>
+                            <li><button type="button" data-target="privacidad-6"><span class="privacy-modal__toc-num">VI.</span><span class="privacy-modal__toc-name">Derechos ARCO</span></button></li>
+                            <li><button type="button" data-target="privacidad-7"><span class="privacy-modal__toc-num">VII.</span><span class="privacy-modal__toc-name">Revocación del consentimiento</span></button></li>
+                            <li><button type="button" data-target="privacidad-8"><span class="privacy-modal__toc-num">VIII.</span><span class="privacy-modal__toc-name">Cookies y rastreo</span></button></li>
+                            <li><button type="button" data-target="privacidad-9"><span class="privacy-modal__toc-num">IX.</span><span class="privacy-modal__toc-name">Limitación de uso</span></button></li>
+                            <li><button type="button" data-target="privacidad-10"><span class="privacy-modal__toc-num">X.</span><span class="privacy-modal__toc-name">Medidas de seguridad</span></button></li>
+                            <li><button type="button" data-target="privacidad-11"><span class="privacy-modal__toc-num">XI.</span><span class="privacy-modal__toc-name">Cambios al aviso</span></button></li>
+                            <li><button type="button" data-target="privacidad-12"><span class="privacy-modal__toc-num">XII.</span><span class="privacy-modal__toc-name">Autoridad competente</span></button></li>
+                            <li><button type="button" data-target="privacidad-13"><span class="privacy-modal__toc-num">XIII.</span><span class="privacy-modal__toc-name">Consentimiento</span></button></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="privacy-modal__body" id="privacy-modal-body" tabindex="-1">
+                <article class="privacy-modal__content">
+                    <section class="privacy-modal__section" id="privacidad-1">
+                        <h3><span class="privacy-modal__num">I</span> Identidad y domicilio del responsable</h3>
+                        <p>Aureo Systems Consulting (en adelante "Aureo Systems", "nosotros" o "el Responsable"), con domicilio en la ciudad de Puebla, estado de Puebla, México, y con dirección de correo electrónico <a href="mailto:help@aureo-systems.com">help@aureo-systems.com</a> y número telefónico <a href="tel:+522221529152">222 152 9152</a>, es el responsable del uso, tratamiento y protección de los datos personales que recabamos de usted, de conformidad con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares ("LFPDPPP"), su Reglamento y demás normatividad aplicable.</p>
+                        <p>Nuestro sitio web oficial es: <a href="https://aureo-systems.com" target="_blank" rel="noopener noreferrer">https://aureo-systems.com</a></p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-2">
+                        <h3><span class="privacy-modal__num">II</span> Datos personales que recabamos</h3>
+                        <p>Para las finalidades señaladas en el presente Aviso de Privacidad, Aureo Systems podrá recabar y tratar las siguientes categorías de datos personales:</p>
+                        <h4>A) Datos de identificación y contacto</h4>
+                        <ul>
+                            <li>Nombre completo</li>
+                            <li>Denominación o razón social (personas morales)</li>
+                            <li>Dirección de correo electrónico</li>
+                            <li>Número telefónico (fijo y/o móvil)</li>
+                            <li>Domicilio fiscal o de contacto</li>
+                            <li>Registro Federal de Contribuyentes (RFC)</li>
+                        </ul>
+                        <h4>B) Datos profesionales y laborales</h4>
+                        <ul>
+                            <li>Nombre de la empresa u organización</li>
+                            <li>Cargo o puesto</li>
+                            <li>Giro de negocio o industria</li>
+                            <li>Sitio web de la empresa</li>
+                        </ul>
+                        <h4>C) Datos de navegación y técnicos</h4>
+                        <ul>
+                            <li>Dirección IP</li>
+                            <li>Tipo de navegador y dispositivo</li>
+                            <li>Sistema operativo</li>
+                            <li>Páginas visitadas dentro de nuestro sitio web</li>
+                            <li>Tiempo de permanencia en el sitio</li>
+                            <li>Cookies y tecnologías de rastreo (véase sección VIII)</li>
+                        </ul>
+                        <h4>D) Datos provenientes de redes sociales</h4>
+                        <ul>
+                            <li>Nombre de usuario o perfil público en Facebook, Instagram y/o LinkedIn</li>
+                            <li>Fotografía de perfil público</li>
+                            <li>Comentarios, mensajes directos e interacciones realizadas en nuestras cuentas oficiales</li>
+                            <li>Información públicamente disponible en su perfil, de acuerdo con su propia configuración de privacidad en cada plataforma</li>
+                            <li>Datos de contacto proporcionados voluntariamente vía mensajes directos o formularios de generación de leads</li>
+                        </ul>
+                        <h4>E) Datos financieros y de facturación</h4>
+                        <ul>
+                            <li>Datos bancarios para pagos y facturación</li>
+                            <li>Información fiscal (RFC, régimen fiscal, domicilio fiscal, uso de CFDI)</li>
+                        </ul>
+                        <p class="privacy-modal__note"><strong>Nota:</strong> Aureo Systems no recaba datos personales sensibles. En caso de que en algún momento fuera necesario, se solicitará su consentimiento expreso y por escrito de manera previa.</p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-3">
+                        <h3><span class="privacy-modal__num">III</span> Finalidades del tratamiento de datos personales</h3>
+                        <p>Sus datos personales serán tratados para las siguientes finalidades:</p>
+                        <h4>A) Finalidades primarias (necesarias para la relación jurídica)</h4>
+                        <ul>
+                            <li>Dar cumplimiento a obligaciones contraídas con usted, incluyendo la prestación de servicios de consultoría digital, desarrollo de software, marketing digital, diseño web, ecommerce y gestión de procesos empresariales.</li>
+                            <li>Identificar y contactar a clientes, prospectos y usuarios para dar seguimiento a solicitudes, cotizaciones y proyectos.</li>
+                            <li>Elaborar y emitir facturas, comprobantes fiscales digitales (CFDI) y documentos relacionados con la prestación de nuestros servicios.</li>
+                            <li>Brindar soporte técnico, atención al cliente y seguimiento posventa.</li>
+                            <li>Cumplir con las obligaciones legales, fiscales y regulatorias aplicables.</li>
+                            <li>Gestionar la relación contractual y administrativa con clientes y proveedores.</li>
+                        </ul>
+                        <h4>B) Finalidades secundarias (requieren su consentimiento)</h4>
+                        <ul>
+                            <li>Enviar comunicaciones promocionales, boletines informativos, invitaciones a eventos y contenido de marketing digital por correo electrónico, WhatsApp, SMS u otros medios.</li>
+                            <li>Publicar testimonios, casos de éxito y reseñas de clientes en nuestro sitio web y redes sociales (previa autorización específica).</li>
+                            <li>Realizar encuestas de satisfacción y estudios de mercado.</li>
+                            <li>Crear perfiles de usuario para personalizar la experiencia de navegación y ofrecer contenido relevante.</li>
+                            <li>Elaborar estadísticas, análisis de datos y reportes internos para mejorar nuestros servicios.</li>
+                            <li>Desarrollar estrategias de marketing digital, incluyendo campañas de publicidad segmentada en Facebook, Instagram y LinkedIn.</li>
+                        </ul>
+                        <p class="privacy-modal__note">Si usted no desea que sus datos personales sean tratados para las finalidades secundarias, puede manifestar su negativa enviando un correo electrónico a <a href="mailto:help@aureo-systems.com?subject=Negativa%20finalidades%20secundarias">help@aureo-systems.com</a> con el asunto "Negativa finalidades secundarias". La negativa para el uso de sus datos personales para finalidades secundarias no será motivo para negarle los servicios o productos que solicita o contrata con nosotros.</p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-4">
+                        <h3><span class="privacy-modal__num">IV</span> Tratamiento de datos personales en redes sociales</h3>
+                        <p>Aureo Systems cuenta con presencia oficial en las siguientes plataformas:</p>
+                        <ul>
+                            <li>Facebook: @aureosystems.mx</li>
+                            <li>Instagram: @aureosystems</li>
+                            <li>LinkedIn: Aureo Systems</li>
+                        </ul>
+                        <p>Al interactuar con nuestras cuentas oficiales en redes sociales (seguir nuestra página, dar "me gusta", comentar, enviar mensajes directos, participar en dinámicas, compartir publicaciones o hacer clic en anuncios), usted acepta que Aureo Systems podrá tratar los datos personales que voluntariamente ponga a disposición o que sean públicamente accesibles conforme a la configuración de privacidad de cada plataforma.</p>
+                        <p>En particular, los datos recabados a través de redes sociales podrán utilizarse para:</p>
+                        <ul>
+                            <li>Responder a consultas, comentarios y mensajes directos.</li>
+                            <li>Gestionar dinámicas, concursos y sorteos (sujetos a términos y condiciones específicos publicados en cada caso).</li>
+                            <li>Analizar el alcance, interacción y efectividad de nuestras publicaciones y campañas publicitarias.</li>
+                            <li>Crear audiencias personalizadas y similares (lookalike) para campañas de publicidad segmentada a través de las herramientas publicitarias de Meta (Facebook e Instagram) y LinkedIn Ads.</li>
+                            <li>Gestionar campañas de generación de leads mediante formularios integrados en las plataformas.</li>
+                        </ul>
+                        <p class="privacy-modal__note"><strong>Importante:</strong> Las redes sociales operan bajo sus propias políticas de privacidad, sobre las cuales Aureo Systems no tiene control. Le recomendamos consultar las políticas de privacidad de Meta Platforms, Inc. en facebook.com/privacy/policy y de LinkedIn Corporation en linkedin.com/legal/privacy-policy. Aureo Systems no es responsable del tratamiento que dichas plataformas realicen de forma independiente sobre sus datos personales.</p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-5">
+                        <h3><span class="privacy-modal__num">V</span> Transferencias de datos personales</h3>
+                        <p>Aureo Systems podrá transferir sus datos personales a los siguientes terceros, sin requerir su consentimiento en los supuestos previstos por el artículo 37 de la LFPDPPP:</p>
+                        <ul>
+                            <li><strong>Autoridades competentes:</strong> cuando sea requerido por ley, resolución judicial o administrativa.</li>
+                            <li><strong>Empresas filiales, subsidiarias o relacionadas:</strong> que operen bajo los mismos procesos y políticas internas de protección de datos.</li>
+                            <li><strong>Procesadores de pago y plataformas de facturación:</strong> exclusivamente para el procesamiento de pagos y emisión de comprobantes fiscales.</li>
+                        </ul>
+                        <p>Asimismo, con su consentimiento, sus datos podrán ser transferidos a:</p>
+                        <ul>
+                            <li><strong>Plataformas publicitarias</strong> (Meta Ads, LinkedIn Ads, Google Ads): para la creación y gestión de campañas de marketing digital segmentadas.</li>
+                            <li><strong>Herramientas de email marketing y automatización:</strong> para el envío de comunicaciones comerciales y seguimiento de prospectos.</li>
+                            <li><strong>Proveedores de servicios tecnológicos:</strong> como hosting, almacenamiento en la nube, análisis de datos y CRM, que actúan como encargados del tratamiento bajo instrucciones de Aureo Systems.</li>
+                        </ul>
+                        <p>En todos los casos, Aureo Systems se asegurará de que los terceros receptores cuenten con medidas de seguridad adecuadas para la protección de sus datos personales y se comprometan a respetar las condiciones establecidas en el presente Aviso de Privacidad.</p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-6">
+                        <h3><span class="privacy-modal__num">VI</span> Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h3>
+                        <p>Usted o su representante legal tiene derecho a acceder a sus datos personales que poseemos y a conocer los detalles del tratamiento de los mismos; rectificarlos en caso de ser inexactos o incompletos; cancelarlos cuando considere que no se requieren para alguna de las finalidades señaladas en el presente Aviso de Privacidad, o bien, oponerse al tratamiento de los mismos para fines específicos.</p>
+                        <p>Para ejercer cualquiera de los derechos ARCO, usted deberá presentar una solicitud (en adelante, "Solicitud ARCO") por escrito al correo electrónico: <a href="mailto:help@aureo-systems.com">help@aureo-systems.com</a></p>
+                        <p>La Solicitud ARCO deberá contener la siguiente información:</p>
+                        <ol>
+                            <li>Nombre completo del titular y, en su caso, del representante legal.</li>
+                            <li>Identificación oficial vigente del titular (y poder notarial del representante, en su caso).</li>
+                            <li>Domicilio o correo electrónico para comunicarle la respuesta a su solicitud.</li>
+                            <li>Descripción clara y precisa de los datos personales respecto de los cuales busca ejercer alguno de sus derechos ARCO.</li>
+                            <li>Cualquier otro elemento o documento que facilite la localización de sus datos personales.</li>
+                        </ol>
+                        <p>Aureo Systems dará respuesta a su Solicitud ARCO en un plazo máximo de veinte (20) días hábiles contados a partir de la fecha de recepción de la solicitud completa. La respuesta indicará si la solicitud es procedente y, en su caso, se hará efectiva dentro de los quince (15) días hábiles siguientes a la comunicación de la respuesta. Los plazos podrán ampliarse una sola vez por un periodo igual, siempre y cuando así lo justifiquen las circunstancias del caso.</p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-7">
+                        <h3><span class="privacy-modal__num">VII</span> Revocación del consentimiento</h3>
+                        <p>Usted puede revocar el consentimiento que, en su caso, nos haya otorgado para el tratamiento de sus datos personales. Sin embargo, es importante considerar que no en todos los casos podremos atender su solicitud o concluir el uso de forma inmediata, ya que es posible que por alguna obligación legal o contractual requiramos seguir tratando sus datos personales.</p>
+                        <p>Para revocar su consentimiento, deberá enviar una solicitud al correo electrónico <a href="mailto:help@aureo-systems.com?subject=Revocaci%C3%B3n%20de%20consentimiento">help@aureo-systems.com</a> con el asunto "Revocación de consentimiento", incluyendo su nombre completo, descripción clara de los datos cuyo consentimiento revoca y copia de identificación oficial.</p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-8">
+                        <h3><span class="privacy-modal__num">VIII</span> Uso de cookies y tecnologías de rastreo</h3>
+                        <p>Nuestro sitio web aureo-systems.com utiliza cookies, web beacons, píxeles de seguimiento y otras tecnologías de rastreo para mejorar su experiencia de navegación, analizar el tráfico del sitio y personalizar el contenido. Las cookies que utilizamos pueden clasificarse en:</p>
+                        <ul>
+                            <li><strong>Cookies esenciales:</strong> necesarias para el funcionamiento básico del sitio web.</li>
+                            <li><strong>Cookies analíticas:</strong> nos permiten medir y analizar el comportamiento de los usuarios en nuestro sitio (por ejemplo, Google Analytics).</li>
+                            <li><strong>Cookies de marketing:</strong> utilizadas para mostrar publicidad relevante y medir la efectividad de nuestras campañas publicitarias (por ejemplo, Meta Pixel, LinkedIn Insight Tag).</li>
+                        </ul>
+                        <p>Adicionalmente, nuestro sitio web y redes sociales pueden utilizar las siguientes tecnologías:</p>
+                        <ul>
+                            <li><strong>Meta Pixel (Facebook Pixel):</strong> para medir la efectividad de anuncios en Facebook e Instagram, crear audiencias personalizadas y realizar análisis de conversión.</li>
+                            <li><strong>LinkedIn Insight Tag:</strong> para análisis de visitantes, seguimiento de conversiones y creación de audiencias de retargeting en LinkedIn.</li>
+                            <li><strong>Google Analytics / Google Tag Manager:</strong> para análisis estadístico del tráfico web y comportamiento de usuarios.</li>
+                        </ul>
+                        <p>Usted puede deshabilitar las cookies en cualquier momento a través de la configuración de su navegador de internet. Sin embargo, algunas funcionalidades del sitio web podrían verse limitadas.</p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-9">
+                        <h3><span class="privacy-modal__num">IX</span> Mecanismos para limitar el uso o divulgación de datos personales</h3>
+                        <p>Si usted desea limitar el uso o divulgación de sus datos personales, puede enviar una solicitud al correo electrónico <a href="mailto:help@aureo-systems.com">help@aureo-systems.com</a> indicando su nombre, los datos que desea limitar y el alcance de la limitación solicitada.</p>
+                        <p>Asimismo, le informamos que usted puede inscribirse en el Registro Público de Usuarios (REUS) de la Comisión Nacional para la Protección y Defensa de los Usuarios de Servicios Financieros (CONDUSEF) o en el Registro Público para Evitar Publicidad (REPEP) de la Procuraduría Federal del Consumidor (PROFECO), según corresponda.</p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-10">
+                        <h3><span class="privacy-modal__num">X</span> Medidas de seguridad</h3>
+                        <p>Aureo Systems ha implementado y mantiene medidas de seguridad administrativas, técnicas y físicas para proteger sus datos personales contra daño, pérdida, alteración, destrucción, acceso no autorizado o uso indebido. Entre las medidas implementadas se incluyen:</p>
+                        <ul>
+                            <li>Control de acceso a la información mediante credenciales de autenticación.</li>
+                            <li>Cifrado de datos sensibles en tránsito y almacenamiento.</li>
+                            <li>Políticas internas de confidencialidad y manejo de información.</li>
+                            <li>Capacitación al personal en materia de protección de datos personales.</li>
+                            <li>Respaldos periódicos de información.</li>
+                            <li>Monitoreo y auditoría de accesos a bases de datos.</li>
+                        </ul>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-11">
+                        <h3><span class="privacy-modal__num">XI</span> Cambios al Aviso de Privacidad</h3>
+                        <p>Aureo Systems se reserva el derecho de modificar el presente Aviso de Privacidad en cualquier momento para adaptarlo a novedades legislativas, criterios jurisprudenciales, políticas internas o nuevos requerimientos para la prestación de nuestros servicios.</p>
+                        <p>Las modificaciones serán notificadas a través de nuestro sitio web <a href="https://aureo-systems.com" target="_blank" rel="noopener noreferrer">https://aureo-systems.com</a> y, en su caso, mediante comunicación directa por correo electrónico. Le recomendamos consultar periódicamente este Aviso de Privacidad para mantenerse informado sobre cualquier cambio.</p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-12">
+                        <h3><span class="privacy-modal__num">XII</span> Autoridad competente y derecho de queja</h3>
+                        <p>Si usted considera que su derecho a la protección de datos personales ha sido vulnerado por alguna conducta de Aureo Systems, o presume que en el tratamiento de sus datos personales existe alguna violación a las disposiciones previstas en la LFPDPPP y demás normatividad aplicable, podrá interponer la queja o denuncia correspondiente ante la Secretaría de Anticorrupción y Buen Gobierno, autoridad competente en la materia conforme a la legislación vigente.</p>
+                        <p>Para más información, visite: <a href="https://www.gob.mx" target="_blank" rel="noopener noreferrer">https://www.gob.mx</a></p>
+                    </section>
+
+                    <section class="privacy-modal__section" id="privacidad-13">
+                        <h3><span class="privacy-modal__num">XIII</span> Consentimiento</h3>
+                        <p>Al proporcionar sus datos personales a través de nuestro sitio web, formularios de contacto, correo electrónico, teléfono, redes sociales (Facebook, Instagram, LinkedIn), landing pages, WhatsApp o cualquier otro medio, usted consiente que sus datos personales sean tratados conforme a los términos y condiciones del presente Aviso de Privacidad.</p>
+                        <p>Si usted no está de acuerdo con los términos del presente Aviso de Privacidad, le pedimos no proporcionar sus datos personales. El uso continuado de nuestros servicios, sitio web y redes sociales después de la publicación de cambios constituye la aceptación de los mismos.</p>
+                    </section>
+
+                    <div class="privacy-modal__contact-card">
+                        <div class="privacy-modal__contact-header">
+                            <h3 class="privacy-modal__contact-title">Datos de contacto del Responsable</h3>
+                            <p class="privacy-modal__contact-desc">Para cualquier duda sobre este aviso o el tratamiento de tus datos, contáctanos directamente.</p>
+                        </div>
+                        <div class="privacy-modal__contact-grid">
+                            <div class="privacy-modal__contact-item">
+                                <span class="privacy-modal__contact-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <div class="privacy-modal__contact-text">
+                                    <span class="privacy-modal__contact-label">Razón social</span>
+                                    <span class="privacy-modal__contact-value">Aureo Systems Consulting</span>
+                                </div>
+                            </div>
+                            <div class="privacy-modal__contact-item">
+                                <span class="privacy-modal__contact-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <div class="privacy-modal__contact-text">
+                                    <span class="privacy-modal__contact-label">Correo electrónico</span>
+                                    <a class="privacy-modal__contact-value" href="mailto:help@aureo-systems.com">help@aureo-systems.com</a>
+                                </div>
+                            </div>
+                            <div class="privacy-modal__contact-item">
+                                <span class="privacy-modal__contact-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.3 2.7L6.6 5a1 1 0 01-.3 1.2l-1 .8a8 8 0 003.7 3.7l.8-1a1 1 0 011.2-.3l2.3 1.3a1 1 0 01.5 1.1l-.4 1.6a1 1 0 01-1 .8C7.8 14 2 8.2 1.9 3.6a1 1 0 01.8-1l1.6-.4a1 1 0 011 .5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+                                </span>
+                                <div class="privacy-modal__contact-text">
+                                    <span class="privacy-modal__contact-label">Teléfono</span>
+                                    <a class="privacy-modal__contact-value" href="tel:+522221529152">222 152 9152</a>
+                                </div>
+                            </div>
+                            <div class="privacy-modal__contact-item">
+                                <span class="privacy-modal__contact-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h12M8 2c1.7 1.7 2.6 3.8 2.6 6S9.7 12.3 8 14c-1.7-1.7-2.6-3.8-2.6-6S6.3 3.7 8 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+                                </span>
+                                <div class="privacy-modal__contact-text">
+                                    <span class="privacy-modal__contact-label">Sitio web</span>
+                                    <a class="privacy-modal__contact-value" href="https://aureo-systems.com" target="_blank" rel="noopener noreferrer">aureo-systems.com</a>
+                                </div>
+                            </div>
+                            <div class="privacy-modal__contact-item privacy-modal__contact-item--wide">
+                                <span class="privacy-modal__contact-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 14c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <div class="privacy-modal__contact-text">
+                                    <span class="privacy-modal__contact-label">Domicilio</span>
+                                    <span class="privacy-modal__contact-value">Morelos 36, Col. Francisco I. Madero, Puebla, Puebla, México</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="privacy-modal__updated">Última actualización: <strong>Abril 2026</strong></p>
+                </article>
+            </div>
+
+            <footer class="privacy-modal__footer">
+                <p class="privacy-modal__footer-note">¿Dudas sobre este aviso? Escríbenos a <a href="mailto:help@aureo-systems.com">help@aureo-systems.com</a></p>
+                <button type="button" class="btn btn--gold" id="privacy-modal-accept">Entendido</button>
+            </footer>
+        </div>
+    </div>
 
     <script src="Script.js"></script>
 </body>

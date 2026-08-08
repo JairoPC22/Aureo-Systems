@@ -2888,3 +2888,760 @@ textarea:focus-visible {
         margin-bottom: 32px;
     }
 }
+
+/* --- Footer legal trigger (abre el aviso de privacidad) --- */
+.footer__legal-trigger {
+    color: var(--text-secondary);
+    font: inherit;
+    transition: color var(--transition-fast);
+    cursor: pointer;
+}
+.footer__legal-trigger:hover {
+    color: var(--gold-elegant);
+}
+
+/* --- Aviso de privacidad (modal) --- */
+.privacy-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(24px, 4vw, 40px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+}
+.privacy-modal--open {
+    pointer-events: all;
+    opacity: 1;
+}
+.privacy-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 8, 14, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.privacy-modal__panel {
+    position: relative;
+    width: min(1180px, calc(100vw - 64px));
+    height: min(94vh, 940px);
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    background: var(--bg-dark-alt);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg), 0 0 70px rgba(227, 184, 47, 0.08);
+    overflow: hidden;
+    transform: translateY(18px) scale(0.98);
+    transition: transform var(--transition-smooth);
+}
+.privacy-modal--open .privacy-modal__panel {
+    transform: translateY(0) scale(1);
+}
+.privacy-modal__panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 3;
+    background: linear-gradient(90deg, transparent, var(--gold-elegant), var(--gold-luminous), var(--gold-elegant), transparent);
+}
+
+/* Header: el eje de texto (header-inner) comparte max-width/padding con
+   .privacy-modal__content para que título y párrafos queden alineados */
+.privacy-modal__header {
+    position: relative;
+    padding: 8px 0 9px;
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(227, 184, 47, 0.12) 0%, transparent 55%),
+        var(--bg-dark);
+    border-bottom: 1px solid var(--border-subtle);
+}
+.privacy-modal__header-inner {
+    max-width: 960px;
+    margin-inline: auto;
+    padding: 0 68px 0 32px;
+}
+.privacy-modal__brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--white-warm);
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+}
+.privacy-modal__brand-mark {
+    display: block;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(227, 184, 47, 0.18);
+}
+.privacy-modal__eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-elegant);
+    margin-bottom: 4px;
+}
+.privacy-modal__eyebrow::before {
+    content: '';
+    width: 16px;
+    height: 1.5px;
+    background: var(--gold-elegant);
+}
+.privacy-modal__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    color: var(--white-warm);
+    line-height: 1.2;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+}
+.privacy-modal__subtitle {
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 640px;
+}
+.privacy-modal__updated {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+.privacy-modal__updated strong {
+    color: var(--text-light);
+}
+.privacy-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--text-light);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    transition: all var(--transition-fast);
+    z-index: 4;
+}
+.privacy-modal__close:hover {
+    color: var(--gold-elegant);
+    border-color: var(--border-gold);
+    background: rgba(227, 184, 47, 0.1);
+    transform: rotate(90deg);
+}
+.privacy-modal__progress {
+    position: relative;
+    height: 3px;
+    background: rgba(227, 184, 47, 0.12);
+}
+.privacy-modal__progress span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold-elegant), var(--gold-luminous));
+    transition: width 0.15s linear;
+}
+
+/* Barra de navegación rápida: reemplaza la columna lateral fija.
+   Muestra la sección visible y abre un índice desplegable bajo demanda. */
+.privacy-modal__quicknav {
+    position: relative;
+    background: var(--bg-dark-alt);
+    border-bottom: 1px solid var(--border-subtle);
+}
+.privacy-modal__quicknav-inner {
+    position: relative;
+    max-width: 960px;
+    margin-inline: auto;
+    padding: 0 32px;
+}
+.privacy-modal__quicknav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 60px;
+}
+.privacy-modal__quicknav-current {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    min-width: 0;
+}
+.privacy-modal__quicknav-num {
+    flex-shrink: 0;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--gold-elegant);
+}
+.privacy-modal__quicknav-text {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    min-width: 0;
+}
+.privacy-modal__quicknav-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--white-warm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.privacy-modal__quicknav-count {
+    flex-shrink: 0;
+    font-size: 0.74rem;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+.privacy-modal__quicknav-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-light);
+    background: rgba(227, 184, 47, 0.05);
+    transition: all var(--transition-fast);
+}
+.privacy-modal__quicknav-toggle:hover {
+    color: var(--gold-elegant);
+    border-color: var(--border-gold);
+    background: rgba(227, 184, 47, 0.1);
+}
+.privacy-modal__quicknav-toggle[aria-expanded="true"] {
+    color: var(--gold-elegant);
+    border-color: var(--border-gold);
+    background: rgba(227, 184, 47, 0.12);
+}
+.privacy-modal__quicknav-chevron {
+    transition: transform var(--transition-fast);
+}
+.privacy-modal__quicknav-toggle[aria-expanded="true"] .privacy-modal__quicknav-chevron {
+    transform: rotate(180deg);
+}
+
+/* Índice desplegable: overlay posicionado bajo la barra, no reduce el ancho del documento */
+.privacy-modal__toc-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin-top: 10px;
+    padding: 18px;
+    max-height: min(60vh, 460px);
+    overflow-y: auto;
+    background: var(--bg-card-solid);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    animation: privacyTocPanelIn var(--transition-fast);
+}
+@keyframes privacyTocPanelIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.privacy-modal__toc-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+.privacy-modal__toc-grid button {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+    padding: 11px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+.privacy-modal__toc-grid .privacy-modal__toc-num {
+    flex-shrink: 0;
+    color: var(--gold-elegant);
+    font-weight: 700;
+    font-size: 0.78rem;
+}
+.privacy-modal__toc-grid button:hover {
+    color: var(--white-warm);
+    background: rgba(227, 184, 47, 0.07);
+}
+.privacy-modal__toc-grid button:focus-visible {
+    color: var(--white-warm);
+    background: rgba(227, 184, 47, 0.1);
+}
+.privacy-modal__toc-grid button.is-active {
+    color: var(--white-warm);
+    font-weight: 600;
+    background: rgba(227, 184, 47, 0.13);
+    border-color: var(--border-gold);
+}
+
+/* Body: una sola columna de lectura, superficie ligeramente elevada
+   respecto al resto del modal (distinta en ambos temas) */
+.privacy-modal__body {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--bg-card-solid);
+    outline: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(227, 184, 47, 0.35) transparent;
+}
+.privacy-modal__body::-webkit-scrollbar {
+    width: 8px;
+}
+.privacy-modal__body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.privacy-modal__body::-webkit-scrollbar-thumb {
+    background: rgba(227, 184, 47, 0.35);
+    border-radius: 999px;
+}
+.privacy-modal__body::-webkit-scrollbar-thumb:hover {
+    background: rgba(227, 184, 47, 0.55);
+}
+
+.privacy-modal__content {
+    width: 100%;
+    max-width: 960px;
+    margin-inline: auto;
+    padding: 26px 32px 48px;
+    color: var(--text-light);
+}
+.privacy-modal__section {
+    padding-block: 32px;
+    border-top: 1px solid var(--border-subtle);
+    scroll-margin-top: 20px;
+}
+.privacy-modal__section:first-child {
+    padding-top: 4px;
+    border-top: none;
+}
+.privacy-modal__section h3 {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: -10px -12px 18px;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(90deg, rgba(227, 184, 47, 0.08), transparent 75%);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white-warm);
+    letter-spacing: -0.01em;
+}
+.privacy-modal__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold-elegant), var(--gold-luminous));
+    color: #1c1400;
+    box-shadow: var(--shadow-gold);
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+.privacy-modal__section h4 {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold-elegant);
+    letter-spacing: 0.02em;
+    margin: 20px 0 10px;
+    padding-left: 12px;
+    border-left: 2px solid var(--border-gold);
+}
+.privacy-modal__section p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin-bottom: 12px;
+}
+.privacy-modal__section p:last-child {
+    margin-bottom: 0;
+}
+.privacy-modal__section ul,
+.privacy-modal__section ol {
+    margin: 0 0 12px;
+    padding-left: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+.privacy-modal__section ul:last-child,
+.privacy-modal__section ol:last-child {
+    margin-bottom: 0;
+}
+.privacy-modal__section ul {
+    list-style: none;
+}
+.privacy-modal__section ul li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+.privacy-modal__section ul li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.65em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold-elegant);
+}
+.privacy-modal__section ol {
+    padding-left: 20px;
+}
+.privacy-modal__section ol li {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    padding-left: 6px;
+}
+.privacy-modal__section ol li::marker {
+    color: var(--gold-elegant);
+    font-weight: 700;
+}
+.privacy-modal__section a {
+    color: var(--gold-elegant);
+    text-decoration: underline;
+    text-decoration-color: rgba(227, 184, 47, 0.35);
+    text-underline-offset: 2px;
+    transition: text-decoration-color var(--transition-fast);
+    word-break: break-word;
+}
+.privacy-modal__section a:hover {
+    text-decoration-color: var(--gold-elegant);
+}
+.privacy-modal__note {
+    padding: 14px 18px;
+    margin-top: 4px;
+    background: var(--success-bg);
+    border-left: 3px solid var(--gold-elegant);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.88rem !important;
+}
+
+.privacy-modal__contact-card {
+    position: relative;
+    margin-top: 36px;
+    padding: 28px 32px;
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(227, 184, 47, 0.12) 0%, transparent 60%),
+        var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+.privacy-modal__contact-header {
+    margin-bottom: 22px;
+}
+.privacy-modal__contact-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white-warm);
+    margin-bottom: 6px;
+}
+.privacy-modal__contact-desc {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 480px;
+}
+.privacy-modal__contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 28px;
+}
+.privacy-modal__contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.privacy-modal__contact-item--wide {
+    grid-column: 1 / -1;
+}
+.privacy-modal__contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(227, 184, 47, 0.1);
+    color: var(--gold-elegant);
+}
+.privacy-modal__contact-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 2px;
+}
+.privacy-modal__contact-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+.privacy-modal__contact-value {
+    font-size: 0.92rem;
+    color: var(--text-light);
+}
+a.privacy-modal__contact-value {
+    color: var(--gold-elegant);
+    text-decoration: none;
+    width: fit-content;
+}
+a.privacy-modal__contact-value:hover {
+    text-decoration: underline;
+}
+
+/* Footer del modal (sticky: fila propia del grid, fuera del área con scroll) */
+.privacy-modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 32px;
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-dark-alt);
+}
+.privacy-modal__footer-note {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+}
+.privacy-modal__footer-note a {
+    color: var(--gold-elegant);
+    text-decoration: none;
+}
+.privacy-modal__footer-note a:hover {
+    text-decoration: underline;
+}
+.privacy-modal__footer .btn {
+    padding: 10px 22px;
+    font-size: 0.88rem;
+    flex-shrink: 0;
+}
+
+/* Bloqueo de scroll de fondo mientras el modal está abierto */
+body.privacy-modal-open {
+    overflow: hidden;
+}
+
+/* --- Responsive: escala progresiva, no un único punto de quiebre --- */
+@media (max-width: 1024px) {
+    .privacy-modal {
+        padding: 16px;
+    }
+    .privacy-modal__panel {
+        width: calc(100vw - 32px);
+        height: 94vh;
+    }
+    .privacy-modal__header-inner,
+    .privacy-modal__quicknav-inner,
+    .privacy-modal__content {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+    .privacy-modal__header-inner {
+        padding-right: 60px;
+    }
+    .privacy-modal__toc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .privacy-modal {
+        padding: 0;
+    }
+    .privacy-modal__panel {
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        max-height: 100vh;
+        max-height: 100dvh;
+        border-radius: 0;
+        border: none;
+    }
+    .privacy-modal__header {
+        padding-top: max(10px, env(safe-area-inset-top));
+    }
+    .privacy-modal__header-inner,
+    .privacy-modal__quicknav-inner,
+    .privacy-modal__content {
+        padding-left: max(18px, env(safe-area-inset-left));
+        padding-right: max(18px, env(safe-area-inset-right));
+    }
+    .privacy-modal__header-inner {
+        padding-right: max(52px, env(safe-area-inset-right));
+    }
+    .privacy-modal__close {
+        top: 18px;
+        right: max(16px, env(safe-area-inset-right));
+    }
+    .privacy-modal__brand {
+        font-size: 0.88rem;
+        margin-bottom: 8px;
+    }
+    .privacy-modal__title {
+        font-size: 1.35rem;
+    }
+    .privacy-modal__quicknav-bar {
+        min-height: 50px;
+        gap: 10px;
+    }
+    .privacy-modal__quicknav-label {
+        max-width: 30vw;
+    }
+    .privacy-modal__quicknav-toggle {
+        padding: 9px 14px;
+        font-size: 0.78rem;
+    }
+    .privacy-modal__toc-panel {
+        left: max(18px, env(safe-area-inset-left));
+        right: max(18px, env(safe-area-inset-right));
+    }
+    .privacy-modal__toc-grid {
+        grid-template-columns: 1fr;
+    }
+    .privacy-modal__content {
+        padding-top: 24px;
+        padding-bottom: 40px;
+    }
+    .privacy-modal__section {
+        padding-block: 22px;
+        scroll-margin-top: 16px;
+    }
+    .privacy-modal__section h3 {
+        margin-inline: -8px;
+        padding-inline: 8px;
+    }
+    .privacy-modal__contact-card {
+        margin-top: 28px;
+        padding: 22px;
+    }
+    .privacy-modal__contact-grid {
+        grid-template-columns: 1fr;
+    }
+    .privacy-modal__footer {
+        padding: 14px max(18px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+        flex-direction: column;
+    }
+    .privacy-modal__footer-note {
+        text-align: center;
+        font-size: 0.8rem;
+    }
+    .privacy-modal__footer .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .privacy-modal__title {
+        font-size: 1.22rem;
+    }
+    .privacy-modal__subtitle {
+        font-size: 0.85rem;
+    }
+    .privacy-modal__quicknav-count {
+        display: none;
+    }
+    .privacy-modal__section h3 {
+        font-size: 1.02rem;
+        gap: 10px;
+    }
+    .privacy-modal__num {
+        min-width: 30px;
+        height: 30px;
+        padding: 0 6px;
+        font-size: 0.76rem;
+    }
+    .privacy-modal__contact-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .privacy-modal__header-inner,
+    .privacy-modal__quicknav-inner,
+    .privacy-modal__content {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .privacy-modal__header-inner {
+        padding-right: 48px;
+    }
+    .privacy-modal__title {
+        font-size: 1.12rem;
+    }
+    .privacy-modal__quicknav-label {
+        max-width: 34vw;
+    }
+    .privacy-modal__section h3 {
+        font-size: 0.96rem;
+    }
+    .privacy-modal__contact-icon {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .privacy-modal,
+    .privacy-modal__panel,
+    .privacy-modal__close,
+    .privacy-modal__quicknav-chevron,
+    .privacy-modal__quicknav-toggle,
+    .privacy-modal__toc-grid button {
+        transition: none !important;
+    }
+    .privacy-modal__toc-panel {
+        animation: none;
+    }
+}
