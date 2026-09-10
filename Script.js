@@ -1325,6 +1325,27 @@
             return '¡Con gusto! 😊 Vamos a preparar tu cotización, será rápido. Para empezar, ¿cuál es tu nombre?';
         }
 
+        // d.nombre y d.empresa ya vienen saneados desde que se capturaron;
+        // solo necesidad, telefono y correo son texto crudo del usuario que
+        // aún no ha pasado por ningún filtro, así que se escapan aquí.
+        function textoConfirmacionCotizacion(d) {
+            return 'Perfecto, antes de continuar quiero confirmar:<br><br>' +
+                '<strong>Nombre:</strong> ' + d.nombre + '<br>' +
+                '<strong>Empresa:</strong> ' + d.empresa + '<br>' +
+                '<strong>Necesidad:</strong> ' + escaparHtml(d.necesidad) + '<br>' +
+                '<strong>Teléfono:</strong> ' + escaparHtml(d.telefono) + '<br>' +
+                '<strong>Correo:</strong> ' + escaparHtml(d.correo) + '<br><br>' +
+                '¿Está correcto? (sí / no)';
+        }
+
+        // Extrae solo la parte que parece número de teléfono de un mensaje
+        // (p. ej. "si claro 231-1101-1451" -> "231-1101-1451"), para no
+        // guardar la frase completa como si fuera el teléfono.
+        function limpiarTelefono(texto) {
+            var m = texto.match(/(\+?\d[\d\s-]{6,}\d)/);
+            return m ? m[0].trim() : texto;
+        }
+
         // Antes de dar una respuesta genérica a un pedido amplio ("quiero una
         // página", "quiero una app"), se hace UNA pregunta que ayuda a
         // orientar mejor la respuesta (regla de oro: entender antes de
@@ -1929,8 +1950,22 @@
                 id: 'cotizar',
                 palabras: ['quiero cotizar', 'necesito una cotizacion', 'quiero presupuesto', 'me interesa contratar', 'quiero contratar', 'necesito precio', 'solicitar cotizacion', 'quiero una cotizacion'],
                 responder: function () {
-                    // iniciarCotizacion() ya se llamó de forma síncrona en
-                    // responder() antes de esto; aquí solo se lee el estado.
+                    // Si el mensaje mencionaba "página"/"app"/"crm" sin decir
+                    // más, responder() (más arriba) activó la pregunta de
+                    // descubrimiento correspondiente en vez de iniciar la
+                    // cotización directo; aquí se muestra esa pregunta.
+                    if (preguntaPendiente === 'web') {
+                        return '¡Con gusto! 😊 Para orientarte mejor: ¿la página sería principalmente informativa o quieres vender en línea?';
+                    }
+                    if (preguntaPendiente === 'app') {
+                        return '¡Claro! 📱 Para orientarte: ¿la app sería más para uso interno de tu equipo o para tus clientes?';
+                    }
+                    if (preguntaPendiente === 'crm') {
+                        return '¡Con gusto! 😊 Para armarlo bien: ¿el CRM sería más para tu equipo de ventas, para atención a clientes, o para gestión administrativa interna?';
+                    }
+                    // En cualquier otro caso, iniciarCotizacion() ya se llamó
+                    // de forma síncrona en responder() antes de esto; aquí
+                    // solo se lee el estado.
                     return textoInicioCotizacion();
                 }
             },
@@ -2313,8 +2348,22 @@
             var intent = buscarIntent(mensajeUsuario);
             if (intent && intent.id === 'cotizar') {
                 var necesidadInicial = inferirNecesidadDesdeMensaje(mensajeUsuario);
-                if (necesidadInicial) necesidadDetectada = necesidadInicial;
-                iniciarCotizacion();
+                var normalizadoCotizar = normalizar(mensajeUsuario);
+                if (necesidadInicial) {
+                    necesidadDetectada = necesidadInicial;
+                    iniciarCotizacion();
+                } else if (/pagina|sitio web|landing page/.test(normalizadoCotizar)) {
+                    // "Quiero una cotización de una página" no dice si es
+                    // informativa o de ventas: se pregunta primero, en vez
+                    // de aceptar "una pagina" como si fuera la necesidad.
+                    preguntaPendiente = 'web';
+                } else if (/\bapp\b|aplicacion movil|una aplicacion/.test(normalizadoCotizar)) {
+                    preguntaPendiente = 'app';
+                } else if (/\bcrm\b/.test(normalizadoCotizar)) {
+                    preguntaPendiente = 'crm';
+                } else {
+                    iniciarCotizacion();
+                }
             }
             if (intent && intent.id === 'discovery-web') preguntaPendiente = 'web';
             if (intent && intent.id === 'discovery-app') preguntaPendiente = 'app';
@@ -2427,7 +2476,7 @@
                     if (digitosTelefono < 10) {
                         texto = 'Creo que ese teléfono está incompleto 🤔 ¿me compartes uno a 10 dígitos para que el equipo de Aureo te pueda contactar?';
                     } else {
-                        d.telefono = valor;
+                        d.telefono = limpiarTelefono(valor);
                         flujoCotizacion.paso = 'correo';
                         texto = 'Perfecto. Y para poder enviarte la propuesta, ¿cuál es tu correo electrónico?';
                     }
@@ -2437,17 +2486,7 @@
                     } else {
                         d.correo = valor;
                         flujoCotizacion.paso = 'confirmar';
-                        // d.nombre y d.empresa ya vienen saneados desde que se
-                        // capturaron; solo necesidad, telefono y correo son
-                        // texto crudo del usuario que aún no ha pasado por
-                        // ningún filtro.
-                        texto = 'Perfecto, antes de continuar quiero confirmar:<br><br>' +
-                            '<strong>Nombre:</strong> ' + d.nombre + '<br>' +
-                            '<strong>Empresa:</strong> ' + d.empresa + '<br>' +
-                            '<strong>Necesidad:</strong> ' + escaparHtml(d.necesidad) + '<br>' +
-                            '<strong>Teléfono:</strong> ' + escaparHtml(d.telefono) + '<br>' +
-                            '<strong>Correo:</strong> ' + escaparHtml(d.correo) + '<br><br>' +
-                            '¿Está correcto? (sí / no)';
+                        texto = textoConfirmacionCotizacion(d);
                     }
                 } else if (flujoCotizacion.paso === 'confirmar') {
                     if (REGEX_AFIRMATIVO.test(normalizado)) {
@@ -2455,13 +2494,67 @@
                         texto = '¡Listo! 🙌 Ya tengo tu información. Escríbenos a <strong>' + EMPRESA.correoVentas + '</strong> o al <strong>' + EMPRESA.telefono + '</strong> mencionando estos datos, o te llevo al formulario de contacto para que quede registrado 👇';
                         accion = '#contacto';
                     } else {
-                        // El nombre, la empresa y la necesidad casi nunca son
-                        // lo que sale mal en la confirmación; lo típico es un
-                        // error de dedo en el teléfono o el correo. Se
-                        // corrige eso directo en vez de hacer repetir todo
-                        // desde la empresa.
-                        flujoCotizacion.paso = 'telefono';
-                        texto = 'Sin problema, corrijamos el teléfono y el correo. ¿Cuál es tu teléfono?';
+                        // En vez de asumir qué está mal, se le pregunta
+                        // directamente qué quiere corregir y se le da un
+                        // menú para elegirlo con un clic.
+                        flujoCotizacion.paso = 'elegir-correccion';
+                        texto = '¿Qué te gustaría corregir?';
+                        sugerencias = ['Nombre', 'Empresa', 'Necesidad', 'Teléfono', 'Correo'];
+                    }
+                } else if (flujoCotizacion.paso === 'elegir-correccion') {
+                    if (/nombre/.test(normalizado)) {
+                        flujoCotizacion.paso = 'corregir-nombre';
+                        texto = '¿Cuál es tu nombre?';
+                    } else if (/empresa/.test(normalizado)) {
+                        flujoCotizacion.paso = 'corregir-empresa';
+                        texto = '¿Cuál es el nombre de tu empresa o negocio?';
+                    } else if (/necesidad/.test(normalizado)) {
+                        flujoCotizacion.paso = 'corregir-necesidad';
+                        texto = '¿Qué necesitas exactamente?';
+                    } else if (/telefono/.test(normalizado)) {
+                        flujoCotizacion.paso = 'corregir-telefono';
+                        texto = '¿Cuál es tu teléfono?';
+                    } else if (/correo/.test(normalizado)) {
+                        flujoCotizacion.paso = 'corregir-correo';
+                        texto = '¿Cuál es tu correo electrónico?';
+                    } else {
+                        texto = 'No reconocí esa opción 🤔 Elige una de estas:';
+                        sugerencias = ['Nombre', 'Empresa', 'Necesidad', 'Teléfono', 'Correo'];
+                    }
+                } else if (flujoCotizacion.paso === 'corregir-nombre') {
+                    var nombreCorregido = escaparHtml(valor.charAt(0).toUpperCase() + valor.slice(1).toLowerCase());
+                    d.nombre = nombreCorregido;
+                    nombreUsuario = nombreCorregido;
+                    try { localStorage.setItem('aureo-chat-nombre', nombreCorregido); } catch (err) { /* almacenamiento no disponible */ }
+                    flujoCotizacion.paso = 'confirmar';
+                    texto = textoConfirmacionCotizacion(d);
+                } else if (flujoCotizacion.paso === 'corregir-empresa') {
+                    var empresaCorregida = escaparHtml(valor);
+                    d.empresa = empresaCorregida;
+                    empresaUsuario = empresaCorregida;
+                    try { localStorage.setItem('aureo-chat-empresa', empresaCorregida); } catch (err) { /* almacenamiento no disponible */ }
+                    flujoCotizacion.paso = 'confirmar';
+                    texto = textoConfirmacionCotizacion(d);
+                } else if (flujoCotizacion.paso === 'corregir-necesidad') {
+                    d.necesidad = valor;
+                    flujoCotizacion.paso = 'confirmar';
+                    texto = textoConfirmacionCotizacion(d);
+                } else if (flujoCotizacion.paso === 'corregir-telefono') {
+                    var digitosCorregidos = (valor.match(/\d/g) || []).length;
+                    if (digitosCorregidos < 10) {
+                        texto = 'Creo que ese teléfono está incompleto 🤔 ¿me compartes uno a 10 dígitos?';
+                    } else {
+                        d.telefono = limpiarTelefono(valor);
+                        flujoCotizacion.paso = 'confirmar';
+                        texto = textoConfirmacionCotizacion(d);
+                    }
+                } else if (flujoCotizacion.paso === 'corregir-correo') {
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor.trim())) {
+                        texto = 'Ese correo no se ve válido 🤔 ¿me lo compartes con formato correo@ejemplo.com?';
+                    } else {
+                        d.correo = valor;
+                        flujoCotizacion.paso = 'confirmar';
+                        texto = textoConfirmacionCotizacion(d);
                     }
                 }
             }
