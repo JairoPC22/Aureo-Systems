@@ -2572,24 +2572,53 @@
             }, demora);
         }
 
+        // Antes de forzar la respuesta a una de las opciones, se checa que
+        // el mensaje de verdad conteste la pregunta pendiente — si alguien
+        // cambia de tema a mitad de la pregunta (p. ej. pasa de "una página"
+        // a "un crm"), no tiene caso interpretarlo como si hubiera elegido
+        // "informativa" solo porque no dijo "vender".
+        function pareceRespuestaWeb(normalizado) {
+            return /vender|tienda|ecommerce|producto|comprar|venta|informativa|informacion|presentar|corporativ|dar a conocer/.test(normalizado);
+        }
+        function pareceRespuestaApp(normalizado) {
+            return /interno|empleado|equipo|administrativo|cliente/.test(normalizado);
+        }
+        function pareceRespuestaCrm(normalizado) {
+            return /venta|vendedor|comercial|prospecto|cliente|atencion|soporte|interno|administrativ|equipo/.test(normalizado);
+        }
+
         function responderPreguntaPendiente(mensajeUsuario) {
             var tipo = preguntaPendiente;
-            preguntaPendiente = null;
             var normalizado = normalizar(mensajeUsuario);
             var texto, sugerencias;
             if (PALABRAS_CANCELAR.indexOf(normalizado) !== -1) {
+                preguntaPendiente = null;
                 texto = 'Sin problema 😊 ¿En qué más te ayudo?';
                 sugerencias = ['🛡️ Ciberseguridad', '💻 Software a medida', '🤖 Automatización con IA'];
-            } else if (tipo === 'crm') {
-                texto = responderPreguntaCrm(mensajeUsuario);
-                sugerencias = ['📝 Solicitar cotización'];
-                ofertaCotizarPendiente = true;
             } else {
-                // web/app encadenan una segunda pregunta (¿ya tiene algo o
-                // sería la primera vez?) antes de ofrecer la cotización.
-                texto = tipo === 'web' ? responderPreguntaWeb(mensajeUsuario) : responderPreguntaApp(mensajeUsuario);
-                sugerencias = [];
-                preguntaExistenciaPendiente = tipo;
+                var pareceRespuesta = tipo === 'web' ? pareceRespuestaWeb(normalizado)
+                    : tipo === 'app' ? pareceRespuestaApp(normalizado)
+                    : pareceRespuestaCrm(normalizado);
+                if (!pareceRespuesta) {
+                    // No contestó la pregunta pendiente (cambió de tema o
+                    // preguntó otra cosa): se procesa como mensaje nuevo, y
+                    // la pregunta se queda pendiente por si la contesta
+                    // directo más adelante.
+                    responder(mensajeUsuario);
+                    return;
+                }
+                preguntaPendiente = null;
+                if (tipo === 'crm') {
+                    texto = responderPreguntaCrm(mensajeUsuario);
+                    sugerencias = ['📝 Solicitar cotización'];
+                    ofertaCotizarPendiente = true;
+                } else {
+                    // web/app encadenan una segunda pregunta (¿ya tiene algo
+                    // o sería la primera vez?) antes de ofrecer la cotización.
+                    texto = tipo === 'web' ? responderPreguntaWeb(mensajeUsuario) : responderPreguntaApp(mensajeUsuario);
+                    sugerencias = [];
+                    preguntaExistenciaPendiente = tipo;
+                }
             }
             ultimaRespuestaBot = texto;
             mostrarTecleando();
