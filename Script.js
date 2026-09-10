@@ -1274,7 +1274,7 @@
         // Reconocimiento de sí/no compartido por el flujo de cotización y la
         // oferta de cotizar tras una pregunta de descubrimiento — una sola
         // lista, para que ambos lugares entiendan las mismas variantes.
-        var REGEX_AFIRMATIVO = /^(si|correcto|va|dale|sale|simon|claro|obvio|de una|ok|oki|porfavor|porsupuesto)/;
+        var REGEX_AFIRMATIVO = /^(si|correcto|va|dale|sale|simon|claro|obvio|de una|ok|oki|porfavor|porsupuesto)|^s$/;
         var REGEX_NEGATIVO = /^(no|nel|ahorita no|todavia no|despues|luego|paso)/;
         var PALABRAS_CANCELAR = ['cancelar', 'ya no', 'olvidalo', 'dejalo'];
 
@@ -1348,6 +1348,32 @@
         // aquí para que, si más adelante pide cotización, el flujo no
         // vuelva a preguntar "¿qué necesitas?" con algo que ya contó.
         var necesidadDetectada = null;
+
+        // Si alguien pide cotización mencionando ya de qué es (p. ej. "quiero
+        // una cotización sobre unos antivirus"), no tiene caso volver a
+        // preguntar "¿qué necesitas?" en el flujo — ya lo dijo.
+        function inferirNecesidadDesdeMensaje(mensaje) {
+            var normalizado = normalizar(mensaje);
+            if (/antivirus|virus|malware|ransomware|hackeo|ciberseguridad|seguridad informatica/.test(normalizado)) {
+                return 'Ciberseguridad administrada';
+            }
+            if (/\bcrm\b/.test(normalizado)) {
+                return 'CRM a la medida';
+            }
+            if (/\berp\b/.test(normalizado)) {
+                return 'ERP a la medida';
+            }
+            if (/automatizacion|automatizar|chatbot|inteligencia artificial/.test(normalizado)) {
+                return 'Automatización con IA';
+            }
+            if (/software|sistema a la medida|programacion|\bapi\b/.test(normalizado)) {
+                return 'Software a la medida';
+            }
+            if (/tienda en linea|ecommerce|vender en linea/.test(normalizado)) {
+                return 'Página web para vender en línea';
+            }
+            return null;
+        }
 
         function responderPreguntaWeb(respuesta) {
             var normalizado = normalizar(respuesta);
@@ -2285,7 +2311,11 @@
             // vería el estado viejo (p. ej. el flujo de cotización aún
             // "apagado") y se procesaría mal.
             var intent = buscarIntent(mensajeUsuario);
-            if (intent && intent.id === 'cotizar') iniciarCotizacion();
+            if (intent && intent.id === 'cotizar') {
+                var necesidadInicial = inferirNecesidadDesdeMensaje(mensajeUsuario);
+                if (necesidadInicial) necesidadDetectada = necesidadInicial;
+                iniciarCotizacion();
+            }
             if (intent && intent.id === 'discovery-web') preguntaPendiente = 'web';
             if (intent && intent.id === 'discovery-app') preguntaPendiente = 'app';
             if (intent && intent.id === 'discovery-crm') preguntaPendiente = 'crm';
