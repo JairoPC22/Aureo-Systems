@@ -1869,7 +1869,7 @@
             },
             {
                 id: 'discovery-web',
-                palabras: ['quiero una pagina web', 'quiero un sitio web', 'necesito una pagina web', 'necesito un sitio web', 'quiero hacer una pagina', 'quiero una landing page', 'necesito una landing page', 'quiero mi pagina web', 'quiero una pagina'],
+                palabras: ['quiero una pagina web', 'quiero un sitio web', 'necesito una pagina web', 'necesito un sitio web', 'quiero hacer una pagina', 'quiero una landing page', 'necesito una landing page', 'quiero mi pagina web', 'quiero una pagina', 'una pagina', 'una pagina web', 'un sitio web', 'una landing page'],
                 responder: function (mensajeUsuario) {
                     // Si el mensaje ya deja claro que es para vender (p. ej.
                     // "quiero una pagina de ventas"), no tiene sentido volver
@@ -1889,7 +1889,7 @@
             },
             {
                 id: 'discovery-app',
-                palabras: ['quiero una app', 'necesito una aplicacion', 'quiero desarrollar una app', 'necesito una app', 'quiero hacer una app', 'necesito una aplicacion movil', 'quiero una aplicacion'],
+                palabras: ['quiero una app', 'necesito una aplicacion', 'quiero desarrollar una app', 'necesito una app', 'quiero hacer una app', 'necesito una aplicacion movil', 'quiero una aplicacion', 'una app', 'una aplicacion', 'una aplicacion movil'],
                 responder: function (mensajeUsuario) {
                     if (/interno|empleado|equipo|administrativo/.test(normalizar(mensajeUsuario))) {
                         preguntaPendiente = null;
