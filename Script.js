@@ -2601,9 +2601,14 @@
                     : pareceRespuestaCrm(normalizado);
                 if (!pareceRespuesta) {
                     // No contestó la pregunta pendiente (cambió de tema o
-                    // preguntó otra cosa): se procesa como mensaje nuevo, y
-                    // la pregunta se queda pendiente por si la contesta
-                    // directo más adelante.
+                    // preguntó otra cosa): se abandona esa pregunta —
+                    // dejarla pendiente para siempre hacía que reapareciera
+                    // mucho más adelante, secuestrando una respuesta sin
+                    // relación (p. ej. al pedir cotización de otra cosa) — y
+                    // se procesa el mensaje como uno nuevo. Si el nuevo
+                    // mensaje activa su propia pregunta de descubrimiento,
+                    // responder() ya se encarga de dejarla pendiente.
+                    preguntaPendiente = null;
                     responder(mensajeUsuario);
                     return;
                 }
@@ -2635,11 +2640,12 @@
             var esAfirmativo = REGEX_AFIRMATIVO.test(normalizado);
             var esNegativo = REGEX_NEGATIVO.test(normalizado);
             if (!esAfirmativo && !esNegativo) {
-                // No fue un sí/no reconocible: se procesa como mensaje normal,
-                // pero la oferta se deja pendiente (no se apaga aquí) para que
-                // un "sí"/"no" más directo en el siguiente mensaje todavía
-                // se entienda como respuesta a "¿quieres que preparemos tu
-                // cotización?" en vez de perderse.
+                // No fue un sí/no reconocible: se abandona la oferta en vez
+                // de dejarla pendiente para siempre (eso hacía que un "sí"
+                // dicho mucho después, por otro motivo, se malinterpretara
+                // como respuesta a esta oferta vieja) y se procesa el
+                // mensaje como uno nuevo.
+                ofertaCotizarPendiente = false;
                 responder(mensajeUsuario);
                 return;
             }
