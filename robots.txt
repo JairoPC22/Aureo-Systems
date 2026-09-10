@@ -36,4 +36,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://aureo-systems.com/sitemap.xml
+Sitemap: https://aureo-systems.com/Aureo2.0/sitemap.xml
