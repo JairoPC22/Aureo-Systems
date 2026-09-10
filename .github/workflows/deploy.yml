@@ -1,0 +1,28 @@
+name: Deploy a Aureo2.0 (producción)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ftp-deploy:
+    name: Subir por FTP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Desplegar por FTP a /public_html/Aureo2.0/
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/Aureo2.0/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/docs/**
+            **/node_modules/**
