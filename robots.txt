@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aureo-systems.com/sitemap.xml

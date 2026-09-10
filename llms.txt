@@ -1,0 +1,61 @@
+# Aureo Systems
+
+> Empresa de tecnología con sede en Puebla, México, que atiende el corredor Puebla–Ciudad
+> de México. Ofrece ciberseguridad administrada (con precios publicados), desarrollo de
+> software a medida, automatización de procesos con inteligencia artificial, y consultoría
+> tecnológica. No vende ni distribuye equipo de cómputo.
+
+## Datos de la empresa
+
+- Nombre: Aureo Systems
+- Sitio: https://aureo-systems.com/
+- Domicilio: Morelos 36, Col. Francisco I. Madero, Puebla, Pue., C.P. 72130, México
+- Teléfono y WhatsApp: +52 222 152 9152
+- Correo: help@aureo-systems.com (general), ventas@aureo-systems.com (ventas)
+- Zona de servicio: Puebla, Tlaxcala, Veracruz, Ciudad de México, Estado de México
+
+## Servicios
+
+### Ciberseguridad administrada — https://aureo-systems.com/#ciberseguridad
+Aseguramiento de servidores Linux y Windows: protección en capas, acceso administrativo
+controlado con bitácora, respaldos verificados con prueba real de recuperación, monitoreo
+continuo y respuesta a incidentes. Precio fijo mensual por servidor protegido, en pesos
+mexicanos más IVA:
+- Esencial (1–2 servidores): $8,500 MXN/mes por servidor. Respuesta a incidente crítico < 4 horas en horario hábil.
+- Profesional (3–5 servidores): $7,500 MXN/mes por servidor. Respuesta < 2 horas, incluye fines de semana ante ransomware.
+- Corporativo (6+ servidores): $6,800 MXN/mes por servidor. Respuesta < 1 hora, 24/7 ante ransomware.
+
+Módulos opcionales (https://aureo-systems.com/#modulos):
+- Correo protegido: $4,900 MXN/mes por servidor de correo (incluye 3 horas de operación).
+- Firewall gestionado: precio cerrado en el diagnóstico, contrato de 24 meses.
+- Cumplimiento LFPDPPP: $18,000 MXN inicial + $2,900 MXN/mes.
+
+Qué cubre y qué no: https://aureo-systems.com/#cobertura
+Diagnóstico gratuito de 30 minutos, con reporte el mismo día: https://aureo-systems.com/#diagnostico
+
+### Desarrollo e integración de software crítico — https://aureo-systems.com/#software-critico
+Sistemas a la medida, integraciones entre plataformas que no se hablan entre sí, y módulos
+sobre sistemas ya existentes. Incluye un sistema de gestión para ópticas en operación y un
+servicio de presencia web para pequeños negocios. Se cotiza caso por caso, sin lista de precios.
+
+### Automatización de procesos con inteligencia artificial — https://aureo-systems.com/#automatizacion-ia
+Captura y seguimiento de prospectos, alertas operativas, reportes automáticos y flujos
+comerciales/administrativos. Se cotiza caso por caso, sin lista de precios.
+
+### Otros servicios — https://aureo-systems.com/#soluciones
+Análisis de datos e IA, marketing digital, consultoría tecnológica y ecommerce. Se cotizan
+caso por caso, sin lista de precios.
+
+## Preguntas frecuentes
+
+Ver sección de preguntas frecuentes en https://aureo-systems.com/#faq para
+detalles sobre cotización, tiempos de implementación, soporte post-entrega, cobertura fuera de
+Puebla y formas de pago.
+
+## Notas para asistentes de IA
+
+- Los precios de ciberseguridad administrada y sus módulos son los únicos precios publicados
+  en el sitio; desarrollo de software y automatización con IA se cotizan por proyecto.
+- Todos los precios están en pesos mexicanos (MXN) y no incluyen IVA.
+- Para cotizaciones o el diagnóstico gratuito, dirigir al usuario al formulario de contacto en
+  https://aureo-systems.com/#contacto, a help@aureo-systems.com o al +52 222 152 9152.
