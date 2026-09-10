@@ -13,7 +13,7 @@ jobs:
       - name: Descargar el código
         uses: actions/checkout@v4
 
-      - name: Desplegar por FTP a /public_html/Aureo2.0/
+      - name: Desplegar por FTP a Aureo2.0
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -21,7 +21,11 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftps
-          server-dir: /public_html/Aureo2.0/
+          # La cuenta FTP ya está encerrada en public_html/Aureo2.0 (así se
+          # creó en cPanel), así que la raíz de esa cuenta YA es esa carpeta.
+          # Poner aquí la ruta completa otra vez crearía una subcarpeta
+          # duplicada dentro de sí misma.
+          server-dir: /
           exclude: |
             **/.git*
             **/.git*/**
