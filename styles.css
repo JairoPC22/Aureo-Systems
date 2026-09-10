@@ -2264,7 +2264,9 @@ textarea:focus-visible {
     border: 1px solid var(--border-subtle);
     background: rgba(133, 146, 161, 0.08);
     color: var(--white-warm);
-    font-size: 0.95rem;
+    /* 16px es el mínimo que evita que Safari en iOS haga zoom automático
+       al enfocar el campo; con menos, "salta" cada vez que se escribe. */
+    font-size: 16px;
     transition: all var(--transition-fast);
     outline: none;
     width: 100%;
@@ -2681,7 +2683,7 @@ textarea:focus-visible {
 /* --- Scroll Top --- */
 .scroll-top {
     position: fixed;
-    bottom: 28px;
+    bottom: 92px;
     right: 28px;
     width: 44px;
     height: 44px;
@@ -2813,7 +2815,7 @@ textarea:focus-visible {
 
 @media (max-width: 480px) {
     .scroll-top {
-        bottom: 16px;
+        bottom: 78px;
         right: 16px;
         width: 38px;
         height: 38px;
@@ -2877,7 +2879,7 @@ textarea:focus-visible {
    y la lógica de conversación viven en Script.js: inicializarChatbotAureo. --- */
 .ai-chat-toggle {
     position: fixed;
-    bottom: 92px;
+    bottom: 28px;
     right: 28px;
     width: 56px;
     height: 56px;
@@ -3141,7 +3143,9 @@ textarea:focus-visible {
     border: 1px solid var(--border-subtle);
     border-radius: 20px;
     padding: 10px 16px;
-    font-size: 0.85rem;
+    /* 16px es el mínimo que evita que Safari en iOS haga zoom automático
+       al enfocar el campo. */
+    font-size: 16px;
     font-family: inherit;
     line-height: 1.4;
     color: var(--white-warm);
@@ -3198,7 +3202,7 @@ textarea:focus-visible {
 }
 @media (max-width: 480px) {
     .ai-chat-toggle {
-        bottom: 78px;
+        bottom: 16px;
         right: 16px;
         width: 50px;
         height: 50px;
