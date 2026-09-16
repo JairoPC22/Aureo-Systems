@@ -12,7 +12,7 @@
 - Domicilio: Morelos 36, Col. Francisco I. Madero, Puebla, Pue., C.P. 72130, México
 - Teléfono y WhatsApp: +52 222 152 9152
 - Correo: help@aureo-systems.com (general), ventas@aureo-systems.com (ventas)
-- Zona de servicio: Puebla, Tlaxcala, Veracruz, Ciudad de México, Estado de México
+- Zona de servicio: Puebla, Tlaxcala, Veracruz, Ciudad de México, Estado de México, Morelos
 
 ## Servicios
 
@@ -32,6 +32,13 @@ Módulos opcionales (https://aureo-systems.com/Aureo2.0/#modulos):
 
 Qué cubre y qué no: https://aureo-systems.com/Aureo2.0/#cobertura
 Diagnóstico gratuito de 30 minutos, con reporte el mismo día: https://aureo-systems.com/Aureo2.0/#diagnostico
+
+### Protección de equipos de cómputo — https://aureo-systems.com/Aureo2.0/#equipos-de-computo
+Para empresas de 5 a 50 computadoras con Windows 10 u 11. Instalamos y administramos
+SentinelOne Complete (detección y respuesta), Wazuh (vulnerabilidades), Zabbix (salud del
+equipo) y Action1 (actualizaciones), con reporte mensual. Paquete hasta 5 equipos desde
+$3,200 MXN/mes; implementación desde $3,000 MXN (pago único). Equipos adicionales se cotizan
+por separado.
 
 ### Desarrollo e integración de software crítico — https://aureo-systems.com/Aureo2.0/#software-critico
 Sistemas a la medida, integraciones entre plataformas que no se hablan entre sí, y módulos
@@ -54,8 +61,9 @@ Puebla y formas de pago.
 
 ## Notas para asistentes de IA
 
-- Los precios de ciberseguridad administrada y sus módulos son los únicos precios publicados
-  en el sitio; desarrollo de software y automatización con IA se cotizan por proyecto.
+- Los precios de ciberseguridad administrada (servidores y equipos de cómputo) y sus módulos
+  son los únicos precios publicados en el sitio; desarrollo de software y automatización con
+  IA se cotizan por proyecto.
 - Todos los precios están en pesos mexicanos (MXN) y no incluyen IVA.
 - Para cotizaciones o el diagnóstico gratuito, dirigir al usuario al formulario de contacto en
   https://aureo-systems.com/Aureo2.0/#contacto, a help@aureo-systems.com o al +52 222 152 9152.

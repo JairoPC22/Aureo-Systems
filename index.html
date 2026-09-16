@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // Se corre de forma síncrona, antes de pintar la página, para que el
+        // tema por defecto (claro) no parpadee en oscuro un instante antes de
+        // aplicarse. Si el usuario ya eligió oscuro antes, se respeta esa
+        // elección guardada.
+        (function () {
+            try {
+                if (localStorage.getItem('aureo-theme') !== 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (err) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     <meta name="description" content="Ciberseguridad administrada, desarrollo de software y automatización con IA para empresas del corredor Puebla–CDMX. Precios publicados desde $6,800 MXN al mes por servidor protegido. Diagnóstico gratuito de 30 minutos.">
     <meta name="keywords" content="ciberseguridad administrada, ciberseguridad Puebla, seguridad gestionada de servidores, MSSP México, desarrollo de software a medida, automatización de procesos con IA, consultoría tecnológica">
-    <meta name="theme-color" content="#0C1622">
+    <meta name="theme-color" content="#F4F1E9">
     <title>Aureo Systems | Ciberseguridad Administrada, Software y Automatización con IA</title>
     <link rel="canonical" href="https://aureo-systems.com/Aureo2.0/">
 
@@ -36,9 +51,9 @@
     <link rel="apple-touch-icon" href="Ico/apple-touch-icon.png?v=2">
     <link rel="manifest" href="site.webmanifest?v=2">
 
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":["Organization","LocalBusiness"],"@id":"https://aureo-systems.com/Aureo2.0/#organizacion","name":"Aureo Systems","url":"https://aureo-systems.com/Aureo2.0/","logo":"https://aureo-systems.com/Aureo2.0/assets/logo-aureo.png","image":"https://aureo-systems.com/Aureo2.0/assets/aureo1.webp","telephone":"+52 222 152 9152","email":"help@aureo-systems.com","address":{"@type":"PostalAddress","streetAddress":"Morelos 36, Col. Francisco I. Madero","addressLocality":"Puebla","addressRegion":"Puebla","postalCode":"72130","addressCountry":"MX"},"areaServed":[{"@type":"AdministrativeArea","name":"Puebla"},{"@type":"AdministrativeArea","name":"Tlaxcala"},{"@type":"AdministrativeArea","name":"Veracruz"},{"@type":"AdministrativeArea","name":"Ciudad de México"},{"@type":"AdministrativeArea","name":"Estado de México"}],"description":"Aureo Systems ofrece ciberseguridad administrada, desarrollo de software a medida y automatización de procesos con IA para empresas del corredor Puebla–Ciudad de México."}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":["Organization","LocalBusiness"],"@id":"https://aureo-systems.com/Aureo2.0/#organizacion","name":"Aureo Systems","url":"https://aureo-systems.com/Aureo2.0/","logo":"https://aureo-systems.com/Aureo2.0/assets/logo-aureo.png","image":"https://aureo-systems.com/Aureo2.0/assets/aureo1.webp","telephone":"+52 222 152 9152","email":"help@aureo-systems.com","address":{"@type":"PostalAddress","streetAddress":"Morelos 36, Col. Francisco I. Madero","addressLocality":"Puebla","addressRegion":"Puebla","postalCode":"72130","addressCountry":"MX"},"areaServed":[{"@type":"AdministrativeArea","name":"Puebla"},{"@type":"AdministrativeArea","name":"Tlaxcala"},{"@type":"AdministrativeArea","name":"Veracruz"},{"@type":"AdministrativeArea","name":"Ciudad de México"},{"@type":"AdministrativeArea","name":"Estado de México"},{"@type":"AdministrativeArea","name":"Morelos"}],"description":"Aureo Systems ofrece ciberseguridad administrada, desarrollo de software a medida y automatización de procesos con IA para empresas del corredor Puebla–Ciudad de México."}</script>
 
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://aureo-systems.com/Aureo2.0/#ciberseguridad","name":"Ciberseguridad administrada","serviceType":"Managed Security Service (MSSP)","provider":{"@id":"https://aureo-systems.com/Aureo2.0/#organizacion"},"areaServed":[{"@type":"AdministrativeArea","name":"Puebla"},{"@type":"AdministrativeArea","name":"Tlaxcala"},{"@type":"AdministrativeArea","name":"Veracruz"},{"@type":"AdministrativeArea","name":"Ciudad de México"},{"@type":"AdministrativeArea","name":"Estado de México"}],"description":"Aseguramiento de servidores con monitoreo continuo, respaldos verificados y respuesta a incidentes. Precio fijo por servidor protegido.","offers":[{"@type":"Offer","name":"Aureo Systems Esencial","description":"Ciberseguridad administrada para 1–2 servidores. Respuesta a incidente crítico en menos de 4 horas en horario hábil.","price":"8500","priceCurrency":"MXN","priceSpecification":{"@type":"UnitPriceSpecification","price":"8500","priceCurrency":"MXN","unitText":"por servidor protegido al mes"},"availability":"https://schema.org/InStock","url":"https://aureo-systems.com/Aureo2.0/#precios"},{"@type":"Offer","name":"Aureo Systems Profesional","description":"Ciberseguridad administrada para 3–5 servidores. Respuesta a incidente crítico en menos de 2 horas, incluye fines de semana ante ransomware.","price":"7500","priceCurrency":"MXN","priceSpecification":{"@type":"UnitPriceSpecification","price":"7500","priceCurrency":"MXN","unitText":"por servidor protegido al mes"},"availability":"https://schema.org/InStock","url":"https://aureo-systems.com/Aureo2.0/#precios"},{"@type":"Offer","name":"Aureo Systems Corporativo","description":"Ciberseguridad administrada para 6 o más servidores. Respuesta a incidente crítico en menos de 1 hora, 24/7 ante ransomware.","price":"6800","priceCurrency":"MXN","priceSpecification":{"@type":"UnitPriceSpecification","price":"6800","priceCurrency":"MXN","unitText":"por servidor protegido al mes"},"availability":"https://schema.org/InStock","url":"https://aureo-systems.com/Aureo2.0/#precios"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://aureo-systems.com/Aureo2.0/#ciberseguridad","name":"Ciberseguridad administrada","serviceType":"Managed Security Service (MSSP)","provider":{"@id":"https://aureo-systems.com/Aureo2.0/#organizacion"},"areaServed":[{"@type":"AdministrativeArea","name":"Puebla"},{"@type":"AdministrativeArea","name":"Tlaxcala"},{"@type":"AdministrativeArea","name":"Veracruz"},{"@type":"AdministrativeArea","name":"Ciudad de México"},{"@type":"AdministrativeArea","name":"Estado de México"},{"@type":"AdministrativeArea","name":"Morelos"}],"description":"Aseguramiento de servidores con monitoreo continuo, respaldos verificados y respuesta a incidentes. Precio fijo por servidor protegido.","offers":[{"@type":"Offer","name":"Aureo Systems Esencial","description":"Ciberseguridad administrada para 1–2 servidores. Respuesta a incidente crítico en menos de 4 horas en horario hábil.","price":"8500","priceCurrency":"MXN","priceSpecification":{"@type":"UnitPriceSpecification","price":"8500","priceCurrency":"MXN","unitText":"por servidor protegido al mes"},"availability":"https://schema.org/InStock","url":"https://aureo-systems.com/Aureo2.0/#precios"},{"@type":"Offer","name":"Aureo Systems Profesional","description":"Ciberseguridad administrada para 3–5 servidores. Respuesta a incidente crítico en menos de 2 horas, incluye fines de semana ante ransomware.","price":"7500","priceCurrency":"MXN","priceSpecification":{"@type":"UnitPriceSpecification","price":"7500","priceCurrency":"MXN","unitText":"por servidor protegido al mes"},"availability":"https://schema.org/InStock","url":"https://aureo-systems.com/Aureo2.0/#precios"},{"@type":"Offer","name":"Aureo Systems Corporativo","description":"Ciberseguridad administrada para 6 o más servidores. Respuesta a incidente crítico en menos de 1 hora, 24/7 ante ransomware.","price":"6800","priceCurrency":"MXN","priceSpecification":{"@type":"UnitPriceSpecification","price":"6800","priceCurrency":"MXN","unitText":"por servidor protegido al mes"},"availability":"https://schema.org/InStock","url":"https://aureo-systems.com/Aureo2.0/#precios"}]}</script>
 
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cómo funciona el proceso de cotización?","acceptedAnswer":{"@type":"Answer","text":"Completas el formulario de contacto o nos llamas directamente, agendamos una llamada breve para entender tu necesidad y te enviamos una propuesta con alcance, tiempos y costo sin compromiso."}},{"@type":"Question","name":"¿Cuánto tiempo toma implementar una solución?","acceptedAnswer":{"@type":"Answer","text":"Depende del alcance: un desarrollo a medida o una automatización de procesos suele tomar entre 3 y 10 semanas; el aseguramiento de servidores queda operando desde la primera semana tras el diagnóstico. Esto se define en la propuesta inicial."}},{"@type":"Question","name":"¿Ofrecen soporte después de la entrega?","acceptedAnswer":{"@type":"Answer","text":"Sí, todos nuestros proyectos incluyen un periodo de soporte post-implementación, y ofrecemos planes de mantenimiento continuo para quienes lo necesitan."}},{"@type":"Question","name":"¿Trabajan con empresas fuera de Puebla?","acceptedAnswer":{"@type":"Answer","text":"Sí, damos atención remota a empresas en toda la región y coordinamos visitas presenciales cuando el proyecto lo requiere."}},{"@type":"Question","name":"¿Qué formas de pago manejan?","acceptedAnswer":{"@type":"Answer","text":"Transferencia bancaria y, para proyectos de mayor alcance, pagos por etapas conforme a los entregables acordados en la propuesta."}}]}</script>
 </head>
@@ -74,6 +89,7 @@
                                             <li><a href="#diagnostico" class="header__mega-sublink" role="menuitem">Diagnóstico gratuito</a></li>
                                         </ul>
                                     </li>
+                                    <li><a href="#equipos-de-computo" class="header__mega-link" role="menuitem">Equipos de cómputo</a></li>
                                     <li><a href="#modulos" class="header__mega-link" role="menuitem">Módulos</a></li>
                                 </ul>
                             </div>
@@ -143,6 +159,7 @@
                             <li><a href="#precios" class="mobile-menu__sublink mobile-menu__sublink--indent2">Precios</a></li>
                             <li><a href="#cobertura" class="mobile-menu__sublink mobile-menu__sublink--indent2">Qué cubrimos y qué no</a></li>
                             <li><a href="#diagnostico" class="mobile-menu__sublink mobile-menu__sublink--indent2">Diagnóstico gratuito</a></li>
+                            <li><a href="#equipos-de-computo" class="mobile-menu__sublink mobile-menu__sublink--indent">Equipos de cómputo</a></li>
                             <li><a href="#modulos" class="mobile-menu__sublink mobile-menu__sublink--indent">Módulos</a></li>
                             <li><a href="#software-critico" class="mobile-menu__sublink mobile-menu__sublink--group">Desarrollo e integración de software crítico</a></li>
                             <li><a href="#sistema-opticas" class="mobile-menu__sublink mobile-menu__sublink--indent">Sistema para ópticas</a></li>
@@ -214,18 +231,14 @@
                         id="intro-earth"
                         class="intro__earth-model"
                         src="assets/earth-hologram.glb"
-                        alt="Holograma 3D de la Tierra de Aureo Systems: arrástralo para girarlo"
-                        camera-controls
-                        disable-pan
-                        min-camera-orbit="auto 60deg 7m"
-                        max-camera-orbit="auto 100deg 7m"
-                        interaction-prompt="none"
-                        camera-orbit="180deg 65deg 7m"
-                        field-of-view="30deg"
-                        min-field-of-view="30deg"
-                        max-field-of-view="30deg"
+                        alt="Holograma 3D dorado de la Tierra de Aureo Systems"
+                        camera-orbit="160deg 62deg 7m"
+                        field-of-view="32deg"
+                        min-field-of-view="32deg"
+                        max-field-of-view="32deg"
                         exposure="1.15"
-                        shadow-intensity="0"
+                        shadow-intensity="0.8"
+                        shadow-softness="1"
                         loading="eager">
                     </model-viewer>
                 </div>
@@ -241,21 +254,7 @@
                     <div class="about__content">
                         <span class="section-header__tag">SOBRE NOSOTROS</span>
                         <h2 class="section-header__title" id="about-heading">Tu socio estratégico para el crecimiento y la optimización empresarial</h2>
-                        <p class="about__text">Nos hemos posicionado como un socio confiable y experto en ciberseguridad administrada, desarrollo de software crítico y automatización de procesos con inteligencia artificial. Entendemos que tu empresa necesita procesos eficientes, infraestructura protegida y soluciones a la medida — por eso trabajamos junto a tu equipo, no en lugar de él.</p>
-                        <div class="about__benefits">
-                            <div class="about__benefit">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="var(--gold-elegant)" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="var(--gold-elegant)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                <span>Soluciones personalizadas</span>
-                            </div>
-                            <div class="about__benefit">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="var(--gold-elegant)" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="var(--gold-elegant)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                <span>Resultados demostrados</span>
-                            </div>
-                            <div class="about__benefit">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="var(--gold-elegant)" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="var(--gold-elegant)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                <span>Atención al cliente excepcional</span>
-                            </div>
-                        </div>
+                        <p class="about__text">Somos una empresa de tecnología con sede en Puebla, y atendemos PyMEs de todo el corredor Puebla–Ciudad de México. Entendemos que tu empresa necesita procesos eficientes, infraestructura protegida y soluciones a la medida — por eso trabajamos junto a tu equipo, no en lugar de él.</p>
                     </div>
                     <div class="about__video-wrap">
                         <video id="about-video" class="about__video" muted loop playsinline preload="none" poster="assets/nosotros-poster.webp">
@@ -266,6 +265,83 @@
                         <div class="about__video-frame" aria-hidden="true"></div>
                     </div>
                 </div>
+
+                <div class="about__team">
+                    <div class="about__team-intro">
+                        <figure class="about__team-photo">
+                            <img src="assets/aureo6.webp" alt="Equipo de Aureo Systems trabajando en su oficina de Puebla" loading="lazy" width="1000" height="667">
+                        </figure>
+                        <div class="about__team-info">
+                            <h3 class="about__team-title">Un equipo de siete personas en Puebla</h3>
+                            <p class="about__team-tagline">Atención directa, sin intermediarios: cada proyecto lo ve alguien con nombre y apellido.</p>
+                        </div>
+                    </div>
+                    <details class="team-disclosure">
+                        <summary class="team-disclosure__summary">
+                            Ver todo el equipo
+                            <svg class="team-disclosure__chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                    <div class="team-groups">
+                        <div class="team-group">
+                            <span class="team-group__label">Dirección</span>
+                            <ul class="team-grid team-grid--1">
+                                <li class="team-member team-member--featured">
+                                    <span class="team-member__avatar">V</span>
+                                    <strong>Víctor</strong>
+                                    <span class="team-member__role">Fundador y director técnico</span>
+                                    <span class="team-member__specialty">Arquitectura, dirección técnica y roadmap</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="team-group">
+                            <span class="team-group__label">Operaciones y negocio</span>
+                            <ul class="team-grid">
+                                <li class="team-member">
+                                    <span class="team-member__avatar">E</span>
+                                    <strong>Evelyn Rivera Catalán</strong>
+                                    <span class="team-member__role">Supervisora de operaciones y ejecutiva de cuenta</span>
+                                    <span class="team-member__specialty">Relación con clientes y seguimiento de cuentas</span>
+                                </li>
+                                <li class="team-member">
+                                    <span class="team-member__avatar">F</span>
+                                    <strong>Fany</strong>
+                                    <span class="team-member__role">Administración</span>
+                                    <span class="team-member__specialty">Facturación, contratos y operación interna</span>
+                                </li>
+                                <li class="team-member">
+                                    <span class="team-member__avatar">S</span>
+                                    <strong>Salma</strong>
+                                    <span class="team-member__role">Desarrollo de negocio</span>
+                                    <span class="team-member__specialty">Nuevos clientes y alianzas comerciales</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="team-group">
+                            <span class="team-group__label">Ingeniería de plataforma</span>
+                            <ul class="team-grid">
+                                <li class="team-member">
+                                    <span class="team-member__avatar">J</span>
+                                    <strong>Jairo</strong>
+                                    <span class="team-member__role">Ingeniero de plataforma de seguridad</span>
+                                    <span class="team-member__specialty">Monitoreo y respuesta a incidentes</span>
+                                </li>
+                                <li class="team-member">
+                                    <span class="team-member__avatar">Y</span>
+                                    <strong>Yan</strong>
+                                    <span class="team-member__role">Ingeniero de plataforma de seguridad</span>
+                                    <span class="team-member__specialty">Configuración y mantenimiento de equipos</span>
+                                </li>
+                                <li class="team-member">
+                                    <span class="team-member__avatar">S</span>
+                                    <strong>Sebastián</strong>
+                                    <span class="team-member__role">Ingeniero de plataforma de seguridad</span>
+                                    <span class="team-member__specialty">Automatización y desarrollo interno</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </details>
+                </div>
             </div>
         </section>
 
@@ -274,10 +350,37 @@
             <div class="cyber__container">
                 <div class="section-header">
                     <span class="section-header__tag">CIBERSEGURIDAD ADMINISTRADA</span>
-                    <h2 class="section-header__title" id="cyber-heading">Operamos y protegemos tu servidor</h2>
+                    <h2 class="section-header__title" id="cyber-heading">Operamos y protegemos tu servidor y tus computadoras</h2>
                     <p class="section-header__desc">Somos el equipo de seguridad que trabaja con tu gente de sistemas — o que hace las veces de ella si no la tienes. Vigilancia continua, respaldos verificados y respuesta a incidentes con tiempo comprometido por contrato.</p>
                 </div>
 
+                <div class="motion-visual motion-visual--shield" aria-hidden="true">
+                    <svg class="motion-visual__svg" viewBox="0 0 320 140">
+                        <defs>
+                            <linearGradient id="sweepGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="var(--gold-elegant)" stop-opacity="0"></stop>
+                                <stop offset="100%" stop-color="var(--gold-elegant)" stop-opacity="0.55"></stop>
+                            </linearGradient>
+                        </defs>
+                        <circle class="motion-visual__ring" cx="160" cy="70" r="20"></circle>
+                        <circle class="motion-visual__ring motion-visual__ring--2" cx="160" cy="70" r="20"></circle>
+                        <circle class="motion-visual__ring motion-visual__ring--3" cx="160" cy="70" r="20"></circle>
+                        <path class="motion-visual__sweep" d="M160 70 L160 30 A40 40 0 0 1 197 52 Z" fill="url(#sweepGrad)"></path>
+                        <line class="motion-visual__link" x1="60" y1="40" x2="146" y2="60"></line>
+                        <line class="motion-visual__link" x1="40" y1="100" x2="146" y2="80"></line>
+                        <line class="motion-visual__link" x1="260" y1="40" x2="174" y2="60"></line>
+                        <line class="motion-visual__link" x1="280" y1="100" x2="174" y2="80"></line>
+                        <circle class="motion-visual__dot motion-visual__dot--1" cx="60" cy="40" r="4"></circle>
+                        <circle class="motion-visual__dot motion-visual__dot--2" cx="40" cy="100" r="4"></circle>
+                        <circle class="motion-visual__dot motion-visual__dot--3" cx="260" cy="40" r="4"></circle>
+                        <circle class="motion-visual__dot motion-visual__dot--4" cx="280" cy="100" r="4"></circle>
+                        <path class="motion-visual__shield" d="M160 50 L174 56 V70 C174 82 167 89 160 92 C153 89 146 82 146 70 V56 Z"></path>
+                        <path class="motion-visual__check" d="M153 70 L158 75 L168 64"></path>
+                    </svg>
+                    <p class="motion-visual__caption">Monitoreo continuo de tus servidores y equipos, todos los días</p>
+                </div>
+
+                <div class="cyber__panels-grid">
                 <details class="cyber__panel cyber__accordion" id="aseguramiento-servidores">
                     <summary class="cyber__accordion-summary">
                         <span class="cyber__step-number">1</span>
@@ -288,43 +391,96 @@
                         <svg class="cyber__accordion-chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </summary>
                     <p class="cyber__star-desc">Un solo servicio, tres tamaños. Protegemos los servidores donde vive lo que tu empresa no puede perder — y cada mes te entregamos la evidencia de que lo hicimos. Desde <strong>$6,800 MXN al mes por servidor protegido</strong>.</p>
-                    <div class="cyber__layers">
-                        <div class="cyber-layer">
-                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="6" y="6" width="24" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="6" y="16" width="24" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="6" y="26" width="24" height="4" rx="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
+                    <div class="cyber__layers cyber__layers--split">
+                        <div class="cyber-layer cyber-layer--compact cyber-layer--left">
+                            <div class="cyber-layer__icon"><svg width="20" height="20" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="6" y="6" width="24" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="6" y="16" width="24" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="6" y="26" width="24" height="4" rx="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
                             <h4>Protección en capas</h4>
                             <p>Operada por personas, no solo por software.</p>
                         </div>
-                        <div class="cyber-layer">
-                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="9" y="16" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M13 16v-4a5 5 0 0110 0v4" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="22" r="2" fill="currentColor"/></svg></div>
+                        <div class="cyber-layer cyber-layer--compact cyber-layer--right">
+                            <div class="cyber-layer__icon"><svg width="20" height="20" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="9" y="16" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M13 16v-4a5 5 0 0110 0v4" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="22" r="2" fill="currentColor"/></svg></div>
                             <h4>Acceso controlado</h4>
                             <p>Queda registrado quién hizo qué y cuándo.</p>
                         </div>
-                        <div class="cyber-layer">
-                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M8 12a10 10 0 0117 -5M28 24a10 10 0 01-17 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M25 7l0 5-5 0M11 29l0-5 5 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="cyber-layer cyber-layer--compact cyber-layer--left">
+                            <div class="cyber-layer__icon"><svg width="20" height="20" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M8 12a10 10 0 0117 -5M28 24a10 10 0 01-17 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M25 7l0 5-5 0M11 29l0-5 5 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                             <h4>Respaldos verificados</h4>
                             <p>Con prueba real de recuperación, no solo la copia.</p>
                         </div>
-                        <div class="cyber-layer">
-                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M18 11v7l5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="cyber-layer cyber-layer--compact cyber-layer--right">
+                            <div class="cyber-layer__icon"><svg width="20" height="20" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M18 11v7l5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                             <h4>Monitoreo continuo</h4>
                             <p>Y respuesta a incidentes con tiempo comprometido.</p>
                         </div>
-                        <div class="cyber-layer">
-                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="24" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M15.5 15.5l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                        <div class="cyber-layer cyber-layer--compact cyber-layer--left">
+                            <div class="cyber-layer__icon"><svg width="20" height="20" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="24" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M15.5 15.5l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
                             <h4>Seguridad coordinada</h4>
                             <p>Entre servidores, con vigilancia de credenciales filtradas.</p>
                         </div>
-                        <div class="cyber-layer">
-                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M10 6h16v24l-8-4-8 4V6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 15l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="cyber-layer cyber-layer--compact cyber-layer--right">
+                            <div class="cyber-layer__icon"><svg width="20" height="20" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M10 6h16v24l-8-4-8 4V6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 15l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                             <h4>Cumplimiento auditable</h4>
                             <p>Evidencia documentada, mes a mes.</p>
                         </div>
                     </div>
                 </details>
 
-                <details class="cyber__panel cyber__accordion" id="precios">
+                <details class="cyber__panel cyber__accordion" id="equipos-de-computo">
                     <summary class="cyber__accordion-summary">
                         <span class="cyber__step-number">2</span>
+                        <span class="cyber__accordion-summary-text">Protección de equipos de cómputo, con SentinelOne</span>
+                        <svg class="cyber__accordion-chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </summary>
+                    <p class="cyber__subdesc">Para empresas de 5 a 50 computadoras (Windows 10 u 11) que quieren que alguien se encargue de vigilarlas, no solo comprar una licencia y olvidarse. Paquete de hasta 5 equipos desde <strong>$3,200 MXN al mes</strong>.</p>
+                    <div class="cyber__layers cyber__layers--four">
+                        <div class="cyber-layer">
+                            <span class="cyber-layer__status" aria-hidden="true"></span>
+                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M18 5l11 5v8c0 8-5 12.5-11 13-6-.5-11-5-11-13v-8l11-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 18l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                            <h4>SentinelOne Complete</h4>
+                            <p>Detección y respuesta: previene, aísla el equipo de la red y puede revertir un ransomware.</p>
+                        </div>
+                        <div class="cyber-layer">
+                            <span class="cyber-layer__status" aria-hidden="true"></span>
+                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M18 11v7l5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                            <h4>Wazuh</h4>
+                            <p>Vigilancia de vulnerabilidades y cambios en archivos críticos de cada equipo.</p>
+                        </div>
+                        <div class="cyber-layer">
+                            <span class="cyber-layer__status" aria-hidden="true"></span>
+                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="6" y="8" width="24" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M13 30h10M18 24v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                            <h4>Zabbix</h4>
+                            <p>Salud del equipo: disco, memoria y procesador, con aviso antes de una falla.</p>
+                        </div>
+                        <div class="cyber-layer">
+                            <span class="cyber-layer__status" aria-hidden="true"></span>
+                            <div class="cyber-layer__icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M18 6a12 12 0 100 24 12 12 0 000-24z" stroke="currentColor" stroke-width="1.5"/><path d="M18 10v8l6 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                            <h4>Action1</h4>
+                            <p>Actualizaciones de Windows y programas; las críticas de seguridad, en menos de 7 días.</p>
+                        </div>
+                    </div>
+                    <div class="pricing__grid pricing__grid--single">
+                        <article class="pricing-card">
+                            <div class="pricing-card__head">
+                                <h4 class="pricing-card__name">Equipos de cómputo</h4>
+                                <p class="pricing-card__target">Paquete hasta 5 equipos · <em>«Que alguien se encargue»</em></p>
+                            </div>
+                            <p class="pricing-card__price"><span class="pricing-card__amount">$3,200</span><span class="pricing-card__unit">MXN + IVA al mes, hasta 5 equipos</span></p>
+                            <ul class="pricing-card__list">
+                                <li>Acceso remoto propio, con tu consentimiento en cada sesión</li>
+                                <li>Aislamiento automático de un equipo comprometido</li>
+                                <li>Reporte mensual: estado, amenazas y actualizaciones</li>
+                            </ul>
+                            <p class="pricing-card__response"><strong>Solicitudes de soporte:</strong> respuesta en menos de 8 horas hábiles; equipo comprometido o ransomware, menos de 4 horas.</p>
+                            <p class="pricing-card__implementation">Implementación: <strong>desde $3,000</strong>, pago único. <span>¿Tienes más de 5 equipos? Pide tu cotización.</span></p>
+                            <a href="#contacto" class="btn btn--outline pricing-card__cta">Empezar con el diagnóstico</a>
+                        </article>
+                    </div>
+                    <p class="cyber__trust">No incluye servidores, red, firewall ni respaldos de tu información (se cotizan por separado), ni soporte de hardware o de las aplicaciones de tu negocio. Precios de referencia en pesos mexicanos más IVA, sujetos a revisión y validación técnica; el precio final se confirma en el diagnóstico sin costo.</p>
+                </details>
+
+                <details class="cyber__panel cyber__accordion" id="precios">
+                    <summary class="cyber__accordion-summary">
+                        <span class="cyber__step-number">3</span>
                         <span class="cyber__accordion-summary-text">Tres niveles — precio fijo mensual por servidor protegido</span>
                         <svg class="cyber__accordion-chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </summary>
@@ -388,7 +544,7 @@
 
                 <details class="cyber__panel cyber__accordion" id="modulos">
                     <summary class="cyber__accordion-summary">
-                        <span class="cyber__step-number">3</span>
+                        <span class="cyber__step-number">4</span>
                         <span class="cyber__accordion-summary-text">Módulos — se agregan solo si los necesitas</span>
                         <svg class="cyber__accordion-chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </summary>
@@ -417,7 +573,7 @@
 
                 <details class="cyber__panel cyber__accordion" id="cobertura">
                     <summary class="cyber__accordion-summary">
-                        <span class="cyber__step-number">4</span>
+                        <span class="cyber__step-number">5</span>
                         <span class="cyber__accordion-summary-text">Qué cubrimos y qué no</span>
                         <svg class="cyber__accordion-chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </summary>
@@ -442,7 +598,7 @@
                         <div class="coverage-col coverage-col--no">
                             <h4><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> No, todavía no</h4>
                             <ul>
-                                <li>Operación 100% en la nube (SaaS), sin ningún servidor propio</li>
+                                <li>Operación 100% en la nube (SaaS), sin ningún servidor propio: te conviene mejor <a href="#equipos-de-computo">proteger tus computadoras</a></li>
                                 <li>Buscas soporte reactivo por evento (no es nuestro modelo)</li>
                                 <li>Solo necesitas antispam por buzón (precio y alcance distintos)</li>
                             </ul>
@@ -452,7 +608,7 @@
 
                 <details class="cyber__panel cyber__accordion" id="diagnostico">
                     <summary class="cyber__accordion-summary">
-                        <span class="cyber__step-number">5</span>
+                        <span class="cyber__step-number">6</span>
                         <span class="cyber__accordion-summary-text">Diagnóstico gratuito — 30 minutos</span>
                         <svg class="cyber__accordion-chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </summary>
@@ -470,15 +626,21 @@
                         <a href="#contacto" class="btn btn--gold btn--lg diagnostic__cta">Diagnóstico gratuito — 30 min</a>
                     </div>
                 </details>
+                </div>
             </div>
         </section>
 
         <section class="software-critico" id="software-critico" aria-labelledby="software-heading">
             <div class="software-critico__container">
-                <div class="section-header">
-                    <span class="section-header__tag">DESARROLLO Y AUTOMATIZACIÓN</span>
-                    <h2 class="section-header__title" id="software-heading">Software crítico y automatización con IA</h2>
-                    <p class="section-header__desc">Dos capacidades que construimos a la medida de cada cliente. Se cotizan caso por caso — cada proyecto se conversa, no hay lista de precios.</p>
+                <div class="section-media">
+                    <div class="section-media__text">
+                        <span class="section-header__tag">DESARROLLO Y AUTOMATIZACIÓN</span>
+                        <h2 class="section-header__title" id="software-heading">Software crítico y automatización con IA</h2>
+                        <p class="section-header__desc">Dos capacidades que construimos a la medida de cada cliente. Se cotizan caso por caso — cada proyecto se conversa, no hay lista de precios.</p>
+                    </div>
+                    <figure class="section-media__photo section-media__photo--kenburns">
+                        <img src="assets/aureo5.webp" alt="Equipo de Aureo Systems revisando un desarrollo en equipo" loading="lazy" width="1000" height="667">
+                    </figure>
                 </div>
 
                 <div class="dev-subsection">
@@ -525,6 +687,18 @@
                 <div class="dev-subsection" id="automatizacion-ia">
                     <h3 class="dev-subsection__title">Automatización de procesos con IA</h3>
                     <p class="dev-subsection__desc">Automatizamos lo repetible, el criterio lo conservan las personas, y todo se mide.</p>
+                    <div class="motion-visual motion-visual--flow" aria-hidden="true">
+                        <svg class="motion-visual__svg" viewBox="0 0 320 100">
+                            <line class="motion-visual__flowline" x1="40" y1="50" x2="280" y2="50"></line>
+                            <circle class="motion-visual__pulse" r="5">
+                                <animateMotion dur="2.2s" repeatCount="indefinite" path="M40,50 L280,50"></animateMotion>
+                            </circle>
+                            <circle class="motion-visual__node motion-visual__node--1" cx="40" cy="50" r="8"></circle>
+                            <circle class="motion-visual__node motion-visual__node--2" cx="160" cy="50" r="8"></circle>
+                            <circle class="motion-visual__node motion-visual__node--3" cx="280" cy="50" r="8"></circle>
+                        </svg>
+                        <p class="motion-visual__caption">Automatización con una persona aprobando lo importante</p>
+                    </div>
                     <div class="solutions__layout solutions__layout--automation">
                     <article class="solution-card" tabindex="0">
                         <div class="solution-card__icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M8 30c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M27 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -558,56 +732,6 @@
             </div>
         </section>
 
-        <section class="simulator" id="simulador" aria-labelledby="simulator-heading">
-            <div class="simulator__container">
-                <div class="section-header">
-                    <span class="section-header__tag">CALCULA TU AHORRO</span>
-                    <h2 class="section-header__title" id="simulator-heading">¿Cuánto podrías ahorrar automatizando tus procesos?</h2>
-                    <p class="section-header__desc">Ajusta los valores según tu empresa y descubre una estimación de tiempo y dinero que podrías recuperar al automatizar tareas repetitivas.</p>
-                </div>
-                <div class="simulator__panel">
-                    <div class="simulator__controls">
-                        <div class="simulator__field">
-                            <label for="sim-empleados">Empleados involucrados en tareas manuales</label>
-                            <div class="simulator__field-row">
-                                <input type="range" id="sim-empleados" min="1" max="50" value="8" step="1">
-                                <span class="simulator__value" id="sim-empleados-val">8</span>
-                            </div>
-                        </div>
-                        <div class="simulator__field">
-                            <label for="sim-horas">Horas semanales por empleado en tareas repetitivas</label>
-                            <div class="simulator__field-row">
-                                <input type="range" id="sim-horas" min="1" max="25" value="8" step="1">
-                                <span class="simulator__value" id="sim-horas-val">8 h</span>
-                            </div>
-                        </div>
-                        <div class="simulator__field">
-                            <label for="sim-costo">Costo promedio por hora, por empleado (MXN)</label>
-                            <div class="simulator__field-row">
-                                <input type="range" id="sim-costo" min="80" max="500" value="180" step="10">
-                                <span class="simulator__value" id="sim-costo-val">$180</span>
-                            </div>
-                        </div>
-                        <p class="simulator__note">Estimación basada en una reducción promedio del 35% del tiempo dedicado a tareas repetitivas al automatizarlas. Es un cálculo referencial, no una cotización.</p>
-                    </div>
-                    <div class="simulator__results">
-                        <div class="simulator__result">
-                            <span class="simulator__result-number" id="sim-horas-mes">0</span>
-                            <span class="simulator__result-label">Horas recuperadas al mes</span>
-                        </div>
-                        <div class="simulator__result">
-                            <span class="simulator__result-number" id="sim-dias-mes">0</span>
-                            <span class="simulator__result-label">Días laborales recuperados al mes</span>
-                        </div>
-                        <div class="simulator__result simulator__result--highlight">
-                            <span class="simulator__result-number" id="sim-dinero-anio">$0</span>
-                            <span class="simulator__result-label">Ahorro estimado al año</span>
-                        </div>
-                        <a href="#contacto" class="btn btn--gold simulator__cta">Quiero automatizar esto</a>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section class="solutions" id="soluciones" aria-labelledby="solutions-heading">
             <div class="solutions__container">
@@ -660,76 +784,66 @@
 
         <section class="process" id="proceso" aria-labelledby="process-heading">
             <div class="process__container">
-                <div class="section-header">
-                    <span class="section-header__tag">CÓMO TRABAJAMOS</span>
-                    <h2 class="section-header__title" id="process-heading">De la idea a la implementación</h2>
-                    <p class="section-header__desc">Un proceso claro y transparente, diseñado para que sepas exactamente qué esperar en cada etapa.</p>
+                <div class="section-media">
+                    <div class="section-media__text">
+                        <span class="section-header__tag">CÓMO TRABAJAMOS</span>
+                        <h2 class="section-header__title" id="process-heading">Primero entendemos tu negocio. Después protegemos, construimos y te lo demostramos</h2>
+                        <p class="section-header__desc">Así trabajamos con cada cliente, sea seguridad gestionada, software o automatización. El orden no cambia.</p>
+                    </div>
+                    <figure class="section-media__photo">
+                        <img src="assets/aureo1.webp" alt="Equipo de Aureo Systems planeando un proyecto en pizarrón" loading="lazy" width="1000" height="667">
+                    </figure>
                 </div>
                 <div class="process__grid">
                     <article class="process-step">
                         <span class="process-step__number">01</span>
                         <h3 class="process-step__title">Diagnóstico</h3>
-                        <p class="process-step__desc">Analizamos tus procesos actuales, infraestructura y objetivos de negocio.</p>
+                        <p class="process-step__desc">Entendemos tu operación real antes de proponer nada.</p>
                     </article>
                     <article class="process-step">
                         <span class="process-step__number">02</span>
-                        <h3 class="process-step__title">Propuesta</h3>
-                        <p class="process-step__desc">Diseñamos una solución a medida con alcance, tiempos y costos claros.</p>
+                        <h3 class="process-step__title">Especificación</h3>
+                        <p class="process-step__desc">Qué se va a hacer, qué no, y cómo sabremos que quedó bien. Por escrito, antes de empezar.</p>
                     </article>
                     <article class="process-step">
                         <span class="process-step__number">03</span>
-                        <h3 class="process-step__title">Implementación</h3>
-                        <p class="process-step__desc">Desarrollamos e integramos la solución con acompañamiento constante.</p>
+                        <h3 class="process-step__title">Implementación con pruebas</h3>
+                        <p class="process-step__desc">Se construye o se instala con pruebas, y lo revisa alguien distinto de quien lo hizo. Las decisiones importantes las aprueba una persona, con registro.</p>
                     </article>
                     <article class="process-step">
                         <span class="process-step__number">04</span>
-                        <h3 class="process-step__title">Soporte</h3>
-                        <p class="process-step__desc">Damos seguimiento, optimizamos y ofrecemos soporte continuo.</p>
+                        <h3 class="process-step__title">Operación y mejora</h3>
+                        <p class="process-step__desc">Monitoreo, auditorías periódicas y un reporte mensual con hallazgos y correcciones.</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section class="testimonials" id="testimonios" aria-labelledby="testimonials-heading">
+        <section class="testimonials" id="diferenciadores" aria-labelledby="testimonials-heading">
             <div class="testimonials__container">
                 <div class="section-header">
-                    <span class="section-header__tag">TESTIMONIOS</span>
-                    <h2 class="section-header__title" id="testimonials-heading">Lo que dicen nuestros clientes</h2>
-                    <p class="section-header__desc">Empresas que ya confiaron en nosotros para resolver sus retos tecnológicos.</p>
+                    <span class="section-header__tag">POR QUÉ AUREO</span>
+                    <h2 class="section-header__title" id="testimonials-heading">Antes de proteger tu empresa, protegimos la nuestra</h2>
+                    <p class="section-header__desc">Operamos nuestra propia seguridad con las mismas herramientas y el mismo proceso que instalamos en la tuya. Esto es lo que eso significa para ti.</p>
                 </div>
-                <div class="testimonials__grid">
-                    <article class="testimonial-card">
-                        <div class="testimonial-card__stars" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg></div>
-                        <p class="testimonial-card__quote">"Automatizaron un proceso que nos tomaba días y ahora lo resolvemos en horas. El acompañamiento del equipo fue excelente de principio a fin."</p>
-                        <div class="testimonial-card__author">
-                            <span class="testimonial-card__avatar">RM</span>
-                            <div>
-                                <strong>Roberto Martínez</strong>
-                                <span>Director de Operaciones, Grupo Industrial del Centro</span>
-                            </div>
-                        </div>
+                <div class="solutions__layout solutions__layout--diferenciadores">
+                    <article class="solution-card" tabindex="0">
+                        <div class="solution-card__icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M18 5l11 5v8c0 8-5 12.5-11 13-6-.5-11-5-11-13v-8l11-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 18l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <h3 class="solution-card__title">Tu seguridad no espera a que alguien lea una alerta</h3>
+                        <p class="solution-card__desc">Nuestra plataforma correlaciona eventos y ejecuta la respuesta inicial, como aislar un equipo, sin esperar a una persona; la persona decide después.</p>
+                        <div class="solution-card__glow"></div>
                     </article>
-                    <article class="testimonial-card">
-                        <div class="testimonial-card__stars" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg></div>
-                        <p class="testimonial-card__quote">"Necesitábamos un proveedor que entendiera nuestra operación antes de proponer nada. Aureo lo planeó por etapas y cumplió cada fecha comprometida."</p>
-                        <div class="testimonial-card__author">
-                            <span class="testimonial-card__avatar">LC</span>
-                            <div>
-                                <strong>Lucía Contreras</strong>
-                                <span>Gerente de TI, Corporativo Altamira</span>
-                            </div>
-                        </div>
+                    <article class="solution-card" tabindex="0">
+                        <div class="solution-card__icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M6 28L12 18l6 8 6-10 6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/></svg></div>
+                        <h3 class="solution-card__title">Reportes con evidencia etiquetada</h3>
+                        <p class="solution-card__desc">Cada dato de tu reporte mensual dice si fue verificado, estimado o no se midió. Cuando no sabemos algo, lo decimos.</p>
+                        <div class="solution-card__glow"></div>
                     </article>
-                    <article class="testimonial-card">
-                        <div class="testimonial-card__stars" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.5l-4 2.2.9-4.6L1.5 5.9l4.6-.5L8 1.2z"/></svg></div>
-                        <p class="testimonial-card__quote">"El sistema a medida que desarrollaron se adapta exactamente a cómo trabajamos, sin forzar nuestros procesos a un software genérico."</p>
-                        <div class="testimonial-card__author">
-                            <span class="testimonial-card__avatar">JF</span>
-                            <div>
-                                <strong>Jorge Fuentes</strong>
-                                <span>Director General, Distribuidora del Valle</span>
-                            </div>
-                        </div>
+                    <article class="solution-card" tabindex="0">
+                        <div class="solution-card__icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="6" y="6" width="24" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="6" y="16" width="24" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="6" y="26" width="24" height="4" rx="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
+                        <h3 class="solution-card__title">Atención con folio</h3>
+                        <p class="solution-card__desc">Cada mensaje por WhatsApp se convierte en un ticket con responsable y tiempo comprometido por escrito.</p>
+                        <div class="solution-card__glow"></div>
                     </article>
                 </div>
             </div>
@@ -747,26 +861,60 @@
                         <img src="assets/empleado.webp" alt="" loading="lazy" width="583" height="428">
                     </figure>
                 </div>
+                <div class="faq__filters" role="tablist" aria-label="Categorías de preguntas frecuentes">
+                    <button type="button" class="faq__filter is-active" data-faq-filter="todas" aria-pressed="true">Todas</button>
+                    <button type="button" class="faq__filter" data-faq-filter="general" aria-pressed="false">General</button>
+                    <button type="button" class="faq__filter" data-faq-filter="ciberseguridad" aria-pressed="false">Ciberseguridad</button>
+                    <button type="button" class="faq__filter" data-faq-filter="equipos" aria-pressed="false">Equipos de cómputo</button>
+                </div>
                 <div class="faq__list">
-                    <details class="faq__item">
+                    <details class="faq__item" data-faq-cat="general">
                         <summary class="faq__question">¿Cómo funciona el proceso de cotización?</summary>
                         <p class="faq__answer">Completas el formulario de contacto o nos llamas directamente, agendamos una llamada breve para entender tu necesidad y te enviamos una propuesta con alcance, tiempos y costo sin compromiso.</p>
                     </details>
-                    <details class="faq__item">
+                    <details class="faq__item" data-faq-cat="general">
                         <summary class="faq__question">¿Cuánto tiempo toma implementar una solución?</summary>
                         <p class="faq__answer">Depende del alcance: un desarrollo a medida o una automatización de procesos suele tomar entre 3 y 10 semanas; el aseguramiento de servidores queda operando desde la primera semana tras el diagnóstico. Esto se define en la propuesta inicial.</p>
                     </details>
-                    <details class="faq__item">
+                    <details class="faq__item" data-faq-cat="general">
                         <summary class="faq__question">¿Ofrecen soporte después de la entrega?</summary>
                         <p class="faq__answer">Sí, todos nuestros proyectos incluyen un periodo de soporte post-implementación, y ofrecemos planes de mantenimiento continuo para quienes lo necesitan.</p>
                     </details>
-                    <details class="faq__item">
+                    <details class="faq__item" data-faq-cat="general">
                         <summary class="faq__question">¿Trabajan con empresas fuera de Puebla?</summary>
                         <p class="faq__answer">Sí, damos atención remota a empresas en toda la región y coordinamos visitas presenciales cuando el proyecto lo requiere.</p>
                     </details>
-                    <details class="faq__item">
+                    <details class="faq__item" data-faq-cat="general">
                         <summary class="faq__question">¿Qué formas de pago manejan?</summary>
                         <p class="faq__answer">Transferencia bancaria y, para proyectos de mayor alcance, pagos por etapas conforme a los entregables acordados en la propuesta.</p>
+                    </details>
+                    <details class="faq__item" data-faq-cat="ciberseguridad">
+                        <summary class="faq__question">¿Qué significa "respaldo verificado"?</summary>
+                        <p class="faq__answer">Que cada cierto tiempo restauramos tu respaldo de verdad, en un ambiente aparte, y te documentamos si funcionó. Un respaldo que nunca se ha probado es una esperanza, no un respaldo.</p>
+                    </details>
+                    <details class="faq__item" data-faq-cat="ciberseguridad">
+                        <summary class="faq__question">¿Garantizan que no me van a atacar?</summary>
+                        <p class="faq__answer">No, y desconfía de quien lo prometa. Lo que sí garantizamos por escrito son tiempos de respuesta: si no los cumplimos, hay un crédito en tu siguiente factura.</p>
+                    </details>
+                    <details class="faq__item" data-faq-cat="ciberseguridad">
+                        <summary class="faq__question">¿Qué pasa si ya tengo un técnico?</summary>
+                        <p class="faq__answer">Trabajamos con él. Nosotros vigilamos, respaldamos y respondemos; él sigue siendo tu contacto para lo de todos los días. Lo que hace cada quien queda por escrito.</p>
+                    </details>
+                    <details class="faq__item" data-faq-cat="ciberseguridad">
+                        <summary class="faq__question">¿Puedo empezar con un solo servidor?</summary>
+                        <p class="faq__answer">Sí. El precio es por servidor: empiezas por el crítico y sumas cuando estés listo.</p>
+                    </details>
+                    <details class="faq__item" data-faq-cat="equipos">
+                        <summary class="faq__question">¿Por qué el paquete es de 5 equipos si tengo 4 computadoras?</summary>
+                        <p class="faq__answer">Porque la licencia se compra en bloques de 5 y preferimos que aproveches la quinta a cobrarte una sin uso.</p>
+                    </details>
+                    <details class="faq__item" data-faq-cat="equipos">
+                        <summary class="faq__question">¿Ven mis archivos?</summary>
+                        <p class="faq__answer">Vemos procesos, programas y conexiones para detectar amenazas. No leemos documentos ni correos.</p>
+                    </details>
+                    <details class="faq__item" data-faq-cat="equipos">
+                        <summary class="faq__question">¿Qué pasa si una computadora se infecta?</summary>
+                        <p class="faq__answer">Se aísla sola de la red en segundos, nosotros la revisamos, limpiamos o revertimos, y te avisamos qué pasó y qué hacer para que no se repita.</p>
                     </details>
                 </div>
             </div>
@@ -816,6 +964,18 @@
                                 <option value="marketing">Marketing digital</option>
                                 <option value="consultoria">Consultoría tecnológica</option>
                                 <option value="ecommerce">Ecommerce</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="contact__field">
+                            <label for="como-nos-encontraste" class="contact__label">¿Cómo nos encontraste?</label>
+                            <select id="como-nos-encontraste" name="como-nos-encontraste" class="contact__input contact__select">
+                                <option value="">Selecciona una opción</option>
+                                <option value="google">Google u otro buscador</option>
+                                <option value="ia">ChatGPT u otra IA</option>
+                                <option value="redes-sociales">Redes sociales</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="recomendacion">Recomendación de alguien</option>
                                 <option value="otro">Otro</option>
                             </select>
                         </div>
@@ -972,7 +1132,6 @@
                         <li><a href="#software-critico">Software crítico</a></li>
                         <li><a href="#automatizacion-ia">Automatización con IA</a></li>
                         <li><a href="#soluciones">Otros servicios</a></li>
-                        <li><a href="#simulador">Calculadora de ahorro</a></li>
                     </ul>
                 </div>
                 <div class="footer__nav">
@@ -981,7 +1140,7 @@
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#nosotros">Nosotros</a></li>
                         <li><a href="#proceso">Proceso</a></li>
-                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#diferenciadores">Por qué elegirnos</a></li>
                         <li><a href="#faq">Preguntas frecuentes</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
@@ -1386,19 +1545,18 @@
             script.src = 'vendor/model-viewer.min.js';
             document.head.appendChild(script);
         }
-        // Pequeño margen antes de pedir el idle callback: el visor 3D es lo más
-        // pesado en crear (contexto WebGL, compilar shaders, subir la geometría),
-        // así que le cede el primer hueco libre al trazo animado de la palabra
-        // del hero (mucho más ligero) para que no se traben entre sí al competir
-        // por el mismo momento "libre" del hilo principal.
+        // Margen mínimo antes de pedir el idle callback (antes eran 1200 ms +
+        // hasta 4000 ms de espera: el globo tardaba hasta 5 s en aparecer, lo
+        // que se sentía como que la página iba lenta). Con esto arranca casi
+        // de inmediato salvo que el hilo principal esté realmente ocupado.
         function pedirCargaVisor3D() {
             if ('requestIdleCallback' in window) {
-                requestIdleCallback(cargarVisor3D, { timeout: 4000 });
+                requestIdleCallback(cargarVisor3D, { timeout: 1200 });
             } else {
                 window.addEventListener('load', cargarVisor3D);
             }
         }
-        setTimeout(pedirCargaVisor3D, 1200);
+        setTimeout(pedirCargaVisor3D, 100);
     </script>
 </body>
 </html>

@@ -511,8 +511,6 @@
         const grupos = [
             '.solution-card',
             '.process-step',
-            '.simulator__panel',
-            '.testimonial-card',
             '.faq__item',
             '.contact__form, .contact__info-card',
             '.showcase-card'
@@ -793,28 +791,32 @@
         });
     }
 
-    // --- Holograma 3D de la Tierra en el hero de marca: gira solo como un
-    //     globo, combinando una rotación automática lenta y constante con un
-    //     impulso extra ligado a cuánto se ha avanzado por la sección. Se
-    //     puede arrastrar con el mouse/dedo para girarlo manualmente (solo
-    //     rotación: zoom y pan están deshabilitados en el HTML); al soltar,
-    //     retoma el giro automático desde donde haya quedado, sin saltos. ---
+    // --- Holograma 3D de la Tierra en el hero de marca: es puramente pasivo
+    //     (sin drag, touch ni zoom — ver ausencia de camera-controls en el
+    //     HTML) y su rotación la controla únicamente el scroll de la página,
+    //     con interpolación (lerp) para que nunca se sienta como un salto. ---
     function inicializarGlobo3D() {
         const globo = document.getElementById('intro-earth');
-        const introSection = document.querySelector('.intro');
-        if (!globo || !introSection) return;
+        const visual = document.querySelector('.intro__visual');
+        if (!globo) return;
+
+        // Red de seguridad: si por lo que sea el visor 3D nunca llega a
+        // avisar que cargó (falla de red, script bloqueado, etc.), esto
+        // evita que el hueco del hero se quede invisible para siempre.
+        if (visual) setTimeout(function () { visual.classList.add('is-ready'); }, 5000);
 
         globo.addEventListener('error', function () {
             console.warn('El modelo 3D no pudo cargarse.');
+            if (visual) visual.classList.add('is-ready');
         });
 
-        // El campo de visión fijo (30deg) se ajustó mirando el recuadro de
+        // El campo de visión fijo (35deg) se ajustó mirando el recuadro de
         // escritorio; en celulares, con la caja más angosta, el anillo del
         // holograma queda casi pegado al borde y se ve recortado. En pantallas
         // chicas se abre un poco el ángulo (la cámara "se aleja") para dejarle
         // margen, sin tocar el encuadre de escritorio.
         function ajustarEncuadre3D() {
-            var fov = window.innerWidth <= 480 ? '36deg' : '30deg';
+            var fov = window.innerWidth <= 480 ? '38deg' : '32deg';
             globo.setAttribute('field-of-view', fov);
             globo.setAttribute('min-field-of-view', fov);
             globo.setAttribute('max-field-of-view', fov);
@@ -823,81 +825,84 @@
         window.addEventListener('resize', ajustarEncuadre3D);
 
         const prefiereMenosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefiereMenosMovimiento) return; // se queda fijo en su ángulo inicial, sin animación
+        if (prefiereMenosMovimiento) {
+            // Se queda fijo en la pose de 3/4 del HTML, sin animación; solo
+            // falta revelarlo en cuanto esté listo (sin el giro de "encendido").
+            globo.addEventListener('load', function () {
+                if (visual) visual.classList.add('is-ready');
+            });
+            return;
+        }
 
-        const ORBIT_INICIAL = 180;
-        const ORBIT_PHI = 65;
-        const ORBIT_RADIO = '7m'; // distancia fija en metros (ver min/max-camera-orbit en el HTML): en % se re-normaliza al encuadre automático y no permite fijar el zoom
-        const GRADOS_POR_SEGUNDO = 32; // rotación continua
-        const GIRO_EXTRA_POR_SCROLL = 110; // grados adicionales al recorrer la sección completa
+        const THETA_INICIAL = 160; // grados; coincide con camera-orbit en el HTML (vista de 3/4)
+        const PHI_BASE = 62; // más chico = vista más inclinada desde arriba
+        const ORBIT_RADIO = '7m';
+        const GRADOS_POR_SEGUNDO = 14; // giro automático continuo, sutil, desde que carga la página
+        const RANGO_SCROLL_PX = 800; // distancia de scroll para sumar el giro extra por avance
+        const SUAVIZADO = 0.08; // qué tan rápido el ángulo actual alcanza al objetivo (lerp)
+        const FLOTE_AMPLITUD_PX = 7; // "respiración" vertical idle, independiente del scroll
+        const FLOTE_DURACION_MS = 6500;
+        const DESPLAZAMIENTO_SCROLL_MAX_PX = 18; // cuánto sube el modelo al recorrer RANGO_SCROLL_PX completo
 
-        let ultimoTimestamp = null;
-        let anguloAcumulado = 0;
-        let activo = true;
+        function rotacionExtraPorScrollGrados() {
+            return window.innerWidth <= 768 ? 90 : 140;
+        }
+
+        let thetaActual = THETA_INICIAL;
+        let anguloAutomatico = 0;
         let idAnimacion = null;
-        let interactuando = false;
+        let inicioTiempo = null;
+        let ultimoTimestamp = null;
+
+        // "Encendido": en cuanto el modelo termina de cargar, arranca girando
+        // rápido y se asienta solo en su posición de reposo (el lerp de
+        // cuadro() ya hace ese suavizado); se revela al mismo tiempo, así que
+        // nunca se ve el salto, solo el giro llegando a su lugar.
+        globo.addEventListener('load', function () {
+            thetaActual = THETA_INICIAL - 260;
+            if (visual) visual.classList.add('is-ready');
+        });
 
         function progresoScroll() {
-            const rect = introSection.getBoundingClientRect();
-            const alto = rect.height || window.innerHeight;
-            return Math.min(Math.max(-rect.top / alto, 0), 1);
+            return Math.min(Math.max(window.scrollY / RANGO_SCROLL_PX, 0), 1);
         }
 
         function cuadro(timestamp) {
-            if (!activo) return;
+            if (inicioTiempo === null) inicioTiempo = timestamp;
             if (ultimoTimestamp === null) ultimoTimestamp = timestamp;
             const deltaSegundos = (timestamp - ultimoTimestamp) / 1000;
             ultimoTimestamp = timestamp;
-            anguloAcumulado += GRADOS_POR_SEGUNDO * deltaSegundos;
+            anguloAutomatico += GRADOS_POR_SEGUNDO * deltaSegundos;
 
-            const theta = ORBIT_INICIAL + anguloAcumulado + progresoScroll() * GIRO_EXTRA_POR_SCROLL;
-            globo.cameraOrbit = `${theta}deg ${ORBIT_PHI}deg ${ORBIT_RADIO}`;
+            const progreso = progresoScroll();
+            const thetaObjetivo = THETA_INICIAL + anguloAutomatico + progreso * rotacionExtraPorScrollGrados();
+            thetaActual += (thetaObjetivo - thetaActual) * SUAVIZADO;
+            // Variación muy leve del ángulo polar: aporta la sensación de un
+            // segundo eje de giro sin arriesgar que el anillo se recorte.
+            const phi = PHI_BASE - progreso * 4;
+            globo.cameraOrbit = thetaActual.toFixed(2) + 'deg ' + phi.toFixed(2) + 'deg ' + ORBIT_RADIO;
+
+            const fase = (timestamp - inicioTiempo) / FLOTE_DURACION_MS;
+            const flote = Math.sin(fase * Math.PI * 2) * FLOTE_AMPLITUD_PX;
+            const desplazamientoScroll = -progreso * DESPLAZAMIENTO_SCROLL_MAX_PX;
+            globo.style.transform = 'translateY(' + (flote + desplazamientoScroll).toFixed(1) + 'px)';
+
             idAnimacion = requestAnimationFrame(cuadro);
         }
 
-        // Solo animamos mientras la sección de inicio es visible, la pestaña
-        // está activa y el usuario no lo está arrastrando en ese momento, para
-        // no gastar CPU/batería de fondo ni pelear con su gesto.
+        // Solo se anima mientras el modelo es visible y la pestaña está
+        // activa, para no gastar CPU/batería de fondo.
         function iniciar() {
-            if (idAnimacion || interactuando) return;
-            activo = true;
-            ultimoTimestamp = null;
+            if (idAnimacion) return;
+            ultimoTimestamp = null; // evita un salto grande de giro tras una pausa larga
             idAnimacion = requestAnimationFrame(cuadro);
         }
         function detener() {
-            activo = false;
             if (idAnimacion) {
                 cancelAnimationFrame(idAnimacion);
                 idAnimacion = null;
             }
         }
-
-        // Pausamos ANTES de que la cámara llegue a moverse (en pointerdown, no
-        // esperamos al evento camera-change) para que nuestro giro automático
-        // nunca alcance a pisar el primer instante del arrastre del usuario.
-        function pausarPorInteraccion() {
-            if (interactuando) return;
-            interactuando = true;
-            detener();
-        }
-        ['pointerdown', 'mousedown', 'touchstart'].forEach(function (evento) {
-            globo.addEventListener(evento, pausarPorInteraccion, { passive: true });
-        });
-        ['pointerup', 'mouseup', 'touchend', 'pointercancel'].forEach(function (evento) {
-            globo.addEventListener(evento, function () {
-                if (!interactuando) return;
-                setTimeout(function () {
-                    interactuando = false;
-                    // Retoma el giro automático desde el ángulo donde el usuario
-                    // lo dejó, en vez de saltar de vuelta al ángulo anterior.
-                    try {
-                        const actual = globo.getCameraOrbit();
-                        anguloAcumulado = (actual.theta * 180 / Math.PI) - ORBIT_INICIAL - progresoScroll() * GIRO_EXTRA_POR_SCROLL;
-                    } catch (err) { /* si no está disponible, se sigue desde el último ángulo automático */ }
-                    iniciar();
-                }, 400);
-            });
-        });
 
         if (typeof IntersectionObserver === 'function') {
             const observer = new IntersectionObserver(function (entries) {
@@ -969,10 +974,11 @@
         if (temaGuardado === 'light' || temaGuardado === 'dark') {
             aplicarTema(temaGuardado, false);
         } else {
-            // Por defecto oscuro (el look pensado para la marca), sin importar
-            // la preferencia del sistema: el usuario puede cambiarlo a mano
-            // con el interruptor, y esa elección sí se recuerda.
-            aplicarTema('dark', false);
+            // Por defecto claro (ver también el script inline en <head> que ya
+            // fija el atributo antes de pintar, para que esto no cause un
+            // parpadeo): el usuario puede cambiarlo a mano con el interruptor,
+            // y esa elección sí se recuerda.
+            aplicarTema('light', false);
         }
     }
 
@@ -1375,6 +1381,9 @@
         // preguntar "¿qué necesitas?" en el flujo — ya lo dijo.
         function inferirNecesidadDesdeMensaje(mensaje) {
             var normalizado = normalizar(mensaje);
+            if (/computadoras|equipos? de computo|sentinelone|wazuh|zabbix|action1/.test(normalizado)) {
+                return 'Seguridad para equipos de cómputo';
+            }
             if (/antivirus|virus|malware|ransomware|hackeo|ciberseguridad|seguridad informatica/.test(normalizado)) {
                 return 'Ciberseguridad administrada';
             }
@@ -1781,7 +1790,7 @@
                 id: 'de-donde-eres',
                 palabras: ['de donde eres', 'donde vives', 'de donde son', 'eres mexicano', 'de que pais eres'],
                 responder: function () {
-                    return 'Yo "vivo" aquí en la página 😄, pero el equipo de Aureo Systems está en <strong>Puebla, México</strong> 🇲🇽, y atendemos también Tlaxcala, Veracruz, CDMX y Estado de México.';
+                    return 'Yo "vivo" aquí en la página 😄, pero el equipo de Aureo Systems está en <strong>Puebla, México</strong> 🇲🇽, y atendemos también Tlaxcala, Veracruz, CDMX, Estado de México y Morelos.';
                 }
             },
             {
@@ -1827,17 +1836,50 @@
             },
             {
                 id: 'ciberseguridad',
-                palabras: ['ciberseguridad', 'seguridad', 'hackeo', 'hackear', 'ransomware', 'servidor', 'servidores', 'antivirus', 'proteger mi empresa', 'firewall', 'respaldo', 'backup'],
+                palabras: ['ciberseguridad', 'seguridad', 'hackeo', 'hackear', 'ransomware', 'servidor', 'servidores', 'proteger mi empresa', 'firewall', 'respaldo', 'backup'],
                 responder: function () {
                     return 'Nuestro servicio de <strong>Ciberseguridad Administrada</strong> protege tus servidores con monitoreo continuo, respaldos verificados y respuesta a incidentes con tiempo comprometido por contrato. Precios fijos desde <strong>$6,800 MXN + IVA/mes</strong> por servidor. Te llevo a ver los detalles 👇';
                 },
                 accion: '#ciberseguridad'
             },
             {
+                // "Antivirus" a secas es ambiguo: puede referirse a servidores o a
+                // las computadoras del equipo, que son dos servicios y precios
+                // distintos. Este intent, con la palabra sola, contesta las dos
+                // opciones en vez de adivinar una; si el mensaje trae más
+                // contexto ("para mis computadoras", "para mi servidor"), los
+                // intents 'equipos-computo' / 'ciberseguridad' ganan por tener
+                // más palabras coincidiendo.
+                id: 'antivirus-general',
+                palabras: ['antivirus', 'tienen antivirus', 'manejan antivirus', 'venden antivirus', 'dan antivirus'],
+                responder: function () {
+                    return 'Sí, con antivirus administrado por nosotros (no una licencia sola) 🛡️ Depende de qué quieras proteger: <strong>servidores</strong> (Ciberseguridad Administrada, desde $6,800 MXN + IVA/mes) o <strong>las computadoras de tu equipo</strong> (con SentinelOne, desde $3,200 MXN + IVA/mes, hasta 5 equipos). ¿Cuál necesitas?';
+                },
+                accion: '#ciberseguridad',
+                sugerencias: ['🖥️ Para mis servidores', '💻 Para mis computadoras']
+            },
+            {
+                id: 'modulos-ciberseguridad',
+                palabras: ['correo protegido', 'firewall gestionado', 'cumplimiento lfpdppp', 'proteccion de correo', 'modulos de ciberseguridad', 'que modulos tienen'],
+                responder: function () {
+                    return 'Tenemos 3 módulos que se agregan solo si los necesitas: <strong>Correo protegido</strong> ($4,900 MXN + IVA/mes por servidor de correo), <strong>Firewall gestionado</strong> (precio cerrado en el diagnóstico, contrato de 24 meses) y <strong>Cumplimiento LFPDPPP</strong> ($18,000 inicial + $2,900 MXN + IVA/mes). Te llevo a verlos 👇';
+                },
+                accion: '#modulos'
+            },
+            {
+                id: 'equipos-computo',
+                palabras: ['equipos de computo', 'equipo de computo', 'mis computadoras', 'proteger mis computadoras', 'proteger computadoras', 'seguridad para computadoras', 'sentinelone', 'wazuh', 'zabbix', 'action1', 'antivirus para computadoras', 'antivirus para mis computadoras'],
+                responder: function () {
+                    return 'Para proteger las computadoras de tu equipo (no servidores) instalamos y administramos <strong>SentinelOne, Wazuh, Zabbix y Action1</strong>, con reporte mensual. Paquete de hasta 5 equipos desde <strong>$3,200 MXN + IVA/mes</strong>. Te llevo a ver los detalles 👇';
+                },
+                accion: '#equipos-de-computo',
+                sugerencias: ['📝 Solicitar cotización']
+            },
+            {
                 id: 'precios',
                 palabras: ['precio', 'precios', 'cuanto cuesta', 'costo', 'costos', 'tarifa', 'cotizacion', 'cuanto cobran', 'planes'],
                 responder: function () {
-                    return 'Los precios de ciberseguridad administrada están publicados desde <strong>$6,800 MXN + IVA/mes</strong> por servidor 💰. Software crítico y automatización con IA se cotizan según el proyecto (cada uno es distinto). Te muestro los precios 👇';
+                    return 'Ciberseguridad de servidores desde <strong>$6,800 MXN + IVA/mes</strong> por servidor, y protección de equipos de cómputo desde <strong>$3,200 MXN + IVA/mes</strong> (hasta 5 equipos) 💰. Software crítico y automatización con IA se cotizan según el proyecto (cada uno es distinto). Te muestro los precios 👇';
                 },
                 accion: '#precios'
             },
@@ -1927,8 +1969,9 @@
                 id: 'no-hardware',
                 palabras: ['venden equipo de computo', 'venden computadoras', 'venden laptops', 'venden hardware', 'venden equipo de comput'],
                 responder: function () {
-                    return 'No, no vendemos equipo de cómputo ni hardware 🙅‍♂️ Nos enfocamos en <strong>ciberseguridad administrada</strong>, <strong>software a la medida</strong> y <strong>automatización con IA</strong>. Si buscas otra cosa, seguro te puedo orientar igual 😊';
-                }
+                    return 'No vendemos equipo de cómputo ni hardware 🙅‍♂️, pero sí protegemos las computadoras que ya tienes con SentinelOne, Wazuh, Zabbix y Action1, desde $3,200 MXN + IVA/mes. Te llevo a ver ese servicio 👇';
+                },
+                accion: '#equipos-de-computo'
             },
             {
                 id: 'diagnostico',
@@ -1987,9 +2030,25 @@
                 id: 'ubicacion',
                 palabras: ['donde estan', 'ubicacion', 'direccion', 'donde queda', 'donde se encuentran'],
                 responder: function () {
-                    return 'Estamos en <strong>' + EMPRESA.direccion + '</strong> 📍. Damos atención remota a Puebla, Tlaxcala, Veracruz, CDMX y Estado de México, y coordinamos visitas presenciales cuando el proyecto lo requiere.';
+                    return 'Estamos en <strong>' + EMPRESA.direccion + '</strong> 📍. Damos atención remota a Puebla, Tlaxcala, Veracruz, CDMX, Estado de México y Morelos, y coordinamos visitas presenciales cuando el proyecto lo requiere.';
                 },
                 accion: '#contacto'
+            },
+            {
+                id: 'equipo-humano',
+                palabras: ['quienes son', 'quien es el equipo', 'quien me atiende', 'quienes trabajan ahi', 'cuantos son en el equipo', 'quien es el fundador', 'quien es el dueño', 'con quien voy a hablar', 'quien esta detras de aureo'],
+                responder: function () {
+                    return 'Somos siete personas en Puebla 🙋 Víctor (fundador y director técnico), Evelyn (supervisora de operaciones), Fany (administración), Salma (desarrollo de negocio), y Jairo, Yan y Sebastián como ingenieros de la plataforma de seguridad. Antes de proteger tu empresa, protegimos la nuestra. Te llevo a conocernos 👇';
+                },
+                accion: '#nosotros'
+            },
+            {
+                id: 'como-trabajamos',
+                palabras: ['como trabajan', 'cual es su proceso', 'como es el proceso', 'cuales son los pasos', 'metodologia', 'como es que trabajan'],
+                responder: function () {
+                    return 'En cuatro pasos: <strong>1)</strong> Diagnóstico de tu operación real, <strong>2)</strong> Especificación por escrito de qué se hará, <strong>3)</strong> Implementación con pruebas revisada por alguien distinto de quien la hizo, y <strong>4)</strong> Operación y mejora continua con reporte mensual. Te muestro el detalle 👇';
+                },
+                accion: '#proceso'
             },
             {
                 id: 'horario',
@@ -2002,9 +2061,9 @@
                 id: 'testimonios',
                 palabras: ['testimonios', 'opiniones', 'referencias', 'clientes satisfechos', 'casos de exito'],
                 responder: function () {
-                    return 'Tenemos +200 clientes satisfechos y +300 proyectos realizados 🌟 Aquí puedes leer lo que dicen algunos de ellos 👇';
+                    return 'Tenemos +200 clientes satisfechos y +300 proyectos realizados 🌟 Aquí te contamos qué nos hace distintos 👇';
                 },
-                accion: '#testimonios'
+                accion: '#diferenciadores'
             },
             {
                 id: 'faq',
@@ -2781,50 +2840,6 @@
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // --- Simulador de ahorro por automatización ---
-    const simEmpleados = document.getElementById('sim-empleados');
-    const simHoras = document.getElementById('sim-horas');
-    const simCosto = document.getElementById('sim-costo');
-    const simEmpleadosVal = document.getElementById('sim-empleados-val');
-    const simHorasVal = document.getElementById('sim-horas-val');
-    const simCostoVal = document.getElementById('sim-costo-val');
-    const simHorasMes = document.getElementById('sim-horas-mes');
-    const simDiasMes = document.getElementById('sim-dias-mes');
-    const simDineroAnio = document.getElementById('sim-dinero-anio');
-
-    const EFICIENCIA_AUTOMATIZACION = 0.35;
-    const SEMANAS_POR_MES = 4.33;
-    const HORAS_POR_DIA_LABORAL = 8;
-
-    function formatearMoneda(valor) {
-        return '$' + Math.round(valor).toLocaleString('es-MX');
-    }
-
-    function calcularSimulador() {
-        const empleados = parseInt(simEmpleados.value, 10);
-        const horas = parseInt(simHoras.value, 10);
-        const costo = parseInt(simCosto.value, 10);
-
-        simEmpleadosVal.textContent = empleados;
-        simHorasVal.textContent = horas + ' h';
-        simCostoVal.textContent = formatearMoneda(costo);
-
-        const horasManualesMes = empleados * horas * SEMANAS_POR_MES;
-        const horasAhorradasMes = horasManualesMes * EFICIENCIA_AUTOMATIZACION;
-        const diasAhorradosMes = horasAhorradasMes / HORAS_POR_DIA_LABORAL;
-        const dineroAhorradoAnio = horasAhorradasMes * costo * 12;
-
-        simHorasMes.textContent = Math.round(horasAhorradasMes).toLocaleString('es-MX');
-        simDiasMes.textContent = diasAhorradosMes.toFixed(1);
-        simDineroAnio.textContent = formatearMoneda(dineroAhorradoAnio);
-    }
-
-    if (simEmpleados && simHoras && simCosto) {
-        [simEmpleados, simHoras, simCosto].forEach(function (input) {
-            input.addEventListener('input', calcularSimulador);
-        });
-        calcularSimulador();
-    }
 // --- Red de particulas doradas en el hero ---
     function inicializarParticulasHero() {
         const canvas = document.getElementById('hero-particles');
@@ -3042,6 +3057,28 @@
         observer.observe(aboutVideo);
     }
 
+    // --- Filtros de categoría del FAQ ---
+    function inicializarFiltrosFaq() {
+        const filtros = document.querySelectorAll('.faq__filter');
+        const items = document.querySelectorAll('.faq__item');
+        if (!filtros.length || !items.length) return;
+
+        filtros.forEach(function (boton) {
+            boton.addEventListener('click', function () {
+                const categoria = boton.getAttribute('data-faq-filter');
+                filtros.forEach(function (b) {
+                    const activo = b === boton;
+                    b.classList.toggle('is-active', activo);
+                    b.setAttribute('aria-pressed', activo ? 'true' : 'false');
+                });
+                items.forEach(function (item) {
+                    const coincide = categoria === 'todas' || item.getAttribute('data-faq-cat') === categoria;
+                    item.classList.toggle('is-hidden', !coincide);
+                });
+            });
+        });
+    }
+
     // --- Inicialización ---
     // Cada paso corre de forma aislada: si alguno falla en algún navegador
     // poco común, el resto de las funciones de la página se siguen iniciando
@@ -3066,6 +3103,7 @@
         pasoSeguro('botones-especulares', inicializarBotonesEspeculares);
         pasoSeguro('video-nosotros', inicializarVideoNosotros);
         pasoSeguro('particulas-hero', inicializarParticulasHero);
+        pasoSeguro('filtros-faq', inicializarFiltrosFaq);
     }
 
     // --- Respetar prefers-reduced-motion: simplificar transiciones ---

@@ -32,6 +32,7 @@ $empresa      = limpiar($_POST['empresa'] ?? '');
 $telefono     = limpiar($_POST['telefono'] ?? '');
 $email        = limpiar($_POST['email'] ?? '');
 $tipoSolucion = limpiar($_POST['tipo-solucion'] ?? '');
+$comoNosEncontro = limpiar($_POST['como-nos-encontraste'] ?? '');
 $mensaje      = trim((string) ($_POST['mensaje'] ?? ''));
 
 $errores = [];
@@ -66,6 +67,16 @@ $tiposSolucion = [
     'otro'              => 'Otro',
 ];
 $tipoSolucionTexto = $tiposSolucion[$tipoSolucion] ?? 'No especificado';
+
+$fuentesContacto = [
+    'google'          => 'Google u otro buscador',
+    'ia'              => 'ChatGPT u otra IA',
+    'redes-sociales'  => 'Redes sociales',
+    'linkedin'        => 'LinkedIn',
+    'recomendacion'   => 'Recomendación de alguien',
+    'otro'            => 'Otro',
+];
+$comoNosEncontroTexto = $fuentesContacto[$comoNosEncontro] ?? 'No especificado';
 
 $fecha = date('d/m/Y H:i');
 $mensajeHtml = nl2br(htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8'));
@@ -102,6 +113,10 @@ $badgeTipoSolucion = $tipoSolucion !== ''
     ? '<span style="display:inline-block;padding:5px 14px;background:#fdf6e3;color:#8a650a;border-radius:20px;font-size:12.5px;font-weight:700;">' . htmlspecialchars($tipoSolucionTexto, ENT_QUOTES, 'UTF-8') . '</span>'
     : '<span style="display:inline-block;padding:5px 14px;background:#f0ede3;color:#8a8272;border-radius:20px;font-size:12.5px;font-weight:600;">No especificado</span>';
 
+$badgeComoNosEncontro = $comoNosEncontro !== ''
+    ? '<span style="display:inline-block;padding:5px 14px;background:#fdf6e3;color:#8a650a;border-radius:20px;font-size:12.5px;font-weight:700;">' . htmlspecialchars($comoNosEncontroTexto, ENT_QUOTES, 'UTF-8') . '</span>'
+    : '<span style="display:inline-block;padding:5px 14px;background:#f0ede3;color:#8a8272;border-radius:20px;font-size:12.5px;font-weight:600;">No especificado</span>';
+
 $cuerpo = '<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -129,6 +144,10 @@ $cuerpo = '<!DOCTYPE html>
 <tr>
 <td style="padding:14px 0 0;color:#8a8272;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;vertical-align:top;">Interés</td>
 <td style="padding:14px 0 0;">' . $badgeTipoSolucion . '</td>
+</tr>
+<tr>
+<td style="padding:10px 0 0;color:#8a8272;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;vertical-align:top;">Nos encontró por</td>
+<td style="padding:10px 0 0;">' . $badgeComoNosEncontro . '</td>
 </tr>
 </table>
 </td></tr>
