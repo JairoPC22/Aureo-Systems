@@ -3690,40 +3690,62 @@ textarea:focus-visible {
     max-width: 800px;
     margin: 0 auto;
 }
-.faq__filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-.faq__filter {
-    font-family: var(--font-body);
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: 999px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
-}
-.faq__filter:hover {
-    border-color: var(--border-gold);
-    color: var(--white-warm);
-}
-.faq__filter.is-active {
-    background: var(--gold-elegant);
-    border-color: var(--gold-elegant);
-    color: var(--blue-deep);
-}
-.faq__item.is-hidden {
-    display: none;
-}
-.faq__list {
+.faq__groups {
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+.faq__group {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 4px 20px;
+    transition: border-color var(--transition-fast);
+}
+.faq__group[open] {
+    border-color: var(--border-gold);
+}
+.faq__group-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 2px 18px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.faq__group-summary::-webkit-details-marker {
+    display: none;
+}
+.faq__group-label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--white-warm);
+}
+.faq__group-count {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    background: var(--gold-elegant);
+    border-radius: 999px;
+    padding: 2px 9px;
+    line-height: 1.5;
+}
+.faq__group-chevron {
+    margin-left: auto;
+    color: var(--gold-elegant);
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+}
+.faq__group[open] > .faq__group-summary .faq__group-chevron {
+    transform: rotate(180deg);
+}
+.faq__group-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 18px;
+    animation: revealUp 0.35s ease-out;
 }
 .faq__item {
     background: var(--bg-card);

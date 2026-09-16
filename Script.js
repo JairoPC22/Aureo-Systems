@@ -3057,28 +3057,6 @@
         observer.observe(aboutVideo);
     }
 
-    // --- Filtros de categoría del FAQ ---
-    function inicializarFiltrosFaq() {
-        const filtros = document.querySelectorAll('.faq__filter');
-        const items = document.querySelectorAll('.faq__item');
-        if (!filtros.length || !items.length) return;
-
-        filtros.forEach(function (boton) {
-            boton.addEventListener('click', function () {
-                const categoria = boton.getAttribute('data-faq-filter');
-                filtros.forEach(function (b) {
-                    const activo = b === boton;
-                    b.classList.toggle('is-active', activo);
-                    b.setAttribute('aria-pressed', activo ? 'true' : 'false');
-                });
-                items.forEach(function (item) {
-                    const coincide = categoria === 'todas' || item.getAttribute('data-faq-cat') === categoria;
-                    item.classList.toggle('is-hidden', !coincide);
-                });
-            });
-        });
-    }
-
     // --- Inicialización ---
     // Cada paso corre de forma aislada: si alguno falla en algún navegador
     // poco común, el resto de las funciones de la página se siguen iniciando
@@ -3103,7 +3081,6 @@
         pasoSeguro('botones-especulares', inicializarBotonesEspeculares);
         pasoSeguro('video-nosotros', inicializarVideoNosotros);
         pasoSeguro('particulas-hero', inicializarParticulasHero);
-        pasoSeguro('filtros-faq', inicializarFiltrosFaq);
     }
 
     // --- Respetar prefers-reduced-motion: simplificar transiciones ---

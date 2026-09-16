@@ -861,60 +861,81 @@
                         <img src="assets/empleado.webp" alt="" loading="lazy" width="583" height="428">
                     </figure>
                 </div>
-                <div class="faq__filters" role="tablist" aria-label="Categorías de preguntas frecuentes">
-                    <button type="button" class="faq__filter is-active" data-faq-filter="todas" aria-pressed="true">Todas</button>
-                    <button type="button" class="faq__filter" data-faq-filter="general" aria-pressed="false">General</button>
-                    <button type="button" class="faq__filter" data-faq-filter="ciberseguridad" aria-pressed="false">Ciberseguridad</button>
-                    <button type="button" class="faq__filter" data-faq-filter="equipos" aria-pressed="false">Equipos de cómputo</button>
-                </div>
-                <div class="faq__list">
-                    <details class="faq__item" data-faq-cat="general">
-                        <summary class="faq__question">¿Cómo funciona el proceso de cotización?</summary>
-                        <p class="faq__answer">Completas el formulario de contacto o nos llamas directamente, agendamos una llamada breve para entender tu necesidad y te enviamos una propuesta con alcance, tiempos y costo sin compromiso.</p>
+                <div class="faq__groups">
+                    <details class="faq__group" open>
+                        <summary class="faq__group-summary">
+                            <span class="faq__group-label">General</span>
+                            <span class="faq__group-count">5</span>
+                            <svg class="faq__group-chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="faq__group-items">
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Cómo funciona el proceso de cotización?</summary>
+                                <p class="faq__answer">Completas el formulario de contacto o nos llamas directamente, agendamos una llamada breve para entender tu necesidad y te enviamos una propuesta con alcance, tiempos y costo sin compromiso.</p>
+                            </details>
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Cuánto tiempo toma implementar una solución?</summary>
+                                <p class="faq__answer">Depende del alcance: un desarrollo a medida o una automatización de procesos suele tomar entre 3 y 10 semanas; el aseguramiento de servidores queda operando desde la primera semana tras el diagnóstico. Esto se define en la propuesta inicial.</p>
+                            </details>
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Ofrecen soporte después de la entrega?</summary>
+                                <p class="faq__answer">Sí, todos nuestros proyectos incluyen un periodo de soporte post-implementación, y ofrecemos planes de mantenimiento continuo para quienes lo necesitan.</p>
+                            </details>
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Trabajan con empresas fuera de Puebla?</summary>
+                                <p class="faq__answer">Sí, damos atención remota a empresas en toda la región y coordinamos visitas presenciales cuando el proyecto lo requiere.</p>
+                            </details>
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Qué formas de pago manejan?</summary>
+                                <p class="faq__answer">Transferencia bancaria y, para proyectos de mayor alcance, pagos por etapas conforme a los entregables acordados en la propuesta.</p>
+                            </details>
+                        </div>
                     </details>
-                    <details class="faq__item" data-faq-cat="general">
-                        <summary class="faq__question">¿Cuánto tiempo toma implementar una solución?</summary>
-                        <p class="faq__answer">Depende del alcance: un desarrollo a medida o una automatización de procesos suele tomar entre 3 y 10 semanas; el aseguramiento de servidores queda operando desde la primera semana tras el diagnóstico. Esto se define en la propuesta inicial.</p>
+                    <details class="faq__group">
+                        <summary class="faq__group-summary">
+                            <span class="faq__group-label">Ciberseguridad</span>
+                            <span class="faq__group-count">4</span>
+                            <svg class="faq__group-chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="faq__group-items">
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Qué significa "respaldo verificado"?</summary>
+                                <p class="faq__answer">Que cada cierto tiempo restauramos tu respaldo de verdad, en un ambiente aparte, y te documentamos si funcionó. Un respaldo que nunca se ha probado es una esperanza, no un respaldo.</p>
+                            </details>
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Garantizan que no me van a atacar?</summary>
+                                <p class="faq__answer">No, y desconfía de quien lo prometa. Lo que sí garantizamos por escrito son tiempos de respuesta: si no los cumplimos, hay un crédito en tu siguiente factura.</p>
+                            </details>
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Qué pasa si ya tengo un técnico?</summary>
+                                <p class="faq__answer">Trabajamos con él. Nosotros vigilamos, respaldamos y respondemos; él sigue siendo tu contacto para lo de todos los días. Lo que hace cada quien queda por escrito.</p>
+                            </details>
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Puedo empezar con un solo servidor?</summary>
+                                <p class="faq__answer">Sí. El precio es por servidor: empiezas por el crítico y sumas cuando estés listo.</p>
+                            </details>
+                        </div>
                     </details>
-                    <details class="faq__item" data-faq-cat="general">
-                        <summary class="faq__question">¿Ofrecen soporte después de la entrega?</summary>
-                        <p class="faq__answer">Sí, todos nuestros proyectos incluyen un periodo de soporte post-implementación, y ofrecemos planes de mantenimiento continuo para quienes lo necesitan.</p>
-                    </details>
-                    <details class="faq__item" data-faq-cat="general">
-                        <summary class="faq__question">¿Trabajan con empresas fuera de Puebla?</summary>
-                        <p class="faq__answer">Sí, damos atención remota a empresas en toda la región y coordinamos visitas presenciales cuando el proyecto lo requiere.</p>
-                    </details>
-                    <details class="faq__item" data-faq-cat="general">
-                        <summary class="faq__question">¿Qué formas de pago manejan?</summary>
-                        <p class="faq__answer">Transferencia bancaria y, para proyectos de mayor alcance, pagos por etapas conforme a los entregables acordados en la propuesta.</p>
-                    </details>
-                    <details class="faq__item" data-faq-cat="ciberseguridad">
-                        <summary class="faq__question">¿Qué significa "respaldo verificado"?</summary>
-                        <p class="faq__answer">Que cada cierto tiempo restauramos tu respaldo de verdad, en un ambiente aparte, y te documentamos si funcionó. Un respaldo que nunca se ha probado es una esperanza, no un respaldo.</p>
-                    </details>
-                    <details class="faq__item" data-faq-cat="ciberseguridad">
-                        <summary class="faq__question">¿Garantizan que no me van a atacar?</summary>
-                        <p class="faq__answer">No, y desconfía de quien lo prometa. Lo que sí garantizamos por escrito son tiempos de respuesta: si no los cumplimos, hay un crédito en tu siguiente factura.</p>
-                    </details>
-                    <details class="faq__item" data-faq-cat="ciberseguridad">
-                        <summary class="faq__question">¿Qué pasa si ya tengo un técnico?</summary>
-                        <p class="faq__answer">Trabajamos con él. Nosotros vigilamos, respaldamos y respondemos; él sigue siendo tu contacto para lo de todos los días. Lo que hace cada quien queda por escrito.</p>
-                    </details>
-                    <details class="faq__item" data-faq-cat="ciberseguridad">
-                        <summary class="faq__question">¿Puedo empezar con un solo servidor?</summary>
-                        <p class="faq__answer">Sí. El precio es por servidor: empiezas por el crítico y sumas cuando estés listo.</p>
-                    </details>
-                    <details class="faq__item" data-faq-cat="equipos">
-                        <summary class="faq__question">¿Por qué el paquete es de 5 equipos si tengo 4 computadoras?</summary>
-                        <p class="faq__answer">Porque la licencia se compra en bloques de 5 y preferimos que aproveches la quinta a cobrarte una sin uso.</p>
-                    </details>
-                    <details class="faq__item" data-faq-cat="equipos">
-                        <summary class="faq__question">¿Ven mis archivos?</summary>
-                        <p class="faq__answer">Vemos procesos, programas y conexiones para detectar amenazas. No leemos documentos ni correos.</p>
-                    </details>
-                    <details class="faq__item" data-faq-cat="equipos">
-                        <summary class="faq__question">¿Qué pasa si una computadora se infecta?</summary>
-                        <p class="faq__answer">Se aísla sola de la red en segundos, nosotros la revisamos, limpiamos o revertimos, y te avisamos qué pasó y qué hacer para que no se repita.</p>
+                    <details class="faq__group">
+                        <summary class="faq__group-summary">
+                            <span class="faq__group-label">Equipos de cómputo</span>
+                            <span class="faq__group-count">3</span>
+                            <svg class="faq__group-chevron" width="14" height="8" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="faq__group-items">
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Por qué el paquete es de 5 equipos si tengo 4 computadoras?</summary>
+                                <p class="faq__answer">Porque la licencia se compra en bloques de 5 y preferimos que aproveches la quinta a cobrarte una sin uso.</p>
+                            </details>
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Ven mis archivos?</summary>
+                                <p class="faq__answer">Vemos procesos, programas y conexiones para detectar amenazas. No leemos documentos ni correos.</p>
+                            </details>
+                            <details class="faq__item">
+                                <summary class="faq__question">¿Qué pasa si una computadora se infecta?</summary>
+                                <p class="faq__answer">Se aísla sola de la red en segundos, nosotros la revisamos, limpiamos o revertimos, y te avisamos qué pasó y qué hacer para que no se repita.</p>
+                            </details>
+                        </div>
                     </details>
                 </div>
             </div>
