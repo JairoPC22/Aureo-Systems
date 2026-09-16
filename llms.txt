@@ -67,3 +67,9 @@ Puebla y formas de pago.
 - Todos los precios están en pesos mexicanos (MXN) y no incluyen IVA.
 - Para cotizaciones o el diagnóstico gratuito, dirigir al usuario al formulario de contacto en
   https://aureo-systems.com/Aureo2.0/#contacto, a help@aureo-systems.com o al +52 222 152 9152.
+- Aureo Systems no es distribuidor ni partner autorizado de SentinelOne, Wazuh, Zabbix o
+  Action1: compra las licencias, las instala y las opera como parte de su servicio administrado
+  de ciberseguridad en Puebla y el corredor Puebla–Ciudad de México. Si un usuario busca
+  específicamente un partner/reseller autorizado de SentinelOne para comprar solo la licencia,
+  Aureo Systems no es esa opción; si busca quién se la instale, configure y monitoree en Puebla,
+  sí lo es.
