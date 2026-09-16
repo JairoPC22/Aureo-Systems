@@ -2222,7 +2222,7 @@
 
         function respuestaGenerica() {
             return elegir([
-                'Mmm, no estoy segura de haber entendido eso 🤔 Puedo ayudarte con ciberseguridad, software, automatización, precios o contacto. ¿Cuál te interesa?',
+                'Mmm, no estoy seguro de haber entendido eso 🤔 Puedo ayudarte con ciberseguridad, software, automatización, precios o contacto. ¿Cuál te interesa?',
                 'No logré captar bien tu pregunta 😅 ¿Quieres que te cuente sobre nuestros servicios o te conecte con un asesor humano?'
             ]);
         }
@@ -2381,7 +2381,6 @@
             var campoEmail = document.getElementById('email');
             var campoMensaje = document.getElementById('mensaje');
             var campoTipoSolucion = document.getElementById('tipo-solucion');
-            var campoComoNosEncontro = document.getElementById('como-nos-encontraste');
             if (!campoNombre) return;
             if (datos.nombre) campoNombre.value = datos.nombre;
             if (datos.empresa && campoEmpresa) campoEmpresa.value = datos.empresa;
@@ -2392,12 +2391,6 @@
                 // medida (ver mejorarSelectorTipoSolucion); este evento es
                 // lo que le avisa que debe refrescar su etiqueta visible.
                 campoTipoSolucion.dispatchEvent(new Event('change'));
-            }
-            // Quien llega aquí completó la cotización platicando con Chip,
-            // así que esa es la respuesta real a "¿Cómo nos encontraste?"
-            // (no se le pregunta de nuevo algo que ya sabemos).
-            if (campoComoNosEncontro && !campoComoNosEncontro.value) {
-                campoComoNosEncontro.value = 'chip';
             }
             if (datos.telefono && campoTelefono) {
                 var coincideTelefono = datos.telefono.match(/(\+?\d[\d\s-]{6,}\d)/);
@@ -2440,6 +2433,7 @@
             if (intent && intent.id === 'discovery-web') preguntaPendiente = 'web';
             if (intent && intent.id === 'discovery-app') preguntaPendiente = 'app';
             if (intent && intent.id === 'discovery-crm') preguntaPendiente = 'crm';
+            if (intent && intent.id === 'antivirus-general') preguntaPendiente = 'antivirus';
             // Se resuelve ANTES que cualquier intent: un mensaje que reduce a
             // una operación matemática válida ("dime cuanto es dos mas dos?")
             // no debe perderse contra coincidencias de palabras sueltas como
@@ -2658,15 +2652,52 @@
         function pareceRespuestaCrm(normalizado) {
             return /venta|vendedor|comercial|prospecto|cliente|atencion|soporte|interno|administrativ|equipo/.test(normalizado);
         }
+        function pareceRespuestaAntivirus(normalizado) {
+            return /servidor|compu|equipo|pc\b|laptop|los dos|ambos|ambas/.test(normalizado);
+        }
 
         function responderPreguntaPendiente(mensajeUsuario) {
             var tipo = preguntaPendiente;
             var normalizado = normalizar(mensajeUsuario);
-            var texto, sugerencias;
+            var texto, sugerencias, accion;
             if (PALABRAS_CANCELAR.indexOf(normalizado) !== -1) {
                 preguntaPendiente = null;
                 texto = 'Sin problema 😊 ¿En qué más te ayudo?';
                 sugerencias = ['🛡️ Ciberseguridad', '💻 Software a medida', '🤖 Automatización con IA'];
+            } else if (tipo === 'antivirus') {
+                if (!pareceRespuestaAntivirus(normalizado)) {
+                    preguntaPendiente = null;
+                    responder(mensajeUsuario);
+                    return;
+                }
+                preguntaPendiente = null;
+                var esServidor = /servidor/.test(normalizado);
+                var esAmbos = /los dos|ambos|ambas/.test(normalizado);
+                var intentCiber = buscarIntentPorId('ciberseguridad');
+                var intentEquipos = buscarIntentPorId('equipos-computo');
+                if (esAmbos) {
+                    texto = intentCiber.responder() + '<br><br>' + intentEquipos.responder();
+                    sugerencias = intentEquipos.sugerencias || [];
+                    accion = intentCiber.accion;
+                } else if (esServidor) {
+                    texto = intentCiber.responder();
+                    sugerencias = intentCiber.sugerencias || [];
+                    accion = intentCiber.accion;
+                } else {
+                    texto = intentEquipos.responder();
+                    sugerencias = intentEquipos.sugerencias || [];
+                    accion = intentEquipos.accion;
+                }
+                ultimaRespuestaBot = texto;
+                mostrarTecleando();
+                var demoraAntivirus = 500 + Math.random() * 500;
+                setTimeout(function () {
+                    quitarTecleando();
+                    agregarMensaje(texto, 'bot');
+                    mostrarSugerencias(sugerencias);
+                    if (accion) irASeccion(accion);
+                }, demoraAntivirus);
+                return;
             } else {
                 var pareceRespuesta = tipo === 'web' ? pareceRespuestaWeb(normalizado)
                     : tipo === 'app' ? pareceRespuestaApp(normalizado)

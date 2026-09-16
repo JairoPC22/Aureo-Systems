@@ -74,7 +74,6 @@ $fuentesContacto = [
     'redes-sociales'  => 'Redes sociales',
     'linkedin'        => 'LinkedIn',
     'recomendacion'   => 'Recomendación de alguien',
-    'chip'            => 'Platicó con Chip, el asistente del sitio',
     'otro'            => 'Otro',
 ];
 $comoNosEncontroTexto = $fuentesContacto[$comoNosEncontro] ?? 'No especificado';
