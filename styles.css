@@ -1448,6 +1448,12 @@ textarea:focus-visible {
         grid-template-columns: 1fr;
     }
 }
+/* Un panel abierto necesita el ancho completo: su contenido (precios,
+   módulos, diagnóstico) está pensado para el ancho de la sección, no
+   para media columna. Los demás paneles se reacomodan alrededor. */
+.cyber__panels-grid > .cyber__panel[open] {
+    grid-column: 1 / -1;
+}
 
 /* --- Panel: agrupa visualmente cada sub-bloque para que se lea como
    un capítulo aparte y no como texto corrido dentro de la sección --- */
@@ -1616,6 +1622,8 @@ textarea:focus-visible {
 
 /* Revelado escalonado al abrir un acordeón: cada tarjeta aparece en
    secuencia en vez de saltar toda junta de golpe. */
+.cyber__accordion[open] .cyber__subdesc,
+.cyber__accordion[open] .cyber__star-desc,
 .cyber__accordion[open] .cyber-layer,
 .cyber__accordion[open] .pricing-card,
 .cyber__accordion[open] .module-card,
@@ -1643,6 +1651,8 @@ textarea:focus-visible {
     to { opacity: 1; transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) {
+    .cyber__accordion[open] .cyber__subdesc,
+    .cyber__accordion[open] .cyber__star-desc,
     .cyber__accordion[open] .cyber-layer,
     .cyber__accordion[open] .pricing-card,
     .cyber__accordion[open] .module-card,
@@ -1874,15 +1884,20 @@ textarea:focus-visible {
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
     padding: 24px;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 .module-card:hover {
     border-color: var(--border-gold);
     box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+.module-card:hover .module-card__icon {
+    transform: scale(1.08);
 }
 .module-card__icon {
     width: 48px;
     height: 48px;
+    transition: transform var(--transition-fast);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1929,6 +1944,11 @@ textarea:focus-visible {
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
     padding: 22px 20px;
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+.coverage-col:hover {
+    border-color: var(--border-gold);
+    transform: translateY(-3px);
 }
 .coverage-col h4 {
     display: flex;
@@ -2127,10 +2147,6 @@ textarea:focus-visible {
     margin: 0 auto 24px;
     text-align: center;
 }
-.cyber__pie {
-    text-align: center;
-}
-
 @media (max-width: 1024px) {
     .cyber__layers,
     .pricing__grid,
