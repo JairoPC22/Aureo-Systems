@@ -513,7 +513,13 @@
             '.process-step',
             '.faq__item',
             '.contact__form, .contact__info-card',
-            '.showcase-card'
+            '.showcase-card',
+            '.section-header',
+            '.section-media__text',
+            '.about__content',
+            '.about__video-wrap',
+            '.about__team-intro',
+            '.dev-subsection__title, .dev-subsection__desc'
         ];
 
         const observer = new IntersectionObserver(function (entries) {
