@@ -2361,7 +2361,7 @@
         // opción del select "Tipo de solución" del formulario le corresponde.
         function inferirTipoSolucion(necesidad) {
             var normalizado = normalizar(necesidad || '');
-            if (/ciberseguridad|servidor|hackeo|virus|malware|respaldo/.test(normalizado)) return 'ciberseguridad';
+            if (/ciberseguridad|servidor|hackeo|virus|antivirus|malware|respaldo|sentinelone|computadoras|equipos de computo/.test(normalizado)) return 'ciberseguridad';
             if (/vender en linea|ecommerce|tienda|carrito de compra/.test(normalizado)) return 'ecommerce';
             if (/automatizacion|automatizar|inteligencia artificial|chatbot|flujos automaticos/.test(normalizado)) return 'automatizacion-ia';
             if (/analisis de datos|reportes|dashboard/.test(normalizado)) return 'datos-ia';
@@ -2381,6 +2381,7 @@
             var campoEmail = document.getElementById('email');
             var campoMensaje = document.getElementById('mensaje');
             var campoTipoSolucion = document.getElementById('tipo-solucion');
+            var campoComoNosEncontro = document.getElementById('como-nos-encontraste');
             if (!campoNombre) return;
             if (datos.nombre) campoNombre.value = datos.nombre;
             if (datos.empresa && campoEmpresa) campoEmpresa.value = datos.empresa;
@@ -2391,6 +2392,12 @@
                 // medida (ver mejorarSelectorTipoSolucion); este evento es
                 // lo que le avisa que debe refrescar su etiqueta visible.
                 campoTipoSolucion.dispatchEvent(new Event('change'));
+            }
+            // Quien llega aquí completó la cotización platicando con Chip,
+            // así que esa es la respuesta real a "¿Cómo nos encontraste?"
+            // (no se le pregunta de nuevo algo que ya sabemos).
+            if (campoComoNosEncontro && !campoComoNosEncontro.value) {
+                campoComoNosEncontro.value = 'chip';
             }
             if (datos.telefono && campoTelefono) {
                 var coincideTelefono = datos.telefono.match(/(\+?\d[\d\s-]{6,}\d)/);
